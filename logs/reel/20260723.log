@@ -1,0 +1,1057 @@
+HP	0	00:00:00.006	NexusEdgeEA (XAUUSD,H1)	CDashboard: Dashboard Created (prefix=NEA_Dash)
+OP	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 03:00:00] [INFO] Analyse de signal autorisée :
+NE	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	✔ Spread : Spread actuel=25.0 pts (max=300.0 pts)
+NK	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	✔ Volatilité : Regime=Normale | ATR brut=17.88929 | ATR en points=1788.9 | Seuils=[80.0 - 3000.0]
+FP	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	✔ Session : Session Tokyo active (00:00-09:00)
+IP	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	✔ News : Aucune annonce bloquante à proximité
+HQ	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	✔ Contexte de marché : Trend=Haussière | Volatilité=Normale
+HE	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	✔ Drawdown : Drawdown actuel=0.00% (max=20.00%)
+KM	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	
+GE	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 03:00:00] [INFO] ===== SCORE DETAIL =====
+CR	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	EMA                          : +30.0 (Haussier)
+HS	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	Tendance                     : +30.0 (Haussier)
+GK	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	RSI                          : +20.0 (Haussier)
+QQ	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	Momentum                     : +0.0 (Aucun)
+PN	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	Support/Resistance           : +20.0 (Baissier)
+KF	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	Pattern(Engulfing haussier)  : +15.0 (Haussier)
+LJ	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	Breakout (aucune cassure)    : +0.0 (Aucun)
+CR	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	ATR Bonus                    : +10.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+JR	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	Volume Bonus (liquidite=31.6 < seuil 55.0, pas de bonus) : +0.0 (Aucun)
+QS	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	--------------------------
+KG	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	Bullish   = 105.0
+IM	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	Bearish   = 30.0
+JF	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	Score     = 105.0
+RN	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	Threshold = 108.0 (60% de 180.0)
+FJ	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	Manquant  = 3.0
+LQ	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	Signal    = NONE
+IE	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	Raison exacte : Score insuffisant : 105.0 obtenu, 108.0 requis (manque 3.0 pts, soit 2% du score max)
+FF	0	01:00:00.026	NexusEdgeEA (XAUUSD,H1)	=========================
+CG	0	02:00:00.082	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 04:00:00] [INFO] Analyse de signal autorisée :
+KL	0	02:00:00.082	NexusEdgeEA (XAUUSD,H1)	✔ Spread : Spread actuel=34.0 pts (max=300.0 pts)
+CM	0	02:00:00.082	NexusEdgeEA (XAUUSD,H1)	✔ Volatilité : Regime=Normale | ATR brut=17.89071 | ATR en points=1789.1 | Seuils=[80.0 - 3000.0]
+KK	0	02:00:00.082	NexusEdgeEA (XAUUSD,H1)	✔ Session : Session Tokyo active (00:00-09:00)
+HJ	0	02:00:00.082	NexusEdgeEA (XAUUSD,H1)	✔ News : Aucune annonce bloquante à proximité
+EG	0	02:00:00.082	NexusEdgeEA (XAUUSD,H1)	✔ Contexte de marché : Trend=Haussière | Volatilité=Normale
+IO	0	02:00:00.082	NexusEdgeEA (XAUUSD,H1)	✔ Drawdown : Drawdown actuel=0.00% (max=20.00%)
+RD	0	02:00:00.082	NexusEdgeEA (XAUUSD,H1)	
+MO	0	02:00:00.172	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 04:00:00] [INFO] ===== SCORE DETAIL =====
+PH	0	02:00:00.172	NexusEdgeEA (XAUUSD,H1)	EMA                          : +30.0 (Haussier)
+OH	0	02:00:00.172	NexusEdgeEA (XAUUSD,H1)	Tendance                     : +30.0 (Haussier)
+DR	0	02:00:00.172	NexusEdgeEA (XAUUSD,H1)	RSI                          : +20.0 (Haussier)
+JO	0	02:00:00.172	NexusEdgeEA (XAUUSD,H1)	Momentum                     : +0.0 (Aucun)
+CH	0	02:00:00.172	NexusEdgeEA (XAUUSD,H1)	Support/Resistance           : +20.0 (Baissier)
+GM	0	02:00:00.172	NexusEdgeEA (XAUUSD,H1)	Pattern (aucun detecte)      : +0.0 (Aucun)
+GQ	0	02:00:00.172	NexusEdgeEA (XAUUSD,H1)	Breakout (aucune cassure)    : +0.0 (Aucun)
+DK	0	02:00:00.172	NexusEdgeEA (XAUUSD,H1)	ATR Bonus                    : +10.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+DE	0	02:00:00.172	NexusEdgeEA (XAUUSD,H1)	Volume Bonus (liquidite=47.0 < seuil 55.0, pas de bonus) : +0.0 (Aucun)
+NJ	0	02:00:00.172	NexusEdgeEA (XAUUSD,H1)	--------------------------
+KL	0	02:00:00.172	NexusEdgeEA (XAUUSD,H1)	Bullish   = 90.0
+LD	0	02:00:00.172	NexusEdgeEA (XAUUSD,H1)	Bearish   = 30.0
+HM	0	02:00:00.172	NexusEdgeEA (XAUUSD,H1)	Score     = 90.0
+IE	0	02:00:00.172	NexusEdgeEA (XAUUSD,H1)	Threshold = 108.0 (60% de 180.0)
+CQ	0	02:00:00.172	NexusEdgeEA (XAUUSD,H1)	Manquant  = 18.0
+IH	0	02:00:00.172	NexusEdgeEA (XAUUSD,H1)	Signal    = NONE
+PN	0	02:00:00.172	NexusEdgeEA (XAUUSD,H1)	Raison exacte : Score insuffisant : 90.0 obtenu, 108.0 requis (manque 18.0 pts, soit 10% du score max)
+IO	0	02:00:00.172	NexusEdgeEA (XAUUSD,H1)	=========================
+IN	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 05:00:00] [INFO] Analyse de signal autorisée :
+OG	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	✔ Spread : Spread actuel=26.0 pts (max=300.0 pts)
+DF	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	✔ Volatilité : Regime=Normale | ATR brut=19.15214 | ATR en points=1915.2 | Seuils=[80.0 - 3000.0]
+RR	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	✔ Session : Session Tokyo active (00:00-09:00)
+ES	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	✔ News : Aucune annonce bloquante à proximité
+GJ	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	✔ Contexte de marché : Trend=Transition | Volatilité=Normale
+FF	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	✔ Drawdown : Drawdown actuel=0.00% (max=20.00%)
+MO	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	
+CH	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 05:00:00] [INFO] ===== SCORE DETAIL =====
+IG	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	EMA                          : +30.0 (Haussier)
+ML	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	Tendance                     : +0.0 (Aucun)
+QD	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	RSI                          : +0.0 (Aucun)
+OG	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	Momentum                     : +0.0 (Aucun)
+DL	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	Support/Resistance           : +0.0 (Aucun)
+HE	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	Pattern (hors zone, ignore)  : +0.0 (Aucun)
+JJ	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	Breakout (aucune cassure)    : +0.0 (Aucun)
+ER	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	ATR Bonus                    : +10.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+CN	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	Volume Bonus                 : +15.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+QR	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	--------------------------
+OK	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	Bullish   = 55.0
+CS	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	Bearish   = 25.0
+DD	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	Score     = 55.0
+NL	0	03:00:00.086	NexusEdgeEA (XAUUSD,H1)	Threshold = 108.0 (60% de 180.0)
+FF	0	03:00:00.087	NexusEdgeEA (XAUUSD,H1)	Manquant  = 53.0
+MO	0	03:00:00.087	NexusEdgeEA (XAUUSD,H1)	Signal    = NONE
+PG	0	03:00:00.087	NexusEdgeEA (XAUUSD,H1)	Raison exacte : Score insuffisant : 55.0 obtenu, 108.0 requis (manque 53.0 pts, soit 29% du score max)
+EG	0	03:00:00.087	NexusEdgeEA (XAUUSD,H1)	=========================
+KE	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 06:00:00] [INFO] Analyse de signal autorisée :
+JN	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	✔ Spread : Spread actuel=13.0 pts (max=300.0 pts)
+KN	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	✔ Volatilité : Regime=Normale | ATR brut=19.83214 | ATR en points=1983.2 | Seuils=[80.0 - 3000.0]
+EM	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	✔ Session : Session Tokyo active (00:00-09:00)
+RK	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	✔ News : Aucune annonce bloquante à proximité
+KD	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	✔ Contexte de marché : Trend=Haussière | Volatilité=Normale
+ON	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	✔ Drawdown : Drawdown actuel=0.00% (max=20.00%)
+HF	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	
+OP	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 06:00:00] [INFO] ===== SCORE DETAIL =====
+LO	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	EMA                          : +30.0 (Haussier)
+KF	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	Tendance                     : +30.0 (Haussier)
+LM	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	RSI                          : +0.0 (Aucun)
+NL	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	Momentum                     : +0.0 (Aucun)
+IE	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	Support/Resistance           : +0.0 (Aucun)
+CJ	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	Pattern (aucun detecte)      : +0.0 (Aucun)
+CQ	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	Breakout (aucune cassure)    : +0.0 (Aucun)
+HK	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	ATR Bonus                    : +10.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+JG	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	Volume Bonus                 : +15.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+LE	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	--------------------------
+IR	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	Bullish   = 85.0
+JJ	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	Bearish   = 25.0
+NS	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	Score     = 85.0
+OK	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	Threshold = 108.0 (60% de 180.0)
+EO	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	Manquant  = 23.0
+OF	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	Signal    = NONE
+KP	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	Raison exacte : Score insuffisant : 85.0 obtenu, 108.0 requis (manque 23.0 pts, soit 13% du score max)
+GL	0	04:00:00.079	NexusEdgeEA (XAUUSD,H1)	=========================
+EL	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 07:00:00] [INFO] Analyse de signal autorisée :
+PI	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	✔ Spread : Spread actuel=21.0 pts (max=300.0 pts)
+HG	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	✔ Volatilité : Regime=Normale | ATR brut=19.72857 | ATR en points=1972.9 | Seuils=[80.0 - 3000.0]
+LD	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	✔ Session : Session Tokyo active (00:00-09:00)
+GL	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	✔ News : Aucune annonce bloquante à proximité
+IK	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	✔ Contexte de marché : Trend=Transition | Volatilité=Normale
+DI	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	✔ Drawdown : Drawdown actuel=0.00% (max=20.00%)
+OI	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	
+GI	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 07:00:00] [INFO] ===== SCORE DETAIL =====
+GF	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	EMA                          : +30.0 (Haussier)
+OR	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	Tendance                     : +0.0 (Aucun)
+GR	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	RSI                          : +0.0 (Aucun)
+MD	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	Momentum                     : +0.0 (Aucun)
+FM	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	Support/Resistance           : +0.0 (Aucun)
+DR	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	Pattern (aucun detecte)      : +0.0 (Aucun)
+PH	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	Breakout (aucune cassure)    : +0.0 (Aucun)
+GP	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	ATR Bonus                    : +10.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+JL	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	Volume Bonus (liquidite=41.5 < seuil 55.0, pas de bonus) : +0.0 (Aucun)
+MM	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	--------------------------
+OJ	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	Bullish   = 40.0
+ES	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	Bearish   = 10.0
+DK	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	Score     = 40.0
+RL	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	Threshold = 108.0 (60% de 180.0)
+QG	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	Manquant  = 68.0
+RO	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	Signal    = NONE
+GH	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	Raison exacte : Score insuffisant : 40.0 obtenu, 108.0 requis (manque 68.0 pts, soit 38% du score max)
+JD	0	05:00:00.051	NexusEdgeEA (XAUUSD,H1)	=========================
+EE	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 09:25:36] [INFO] Analyse de signal autorisée :
+IN	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	✔ Spread : Spread actuel=26.0 pts (max=300.0 pts)
+HO	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	✔ Volatilité : Regime=Normale | ATR brut=16.20286 | ATR en points=1620.3 | Seuils=[80.0 - 3000.0]
+LM	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	✔ Session : Session Londres active (08:00-17:00)
+OD	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	✔ News : Aucune annonce bloquante à proximité
+IS	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	✔ Contexte de marché : Trend=Transition | Volatilité=Normale
+DQ	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	✔ Drawdown : Drawdown actuel=0.00% (max=20.00%)
+GF	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	
+CQ	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 09:25:36] [INFO] ===== SCORE DETAIL =====
+GN	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	EMA                          : +30.0 (Haussier)
+GK	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	Tendance                     : +0.0 (Aucun)
+OM	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	RSI                          : +0.0 (Aucun)
+ML	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	Momentum                     : +0.0 (Aucun)
+FE	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	Support/Resistance           : +0.0 (Aucun)
+NJ	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	Pattern (hors zone, ignore)  : +0.0 (Aucun)
+HP	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	Breakout (aucune cassure)    : +0.0 (Aucun)
+GH	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	ATR Bonus                    : +10.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+RD	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	Volume Bonus (liquidite=48.4 < seuil 55.0, pas de bonus) : +0.0 (Aucun)
+ME	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	--------------------------
+GS	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	Bullish   = 40.0
+MK	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	Bearish   = 10.0
+LL	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	Score     = 40.0
+JD	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	Threshold = 108.0 (60% de 180.0)
+IN	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	Manquant  = 68.0
+JG	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	Signal    = NONE
+OO	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	Raison exacte : Score insuffisant : 40.0 obtenu, 108.0 requis (manque 68.0 pts, soit 38% du score max)
+JL	0	07:25:36.066	NexusEdgeEA (XAUUSD,H1)	=========================
+FM	0	07:59:59.418	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 10:00:00] [INFO] Analyse de signal autorisée :
+EF	0	07:59:59.418	NexusEdgeEA (XAUUSD,H1)	✔ Spread : Spread actuel=21.0 pts (max=300.0 pts)
+DG	0	07:59:59.418	NexusEdgeEA (XAUUSD,H1)	✔ Volatilité : Regime=Normale | ATR brut=15.62500 | ATR en points=1562.5 | Seuils=[80.0 - 3000.0]
+EE	0	07:59:59.418	NexusEdgeEA (XAUUSD,H1)	✔ Session : Session Londres active (08:00-17:00)
+JL	0	07:59:59.418	NexusEdgeEA (XAUUSD,H1)	✔ News : Aucune annonce bloquante à proximité
+HK	0	07:59:59.418	NexusEdgeEA (XAUUSD,H1)	✔ Contexte de marché : Trend=Transition | Volatilité=Normale
+EI	0	07:59:59.418	NexusEdgeEA (XAUUSD,H1)	✔ Drawdown : Drawdown actuel=0.00% (max=20.00%)
+QN	0	07:59:59.419	NexusEdgeEA (XAUUSD,H1)	
+CI	0	07:59:59.419	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 10:00:00] [INFO] ===== SCORE DETAIL =====
+IF	0	07:59:59.419	NexusEdgeEA (XAUUSD,H1)	EMA                          : +30.0 (Haussier)
+QS	0	07:59:59.419	NexusEdgeEA (XAUUSD,H1)	Tendance                     : +0.0 (Aucun)
+IE	0	07:59:59.419	NexusEdgeEA (XAUUSD,H1)	RSI                          : +0.0 (Aucun)
+KD	0	07:59:59.419	NexusEdgeEA (XAUUSD,H1)	Momentum                     : +0.0 (Aucun)
+DM	0	07:59:59.419	NexusEdgeEA (XAUUSD,H1)	Support/Resistance           : +0.0 (Aucun)
+FR	0	07:59:59.419	NexusEdgeEA (XAUUSD,H1)	Pattern (aucun detecte)      : +0.0 (Aucun)
+RH	0	07:59:59.419	NexusEdgeEA (XAUUSD,H1)	Breakout (aucune cassure)    : +0.0 (Aucun)
+IS	0	07:59:59.419	NexusEdgeEA (XAUUSD,H1)	ATR Bonus                    : +10.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+GO	0	07:59:59.419	NexusEdgeEA (XAUUSD,H1)	Volume Bonus                 : +15.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+MM	0	07:59:59.419	NexusEdgeEA (XAUUSD,H1)	--------------------------
+KJ	0	07:59:59.419	NexusEdgeEA (XAUUSD,H1)	Bullish   = 55.0
+GR	0	07:59:59.419	NexusEdgeEA (XAUUSD,H1)	Bearish   = 25.0
+HK	0	07:59:59.419	NexusEdgeEA (XAUUSD,H1)	Score     = 55.0
+RS	0	07:59:59.419	NexusEdgeEA (XAUUSD,H1)	Threshold = 108.0 (60% de 180.0)
+IG	0	07:59:59.419	NexusEdgeEA (XAUUSD,H1)	Manquant  = 53.0
+RN	0	07:59:59.419	NexusEdgeEA (XAUUSD,H1)	Signal    = NONE
+KH	0	07:59:59.419	NexusEdgeEA (XAUUSD,H1)	Raison exacte : Score insuffisant : 55.0 obtenu, 108.0 requis (manque 53.0 pts, soit 29% du score max)
+JD	0	07:59:59.419	NexusEdgeEA (XAUUSD,H1)	=========================
+HD	0	08:59:59.546	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 11:00:00] [INFO] Analyse de signal autorisée :
+DQ	0	08:59:59.546	NexusEdgeEA (XAUUSD,H1)	✔ Spread : Spread actuel=25.0 pts (max=300.0 pts)
+PO	0	08:59:59.546	NexusEdgeEA (XAUUSD,H1)	✔ Volatilité : Regime=Normale | ATR brut=16.47143 | ATR en points=1647.1 | Seuils=[80.0 - 3000.0]
+HL	0	08:59:59.546	NexusEdgeEA (XAUUSD,H1)	✔ Session : Session Londres active (08:00-17:00)
+CE	0	08:59:59.546	NexusEdgeEA (XAUUSD,H1)	✔ News : Aucune annonce bloquante à proximité
+ID	0	08:59:59.546	NexusEdgeEA (XAUUSD,H1)	✔ Contexte de marché : Trend=Transition | Volatilité=Normale
+DP	0	08:59:59.546	NexusEdgeEA (XAUUSD,H1)	✔ Drawdown : Drawdown actuel=0.00% (max=20.00%)
+KQ	0	08:59:59.546	NexusEdgeEA (XAUUSD,H1)	
+QR	0	08:59:59.608	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 11:00:00] [INFO] ===== SCORE DETAIL =====
+LM	0	08:59:59.648	NexusEdgeEA (XAUUSD,H1)	EMA                          : +30.0 (Haussier)
+HJ	0	08:59:59.648	NexusEdgeEA (XAUUSD,H1)	Tendance                     : +0.0 (Aucun)
+NF	0	08:59:59.648	NexusEdgeEA (XAUUSD,H1)	RSI                          : +20.0 (Baissier)
+NM	0	08:59:59.648	NexusEdgeEA (XAUUSD,H1)	Momentum                     : +0.0 (Aucun)
+IF	0	08:59:59.648	NexusEdgeEA (XAUUSD,H1)	Support/Resistance           : +0.0 (Aucun)
+CK	0	08:59:59.648	NexusEdgeEA (XAUUSD,H1)	Pattern (aucun detecte)      : +0.0 (Aucun)
+GO	0	08:59:59.648	NexusEdgeEA (XAUUSD,H1)	Breakout                     : +15.0 (Baissier)
+PI	0	08:59:59.648	NexusEdgeEA (XAUUSD,H1)	ATR Bonus                    : +10.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+RE	0	08:59:59.648	NexusEdgeEA (XAUUSD,H1)	Volume Bonus                 : +15.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+DG	0	08:59:59.648	NexusEdgeEA (XAUUSD,H1)	--------------------------
+FP	0	08:59:59.648	NexusEdgeEA (XAUUSD,H1)	Bullish   = 55.0
+QH	0	08:59:59.648	NexusEdgeEA (XAUUSD,H1)	Bearish   = 60.0
+KQ	0	08:59:59.648	NexusEdgeEA (XAUUSD,H1)	Score     = 60.0
+GI	0	08:59:59.648	NexusEdgeEA (XAUUSD,H1)	Threshold = 108.0 (60% de 180.0)
+JM	0	08:59:59.648	NexusEdgeEA (XAUUSD,H1)	Manquant  = 48.0
+GD	0	08:59:59.648	NexusEdgeEA (XAUUSD,H1)	Signal    = NONE
+DR	0	08:59:59.648	NexusEdgeEA (XAUUSD,H1)	Raison exacte : Score insuffisant : 60.0 obtenu, 108.0 requis (manque 48.0 pts, soit 27% du score max)
+OJ	0	08:59:59.648	NexusEdgeEA (XAUUSD,H1)	=========================
+KJ	0	09:59:59.556	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 12:00:00] [INFO] Analyse de signal autorisée :
+DK	0	09:59:59.556	NexusEdgeEA (XAUUSD,H1)	✔ Spread : Spread actuel=23.0 pts (max=300.0 pts)
+IQ	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	✔ Volatilité : Regime=Normale | ATR brut=16.15357 | ATR en points=1615.4 | Seuils=[80.0 - 3000.0]
+CF	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	✔ Session : Session Londres active (08:00-17:00)
+HN	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	✔ News : Aucune annonce bloquante à proximité
+RN	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	✔ Contexte de marché : Trend=Transition | Volatilité=Normale
+KJ	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	✔ Drawdown : Drawdown actuel=0.00% (max=20.00%)
+PK	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	
+DK	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 12:00:00] [INFO] ===== SCORE DETAIL =====
+PK	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	EMA                          : +30.0 (Haussier)
+PP	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	Tendance                     : +0.0 (Aucun)
+RL	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	RSI                          : +20.0 (Baissier)
+HD	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	Momentum                     : +4.2 (Baissier)
+GH	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	Support/Resistance           : +0.0 (Aucun)
+EQ	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	Pattern (aucun detecte)      : +0.0 (Aucun)
+ME	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	Breakout (aucune cassure)    : +0.0 (Aucun)
+RG	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	ATR Bonus                    : +10.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+OH	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	Volume Bonus (liquidite=50.5 < seuil 55.0, pas de bonus) : +0.0 (Aucun)
+PN	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	--------------------------
+NO	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	Bullish   = 40.0
+DP	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	Bearish   = 34.2
+IH	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	Score     = 40.0
+KQ	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	Threshold = 108.0 (60% de 180.0)
+LR	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	Manquant  = 68.0
+KL	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	Signal    = NONE
+FK	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	Raison exacte : Score insuffisant : 40.0 obtenu, 108.0 requis (manque 68.0 pts, soit 38% du score max)
+CS	0	09:59:59.580	NexusEdgeEA (XAUUSD,H1)	=========================
+LQ	0	10:59:59.549	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 13:00:00] [INFO] Analyse de signal autorisée :
+KS	0	10:59:59.569	NexusEdgeEA (XAUUSD,H1)	✔ Spread : Spread actuel=31.0 pts (max=300.0 pts)
+DJ	0	10:59:59.569	NexusEdgeEA (XAUUSD,H1)	✔ Volatilité : Regime=Normale | ATR brut=16.26643 | ATR en points=1626.6 | Seuils=[80.0 - 3000.0]
+LQ	0	10:59:59.569	NexusEdgeEA (XAUUSD,H1)	✔ Session : Session Londres active (08:00-17:00)
+OG	0	10:59:59.569	NexusEdgeEA (XAUUSD,H1)	✔ News : Aucune annonce bloquante à proximité
+MF	0	10:59:59.569	NexusEdgeEA (XAUUSD,H1)	✔ Contexte de marché : Trend=Transition | Volatilité=Normale
+PR	0	10:59:59.569	NexusEdgeEA (XAUUSD,H1)	✔ Drawdown : Drawdown actuel=0.00% (max=20.00%)
+GR	0	10:59:59.569	NexusEdgeEA (XAUUSD,H1)	
+LD	0	10:59:59.569	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 13:00:00] [INFO] ===== SCORE DETAIL =====
+KS	0	10:59:59.569	NexusEdgeEA (XAUUSD,H1)	EMA                          : +30.0 (Haussier)
+GO	0	10:59:59.569	NexusEdgeEA (XAUUSD,H1)	Tendance                     : +0.0 (Aucun)
+MD	0	10:59:59.569	NexusEdgeEA (XAUUSD,H1)	RSI                          : +20.0 (Baissier)
+DO	0	10:59:59.569	NexusEdgeEA (XAUUSD,H1)	Momentum                     : +4.7 (Baissier)
+DL	0	10:59:59.569	NexusEdgeEA (XAUUSD,H1)	Support/Resistance           : +20.0 (Haussier)
+RF	0	10:59:59.569	NexusEdgeEA (XAUUSD,H1)	Pattern (aucun detecte)      : +0.0 (Aucun)
+FL	0	10:59:59.569	NexusEdgeEA (XAUUSD,H1)	Breakout (aucune cassure)    : +0.0 (Aucun)
+ML	0	10:59:59.570	NexusEdgeEA (XAUUSD,H1)	ATR Bonus                    : +10.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+QS	0	10:59:59.570	NexusEdgeEA (XAUUSD,H1)	Volume Bonus (liquidite=46.5 < seuil 55.0, pas de bonus) : +0.0 (Aucun)
+GQ	0	10:59:59.570	NexusEdgeEA (XAUUSD,H1)	--------------------------
+KF	0	10:59:59.570	NexusEdgeEA (XAUUSD,H1)	Bullish   = 60.0
+HO	0	10:59:59.570	NexusEdgeEA (XAUUSD,H1)	Bearish   = 34.7
+HG	0	10:59:59.570	NexusEdgeEA (XAUUSD,H1)	Score     = 60.0
+LH	0	10:59:59.570	NexusEdgeEA (XAUUSD,H1)	Threshold = 108.0 (60% de 180.0)
+MK	0	10:59:59.570	NexusEdgeEA (XAUUSD,H1)	Manquant  = 48.0
+LS	0	10:59:59.570	NexusEdgeEA (XAUUSD,H1)	Signal    = NONE
+OD	0	10:59:59.570	NexusEdgeEA (XAUUSD,H1)	Raison exacte : Score insuffisant : 60.0 obtenu, 108.0 requis (manque 48.0 pts, soit 27% du score max)
+LH	0	10:59:59.570	NexusEdgeEA (XAUUSD,H1)	=========================
+IH	0	11:59:59.553	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 14:00:00] [INFO] Analyse de signal autorisée :
+DJ	0	11:59:59.553	NexusEdgeEA (XAUUSD,H1)	✔ Spread : Spread actuel=23.0 pts (max=300.0 pts)
+QS	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	✔ Volatilité : Regime=Normale | ATR brut=16.16143 | ATR en points=1616.1 | Seuils=[80.0 - 3000.0]
+MH	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	✔ Session : Session Londres active (08:00-17:00)
+RH	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	✔ News : Aucune annonce bloquante à proximité
+PO	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	✔ Contexte de marché : Trend=Transition | Volatilité=Normale
+MM	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	✔ Drawdown : Drawdown actuel=0.00% (max=20.00%)
+JE	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	
+PM	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 14:00:00] [INFO] ===== SCORE DETAIL =====
+RJ	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	EMA                          : +30.0 (Haussier)
+JF	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	Tendance                     : +0.0 (Aucun)
+HR	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	RSI                          : +20.0 (Baissier)
+LI	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	Momentum                     : +0.0 (Aucun)
+CJ	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	Support/Resistance           : +0.0 (Aucun)
+EO	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	Pattern (aucun detecte)      : +0.0 (Aucun)
+QS	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	Breakout (aucune cassure)    : +0.0 (Aucun)
+JD	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	ATR Bonus                    : +10.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+MK	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	Volume Bonus (liquidite=43.9 < seuil 55.0, pas de bonus) : +0.0 (Aucun)
+LI	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	--------------------------
+RN	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	Bullish   = 40.0
+FF	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	Bearish   = 30.0
+EO	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	Score     = 40.0
+OG	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	Threshold = 108.0 (60% de 180.0)
+PS	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	Manquant  = 68.0
+OJ	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	Signal    = NONE
+JL	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	Raison exacte : Score insuffisant : 40.0 obtenu, 108.0 requis (manque 68.0 pts, soit 38% du score max)
+GP	0	11:59:59.578	NexusEdgeEA (XAUUSD,H1)	=========================
+IP	0	12:59:59.788	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 15:00:00] [INFO] Analyse de signal filtrée :
+MR	0	12:59:59.796	NexusEdgeEA (XAUUSD,H1)	✔ Spread : Spread actuel=31.0 pts (max=300.0 pts)
+FK	0	12:59:59.796	NexusEdgeEA (XAUUSD,H1)	✔ Volatilité : Regime=Normale | ATR brut=17.05429 | ATR en points=1705.4 | Seuils=[80.0 - 3000.0]
+QP	0	12:59:59.814	NexusEdgeEA (XAUUSD,H1)	✔ Session : Session Londres active (08:00-17:00)
+OG	0	12:59:59.814	NexusEdgeEA (XAUUSD,H1)	❌ News : Annonce 'Allocations Initiales de Chômage' (USD, importance=NEWS_IMPORTANCE_HIGH) prévue à 2026.07.23 15:30
+RP	0	12:59:59.814	NexusEdgeEA (XAUUSD,H1)	✔ Contexte de marché : Trend=Transition | Volatilité=Normale
+KL	0	12:59:59.814	NexusEdgeEA (XAUUSD,H1)	✔ Drawdown : Drawdown actuel=0.00% (max=20.00%)
+DD	0	12:59:59.814	NexusEdgeEA (XAUUSD,H1)	
+EM	0	12:59:59.889	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 15:00:00] [INFO] [SessionFilter] Analyse bloquee : News
+IK	0	14:56:50.634	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 16:56:51] [INFO] Analyse de signal autorisée :
+QH	0	14:56:50.727	NexusEdgeEA (XAUUSD,H1)	✔ Spread : Spread actuel=22.0 pts (max=300.0 pts)
+FP	0	14:56:50.727	NexusEdgeEA (XAUUSD,H1)	✔ Volatilité : Regime=Normale | ATR brut=15.18357 | ATR en points=1518.4 | Seuils=[80.0 - 3000.0]
+HG	0	14:56:50.727	NexusEdgeEA (XAUUSD,H1)	✔ Session : Session Londres active (08:00-17:00)
+CM	0	14:56:50.727	NexusEdgeEA (XAUUSD,H1)	✔ News : Aucune annonce bloquante à proximité
+MM	0	14:56:50.727	NexusEdgeEA (XAUUSD,H1)	✔ Contexte de marché : Trend=Transition | Volatilité=Normale
+PK	0	14:56:50.727	NexusEdgeEA (XAUUSD,H1)	✔ Drawdown : Drawdown actuel=0.00% (max=20.00%)
+KH	0	14:56:50.727	NexusEdgeEA (XAUUSD,H1)	
+DJ	0	14:56:50.747	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 16:56:51] [INFO] ===== SCORE DETAIL =====
+QD	0	14:56:50.747	NexusEdgeEA (XAUUSD,H1)	EMA                          : +30.0 (Haussier)
+QQ	0	14:56:50.747	NexusEdgeEA (XAUUSD,H1)	Tendance                     : +0.0 (Aucun)
+OO	0	14:56:50.747	NexusEdgeEA (XAUUSD,H1)	RSI                          : +20.0 (Baissier)
+IE	0	14:56:50.747	NexusEdgeEA (XAUUSD,H1)	Momentum                     : +7.1 (Baissier)
+PS	0	14:56:50.747	NexusEdgeEA (XAUUSD,H1)	Support/Resistance           : +20.0 (Baissier)
+LQ	0	14:56:50.747	NexusEdgeEA (XAUUSD,H1)	Pattern (aucun detecte)      : +0.0 (Aucun)
+HE	0	14:56:50.747	NexusEdgeEA (XAUUSD,H1)	Breakout                     : +15.0 (Baissier)
+OG	0	14:56:50.747	NexusEdgeEA (XAUUSD,H1)	ATR Bonus                    : +10.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+LH	0	14:56:50.747	NexusEdgeEA (XAUUSD,H1)	Volume Bonus (liquidite=32.7 < seuil 55.0, pas de bonus) : +0.0 (Aucun)
+QN	0	14:56:50.747	NexusEdgeEA (XAUUSD,H1)	--------------------------
+KO	0	14:56:50.747	NexusEdgeEA (XAUUSD,H1)	Bullish   = 40.0
+FP	0	14:56:50.747	NexusEdgeEA (XAUUSD,H1)	Bearish   = 72.1
+HH	0	14:56:50.747	NexusEdgeEA (XAUUSD,H1)	Score     = 72.1
+NQ	0	14:56:50.747	NexusEdgeEA (XAUUSD,H1)	Threshold = 108.0 (60% de 180.0)
+NR	0	14:56:50.747	NexusEdgeEA (XAUUSD,H1)	Manquant  = 35.9
+NL	0	14:56:50.747	NexusEdgeEA (XAUUSD,H1)	Signal    = NONE
+KK	0	14:56:50.747	NexusEdgeEA (XAUUSD,H1)	Raison exacte : Score insuffisant : 72.1 obtenu, 108.0 requis (manque 35.9 pts, soit 20% du score max)
+FS	0	14:56:50.747	NexusEdgeEA (XAUUSD,H1)	=========================
+JQ	0	14:59:59.446	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 17:00:00] [INFO] Analyse de signal autorisée :
+ES	0	14:59:59.446	NexusEdgeEA (XAUUSD,H1)	✔ Spread : Spread actuel=44.0 pts (max=300.0 pts)
+LJ	0	14:59:59.446	NexusEdgeEA (XAUUSD,H1)	✔ Volatilité : Regime=Normale | ATR brut=16.30071 | ATR en points=1630.1 | Seuils=[80.0 - 3000.0]
+FP	0	14:59:59.446	NexusEdgeEA (XAUUSD,H1)	✔ Session : Session New York active (13:00-22:00)
+LG	0	14:59:59.458	NexusEdgeEA (XAUUSD,H1)	✔ News : Aucune annonce bloquante à proximité
+NF	0	14:59:59.458	NexusEdgeEA (XAUUSD,H1)	✔ Contexte de marché : Trend=Transition | Volatilité=Normale
+OR	0	14:59:59.458	NexusEdgeEA (XAUUSD,H1)	✔ Drawdown : Drawdown actuel=0.00% (max=20.00%)
+DR	0	14:59:59.458	NexusEdgeEA (XAUUSD,H1)	
+LD	0	14:59:59.459	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 17:00:00] [INFO] ===== SCORE DETAIL =====
+KS	0	14:59:59.459	NexusEdgeEA (XAUUSD,H1)	EMA                          : +30.0 (Haussier)
+CO	0	14:59:59.459	NexusEdgeEA (XAUUSD,H1)	Tendance                     : +0.0 (Aucun)
+EE	0	14:59:59.459	NexusEdgeEA (XAUUSD,H1)	RSI                          : +20.0 (Baissier)
+KO	0	14:59:59.459	NexusEdgeEA (XAUUSD,H1)	Momentum                     : +9.7 (Baissier)
+HL	0	14:59:59.459	NexusEdgeEA (XAUUSD,H1)	Support/Resistance           : +20.0 (Haussier)
+JG	0	14:59:59.459	NexusEdgeEA (XAUUSD,H1)	Pattern (aucun detecte)      : +0.0 (Aucun)
+FL	0	14:59:59.459	NexusEdgeEA (XAUUSD,H1)	Breakout                     : +15.0 (Baissier)
+MM	0	14:59:59.459	NexusEdgeEA (XAUUSD,H1)	ATR Bonus                    : +10.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+KP	0	14:59:59.459	NexusEdgeEA (XAUUSD,H1)	Volume Bonus                 : +15.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+IS	0	14:59:59.459	NexusEdgeEA (XAUUSD,H1)	--------------------------
+ID	0	14:59:59.459	NexusEdgeEA (XAUUSD,H1)	Bullish   = 75.0
+JM	0	14:59:59.459	NexusEdgeEA (XAUUSD,H1)	Bearish   = 69.7
+NE	0	14:59:59.459	NexusEdgeEA (XAUUSD,H1)	Score     = 75.0
+FN	0	14:59:59.459	NexusEdgeEA (XAUUSD,H1)	Threshold = 108.0 (60% de 180.0)
+OI	0	14:59:59.459	NexusEdgeEA (XAUUSD,H1)	Manquant  = 33.0
+FQ	0	14:59:59.459	NexusEdgeEA (XAUUSD,H1)	Signal    = NONE
+EF	0	14:59:59.459	NexusEdgeEA (XAUUSD,H1)	Raison exacte : Score insuffisant : 75.0 obtenu, 108.0 requis (manque 33.0 pts, soit 18% du score max)
+NF	0	14:59:59.459	NexusEdgeEA (XAUUSD,H1)	=========================
+DG	0	15:59:59.505	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 18:00:00] [INFO] Analyse de signal autorisée :
+JL	0	15:59:59.505	NexusEdgeEA (XAUUSD,H1)	✔ Spread : Spread actuel=37.0 pts (max=300.0 pts)
+MM	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	✔ Volatilité : Regime=Normale | ATR brut=17.14857 | ATR en points=1714.9 | Seuils=[80.0 - 3000.0]
+KJ	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	✔ Session : Session New York active (13:00-22:00)
+DJ	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	✔ News : Aucune annonce bloquante à proximité
+JQ	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	✔ Contexte de marché : Trend=Transition | Volatilité=Normale
+CO	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	✔ Drawdown : Drawdown actuel=0.00% (max=20.00%)
+LG	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	
+RO	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 18:00:00] [INFO] ===== SCORE DETAIL =====
+HH	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	EMA                          : +30.0 (Haussier)
+LD	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	Tendance                     : +0.0 (Aucun)
+JS	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	RSI                          : +20.0 (Baissier)
+OP	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	Momentum                     : +6.5 (Baissier)
+MH	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	Support/Resistance           : +20.0 (Baissier)
+EM	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	Pattern (aucun detecte)      : +0.0 (Aucun)
+QQ	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	Breakout (aucune cassure)    : +0.0 (Aucun)
+RK	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	ATR Bonus                    : +10.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+PG	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	Volume Bonus                 : +15.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+FE	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	--------------------------
+LR	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	Bullish   = 55.0
+DK	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	Bearish   = 71.5
+JS	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	Score     = 71.5
+QD	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	Threshold = 108.0 (60% de 180.0)
+DO	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	Manquant  = 36.5
+QG	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	Signal    = NONE
+HP	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	Raison exacte : Score insuffisant : 71.5 obtenu, 108.0 requis (manque 36.5 pts, soit 20% du score max)
+QL	0	15:59:59.525	NexusEdgeEA (XAUUSD,H1)	=========================
+CL	0	16:59:59.494	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:00:00] [INFO] Analyse de signal autorisée :
+JI	0	16:59:59.494	NexusEdgeEA (XAUUSD,H1)	✔ Spread : Spread actuel=26.0 pts (max=300.0 pts)
+KG	0	16:59:59.494	NexusEdgeEA (XAUUSD,H1)	✔ Volatilité : Regime=Normale | ATR brut=16.46143 | ATR en points=1646.1 | Seuils=[80.0 - 3000.0]
+FE	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	✔ Session : Session New York active (13:00-22:00)
+IL	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	✔ News : Aucune annonce bloquante à proximité
+OL	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	✔ Contexte de marché : Trend=Transition | Volatilité=Normale
+NH	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	✔ Drawdown : Drawdown actuel=0.00% (max=20.00%)
+QI	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	
+LI	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:00:00] [INFO] ===== SCORE DETAIL =====
+KD	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	EMA                          : +30.0 (Baissier)
+QR	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	Tendance                     : +0.0 (Aucun)
+ON	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	RSI                          : +20.0 (Baissier)
+FJ	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	Momentum                     : +7.4 (Baissier)
+NS	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	Support/Resistance           : +20.0 (Haussier)
+MM	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	Pattern(Inside Bar (compression)) : +7.0 (Baissier)
+DE	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	Breakout (aucune cassure)    : +0.0 (Aucun)
+GG	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	ATR Bonus                    : +10.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+IJ	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	Volume Bonus                 : +15.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+KI	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	--------------------------
+FO	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	Bullish   = 45.0
+OG	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	Bearish   = 89.4
+MH	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	Score     = 89.4
+HP	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	Threshold = 108.0 (60% de 180.0)
+HR	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	Manquant  = 18.6
+HK	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	Signal    = NONE
+GK	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	Raison exacte : Score insuffisant : 89.4 obtenu, 108.0 requis (manque 18.6 pts, soit 10% du score max)
+HP	0	16:59:59.505	NexusEdgeEA (XAUUSD,H1)	=========================
+PQ	0	17:41:54.571	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:41:55] [INFO] Arrêt de NexusEdgeEA (raison=2)
+CQ	0	17:41:54.612	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:41:55] [INFO] === Rapport de Performance NexusEdgeEA ===
+DQ	0	17:41:54.612	NexusEdgeEA (XAUUSD,H1)	Trades totaux       : 1 (BUY=0, SELL=1)
+ON	0	17:41:54.612	NexusEdgeEA (XAUUSD,H1)	Win Rate            : 100.00%
+RI	0	17:41:54.612	NexusEdgeEA (XAUUSD,H1)	Profit Factor       : 0.00
+EP	0	17:41:54.612	NexusEdgeEA (XAUUSD,H1)	Esperance/trade     : 651.90
+NK	0	17:41:54.612	NexusEdgeEA (XAUUSD,H1)	RR moyen realise    : 0.06
+QS	0	17:41:54.612	NexusEdgeEA (XAUUSD,H1)	Profit net          : 651.90
+DE	0	17:41:54.612	NexusEdgeEA (XAUUSD,H1)	Drawdown maximal    : 0.00% (0.00 en montant)
+CI	0	17:41:54.612	NexusEdgeEA (XAUUSD,H1)	Recovery Factor     : 0.00
+LQ	0	17:41:54.612	NexusEdgeEA (XAUUSD,H1)	Sharpe (approx, secondaire) : 0.000
+RI	0	17:41:54.618	NexusEdgeEA (XAUUSD,H1)	Profit du jour      : 0.00
+OL	0	17:41:54.618	NexusEdgeEA (XAUUSD,H1)	Profit de la semaine: 0.00
+IF	0	17:41:54.618	NexusEdgeEA (XAUUSD,H1)	Profit du mois      : 651.90
+IL	0	17:41:54.618	NexusEdgeEA (XAUUSD,H1)	
+OK	0	17:41:54.618	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:41:55] [INFO] ===== AUDIT DES CONTRIBUTIONS (preuve empirique) =====
+GD	0	17:41:54.618	NexusEdgeEA (XAUUSD,H1)	Nombre total de bougies analysees : 16
+OM	0	17:41:54.618	NexusEdgeEA (XAUUSD,H1)	--------------------------------------------------------
+FS	0	17:41:54.618	NexusEdgeEA (XAUUSD,H1)	EMA                    :    16 / 16 bougies (100.0%)
+OH	0	17:41:54.618	NexusEdgeEA (XAUUSD,H1)	Tendance               :     3 / 16 bougies (18.8%)
+IH	0	17:41:54.618	NexusEdgeEA (XAUUSD,H1)	RSI                    :    10 / 16 bougies (62.5%)
+JQ	0	17:41:54.618	NexusEdgeEA (XAUUSD,H1)	Momentum               :     6 / 16 bougies (37.5%)
+DS	0	17:41:54.618	NexusEdgeEA (XAUUSD,H1)	Support/Resistance     :     7 / 16 bougies (43.8%)
+KD	0	17:41:54.618	NexusEdgeEA (XAUUSD,H1)	Pattern                :     2 / 16 bougies (12.5%)
+HE	0	17:41:54.618	NexusEdgeEA (XAUUSD,H1)	Breakout               :     3 / 16 bougies (18.8%)
+GP	0	17:41:54.618	NexusEdgeEA (XAUUSD,H1)	ATR Bonus              :    16 / 16 bougies (100.0%)
+HR	0	17:41:54.618	NexusEdgeEA (XAUUSD,H1)	Volume Bonus           :     7 / 16 bougies (43.8%)
+JF	0	17:41:54.618	NexusEdgeEA (XAUUSD,H1)	=========================================================
+LH	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:41:55] [INFO] ===== DIAGNOSTICS GLOBAUX DU PIPELINE =====
+RN	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	
+CH	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	--- PIPELINE (entonnoir) ---
+CM	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	Bougies analysees                       : 17
+CS	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	  v  Filters rejetees                   : 1 (5.9%)
+QH	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	  v  Signal NONE                        : 17 (100.0%)
+IF	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	  v  Validator refuses (sur signaux)    : 0 (0.0%)
+DP	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	  v  TradeManager echecs                : 0 (0.0%)
+KP	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	  v  Trades ouverts                     : 0
+FJ	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	
+HS	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	--- Etage FILTERS (avant analyse du signal) ---
+IF	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	   Analyse autorisee                    : 16
+EN	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	   Analyse bloquee                      : 1
+KS	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	      -> News : 1 fois (100.0%)
+PJ	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	
+MS	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	--- Etage SIGNALMANAGER ---
+DG	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	   Signal BUY                           : 0
+NM	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	   Signal SELL                          : 0
+GH	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	   Signal NONE (total)                  : 17
+ED	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	      -> score insuffisant (< seuil)     : 16
+JN	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	      -> dont quasi-signal (< 10 pts)   : 1
+RP	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	      -> egalite Bull=Bear (cas limite)  : 0
+RJ	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	
+GS	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	--- Etage VALIDATOR (avant execution) ---
+JF	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	   Trade autorise                       : 0
+DR	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	   Trade refuse                         : 0
+PP	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	
+QL	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	--- Etage TRADEMANAGER (ouverture) ---
+LO	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	   Positions ouvertes avec succes        : 0
+EH	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	   Echecs d'ouverture (retcode broker)    : 0
+FN	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	
+HF	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	--- Etage CLOTURE DES TRADES (WIN/LOSS) ---
+DQ	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	   Trades clotures (total)               : 1
+EL	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	   WIN                                   : 1
+CD	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	   LOSS                                  : 0
+RH	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	   Raisons de cloture :
+RS	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	      -> SL atteint (initial ou ajuste par BreakEven/Trailing) : 1 fois (100.0%)
+NN	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	   MFE moyen prix (trades WIN)          : 4.49000
+CH	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	   MAE moyen prix (trades WIN)           : 8.65000
+CI	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	   Duree moyenne (trades WIN)            : 152 sec
+LR	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	
+GG	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	--- LABORATOIRE D'ANALYSE (argent reel, depuis CTradeLifecycleTracker) ---
+MD	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	   (Aucune donnee - InpTrackTradeLifecycle desactive ou aucun trade cloture avec suivi)
+FI	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	
+DE	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	--- REPARTITION WIN/LOSS PAR DIMENSION ---
+RE	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	   Par direction (BUY vs SELL) :
+KR	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	      -> SELL : 1 trades | WinRate=100.0% | Profit net=651.90
+DF	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	
+LR	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	--- ANALYSE ET SUGGESTIONS (observations statistiques, aucune modification automatique) ---
+DR	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	Etage le plus bloquant : SignalManager (SIGNAL_NONE) (17 occurrences, 100.0% des bougies analysees)
+IN	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	   Cause : score inferieur au seuil sur 94.1% des SIGNAL_NONE, dont 6.2% manquent de moins de 10 points.
+FD	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	   Suggestion : ce seuil (InpScore_Threshold) merite une analyse - une part significative des rejets sont des quasi-signaux.
+DE	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	Trades clotures (1) encore insuffisants pour une analyse statistique fiable du Win Rate.
+CE	0	17:41:54.686	NexusEdgeEA (XAUUSD,H1)	=============================================
+IG	0	17:41:54.710	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:41:55] [INFO] ===== PROFIT PROTECTION ENGINE - Activations par mecanisme =====
+ME	0	17:41:54.710	NexusEdgeEA (XAUUSD,H1)	BreakEven :
+LQ	0	17:41:54.710	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+LE	0	17:41:54.710	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+PJ	0	17:41:54.710	NexusEdgeEA (XAUUSD,H1)	TrailingClassique :
+HO	0	17:41:54.710	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+PS	0	17:41:54.710	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+OI	0	17:41:54.710	NexusEdgeEA (XAUUSD,H1)	ProfitGuard_Structure :
+LM	0	17:41:54.710	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+LQ	0	17:41:54.710	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+DL	0	17:41:54.710	NexusEdgeEA (XAUUSD,H1)	ProfitGuard_PeakPercent :
+DJ	0	17:41:54.710	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+DL	0	17:41:54.710	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+GM	0	17:41:54.710	NexusEdgeEA (XAUUSD,H1)	ProfitGuard_Emergency :
+HH	0	17:41:54.710	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+PJ	0	17:41:54.710	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+EN	0	17:41:54.710	NexusEdgeEA (XAUUSD,H1)	-------------------------------------------------------------------
+EN	0	17:41:54.710	NexusEdgeEA (XAUUSD,H1)	Definition de "Efficace" : le DERNIER mecanisme a avoir modifie le SL
+MR	0	17:41:54.710	NexusEdgeEA (XAUUSD,H1)	avant que le trade ne se cloture sur ce SL touche, avec un profit final >= 0.
+DM	0	17:41:54.710	NexusEdgeEA (XAUUSD,H1)	Un mecanisme peut etre applique souvent sans etre "efficace" (surclasse
+HG	0	17:41:54.710	NexusEdgeEA (XAUUSD,H1)	ensuite par un autre), et inversement.
+IK	0	17:41:54.710	NexusEdgeEA (XAUUSD,H1)	===================================================================
+IE	0	17:41:59.712	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:42:00] [INFO] Logger initialisé (niveau=LOG_LEVEL_INFO, fichiers=NexusEdgeEA_Trades.csv/NexusEdgeEA_Log.txt/NexusEdgeEA_Decisions.json + TradeEvents/TradeFull/PostCloseReview/SystemEvents/DebugPipeline)
+IL	0	17:42:00.363	NexusEdgeEA (XAUUSD,H1)	CPositionManager::LoadProcessedIds - 16 position(s) deja traitee(s) rechargee(s) depuis NexusEdgeEA_ProcessedPositions_XAUUSD_202601.dat
+JK	0	17:42:00.373	NexusEdgeEA (XAUUSD,H1)	CDashboard: Dashboard Init Start (x=10, y=20, visible=true, prefix=NEA_Dash)
+ID	0	17:42:00.373	NexusEdgeEA (XAUUSD,H1)	CDashboard: Dashboard Init termine avec succes
+DK	0	17:42:00.453	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:42:01] [INFO] Nouveau jour de trading - réinitialisation des limites journalières
+PQ	0	17:42:00.453	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:42:01] [INFO] NexusEdgeEA v1.0.0 initialisé sur XAUUSD (TF principal=PERIOD_H1)
+JP	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:42:21] [INFO] Arrêt de NexusEdgeEA (raison=2)
+OF	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:42:21] [INFO] === Rapport de Performance NexusEdgeEA ===
+DQ	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	Trades totaux       : 0 (BUY=0, SELL=0)
+DN	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	Win Rate            : 0.00%
+NI	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	Profit Factor       : 0.00
+PP	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	Esperance/trade     : 0.00
+PK	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	RR moyen realise    : 0.00
+PL	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	Profit net          : 0.00
+PD	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	Drawdown maximal    : 0.00% (0.00 en montant)
+KN	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	Recovery Factor     : 0.00
+LQ	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	Sharpe (approx, secondaire) : 0.000
+LI	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	Profit du jour      : 0.00
+ML	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	Profit de la semaine: 0.00
+NI	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	Profit du mois      : 0.00
+GM	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	
+QK	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:42:21] [INFO] ===== AUDIT DES CONTRIBUTIONS (preuve empirique) =====
+HG	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	Nombre total de bougies analysees : 0
+OM	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	--------------------------------------------------------
+EP	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	EMA                    :     0 / 0 bougies (0.0%)
+JI	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	Tendance               :     0 / 0 bougies (0.0%)
+JO	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	RSI                    :     0 / 0 bougies (0.0%)
+DO	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	Momentum               :     0 / 0 bougies (0.0%)
+CE	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	Support/Resistance     :     0 / 0 bougies (0.0%)
+HJ	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	Pattern                :     0 / 0 bougies (0.0%)
+IS	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	Breakout               :     0 / 0 bougies (0.0%)
+FL	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	ATR Bonus              :     0 / 0 bougies (0.0%)
+IG	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	Volume Bonus           :     0 / 0 bougies (0.0%)
+JK	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	=========================================================
+QL	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:42:21] [INFO] ===== DIAGNOSTICS GLOBAUX DU PIPELINE =====
+KM	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	
+JD	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	--- PIPELINE (entonnoir) ---
+DR	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	Bougies analysees                       : 0
+KG	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	  v  Filters rejetees                   : 0 (0.0%)
+GF	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	  v  Signal NONE                        : 0 (0.0%)
+LR	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	  v  Validator refuses (sur signaux)    : 0 (0.0%)
+IM	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	  v  TradeManager echecs                : 0 (0.0%)
+JD	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	  v  Trades ouverts                     : 0
+GN	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	
+EF	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	--- Etage FILTERS (avant analyse du signal) ---
+II	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	   Analyse autorisee                    : 0
+MR	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	   Analyse bloquee                      : 0
+MG	0	17:42:20.506	NexusEdgeEA (XAUUSD,H1)	
+QQ	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	--- Etage SIGNALMANAGER ---
+PJ	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	   Signal BUY                           : 0
+JN	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	   Signal SELL                          : 0
+IN	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	   Signal NONE (total)                  : 0
+FH	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	      -> score insuffisant (< seuil)     : 0
+IK	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	      -> dont quasi-signal (< 10 pts)   : 0
+RS	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	      -> egalite Bull=Bear (cas limite)  : 0
+RG	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	
+GQ	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	--- Etage VALIDATOR (avant execution) ---
+JK	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	   Trade autorise                       : 0
+DE	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	   Trade refuse                         : 0
+PM	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	
+QJ	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	--- Etage TRADEMANAGER (ouverture) ---
+LM	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	   Positions ouvertes avec succes        : 0
+EJ	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	   Echecs d'ouverture (retcode broker)    : 0
+FH	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	
+HE	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	--- Etage CLOTURE DES TRADES (WIN/LOSS) ---
+CD	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	   Trades clotures (total)               : 0
+FS	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	   WIN                                   : 0
+CQ	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	   LOSS                                  : 0
+LJ	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	
+GN	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	--- LABORATOIRE D'ANALYSE (argent reel, depuis CTradeLifecycleTracker) ---
+MK	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	   (Aucune donnee - InpTrackTradeLifecycle desactive ou aucun trade cloture avec suivi)
+FF	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	
+DM	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	--- REPARTITION WIN/LOSS PAR DIMENSION ---
+KS	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	   (Aucune donnee - pas encore de trades clotures avec contexte associe)
+JG	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	
+RR	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	--- ANALYSE ET SUGGESTIONS (observations statistiques, aucune modification automatique) ---
+PL	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	Etage le plus bloquant : Validator (0 occurrences, 0.0% des bougies analysees)
+ON	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	Trades clotures (0) encore insuffisants pour une analyse statistique fiable du Win Rate.
+ON	0	17:42:20.527	NexusEdgeEA (XAUUSD,H1)	=============================================
+HJ	0	17:42:20.562	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:42:21] [INFO] ===== PROFIT PROTECTION ENGINE - Activations par mecanisme =====
+DO	0	17:42:20.562	NexusEdgeEA (XAUUSD,H1)	BreakEven :
+ML	0	17:42:20.562	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+EO	0	17:42:20.562	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+QO	0	17:42:20.562	NexusEdgeEA (XAUUSD,H1)	TrailingClassique :
+QJ	0	17:42:20.562	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+QL	0	17:42:20.562	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+JL	0	17:42:20.562	NexusEdgeEA (XAUUSD,H1)	ProfitGuard_Structure :
+MH	0	17:42:20.562	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+EK	0	17:42:20.562	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+EQ	0	17:42:20.562	NexusEdgeEA (XAUUSD,H1)	ProfitGuard_PeakPercent :
+EE	0	17:42:20.562	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+MI	0	17:42:20.562	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+JF	0	17:42:20.562	NexusEdgeEA (XAUUSD,H1)	ProfitGuard_Emergency :
+QS	0	17:42:20.562	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+QG	0	17:42:20.562	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+LI	0	17:42:20.562	NexusEdgeEA (XAUUSD,H1)	-------------------------------------------------------------------
+DE	0	17:42:20.562	NexusEdgeEA (XAUUSD,H1)	Definition de "Efficace" : le DERNIER mecanisme a avoir modifie le SL
+DM	0	17:42:20.562	NexusEdgeEA (XAUUSD,H1)	avant que le trade ne se cloture sur ce SL touche, avec un profit final >= 0.
+NP	0	17:42:20.572	NexusEdgeEA (XAUUSD,H1)	Un mecanisme peut etre applique souvent sans etre "efficace" (surclasse
+RM	0	17:42:20.572	NexusEdgeEA (XAUUSD,H1)	ensuite par un autre), et inversement.
+GD	0	17:42:20.572	NexusEdgeEA (XAUUSD,H1)	===================================================================
+KO	0	17:42:20.822	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:42:21] [INFO] Logger initialisé (niveau=LOG_LEVEL_INFO, fichiers=NexusEdgeEA_Trades.csv/NexusEdgeEA_Log.txt/NexusEdgeEA_Decisions.json + TradeEvents/TradeFull/PostCloseReview/SystemEvents/DebugPipeline)
+RG	0	17:42:20.823	NexusEdgeEA (XAUUSD,H1)	CPositionManager::LoadProcessedIds - 16 position(s) deja traitee(s) rechargee(s) depuis NexusEdgeEA_ProcessedPositions_XAUUSD_202601.dat
+RN	0	17:42:20.823	NexusEdgeEA (XAUUSD,H1)	CDashboard: Dashboard Init Start (x=10, y=20, visible=true, prefix=NEA_Dash)
+QS	0	17:42:20.823	NexusEdgeEA (XAUUSD,H1)	CDashboard: Dashboard Init termine avec succes
+DF	0	17:42:20.824	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:42:21] [INFO] Nouveau jour de trading - réinitialisation des limites journalières
+PO	0	17:42:20.824	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:42:21] [INFO] NexusEdgeEA v1.0.0 initialisé sur XAUUSD (TF principal=PERIOD_H1)
+IK	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:44:59] [INFO] Arrêt de NexusEdgeEA (raison=2)
+PK	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:44:59] [INFO] === Rapport de Performance NexusEdgeEA ===
+DD	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Trades totaux       : 0 (BUY=0, SELL=0)
+DP	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Win Rate            : 0.00%
+FF	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Profit Factor       : 0.00
+PM	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Esperance/trade     : 0.00
+HP	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	RR moyen realise    : 0.00
+PF	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Profit net          : 0.00
+HQ	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Drawdown maximal    : 0.00% (0.00 en montant)
+KD	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Recovery Factor     : 0.00
+DL	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Sharpe (approx, secondaire) : 0.000
+LD	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Profit du jour      : 0.00
+EG	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Profit de la semaine: 0.00
+NS	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Profit du mois      : 0.00
+OH	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	
+RF	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:44:59] [INFO] ===== AUDIT DES CONTRIBUTIONS (preuve empirique) =====
+PJ	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Nombre total de bougies analysees : 0
+GH	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	--------------------------------------------------------
+MM	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	EMA                    :     0 / 0 bougies (0.0%)
+JL	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Tendance               :     0 / 0 bougies (0.0%)
+JE	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	RSI                    :     0 / 0 bougies (0.0%)
+LD	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Momentum               :     0 / 0 bougies (0.0%)
+KN	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Support/Resistance     :     0 / 0 bougies (0.0%)
+HP	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Pattern                :     0 / 0 bougies (0.0%)
+IF	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Breakout               :     0 / 0 bougies (0.0%)
+NQ	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	ATR Bonus              :     0 / 0 bougies (0.0%)
+QP	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Volume Bonus           :     0 / 0 bougies (0.0%)
+JD	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	=========================================================
+JJ	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:44:59] [INFO] ===== DIAGNOSTICS GLOBAUX DU PIPELINE =====
+KH	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	
+JJ	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	--- PIPELINE (entonnoir) ---
+DH	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Bougies analysees                       : 0
+KQ	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	  v  Filters rejetees                   : 0 (0.0%)
+OI	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	  v  Signal NONE                        : 0 (0.0%)
+LE	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	  v  Validator refuses (sur signaux)    : 0 (0.0%)
+QR	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	  v  TradeManager echecs                : 0 (0.0%)
+JR	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	  v  Trades ouverts                     : 0
+OE	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	
+MQ	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	--- Etage FILTERS (avant analyse du signal) ---
+QD	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   Analyse autorisee                    : 0
+MI	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   Analyse bloquee                      : 0
+MR	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	
+PK	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	--- Etage SIGNALMANAGER ---
+IO	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   Signal BUY                           : 0
+OE	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   Signal SELL                          : 0
+HS	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   Signal NONE (total)                  : 0
+CO	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	      -> score insuffisant (< seuil)     : 0
+HF	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	      -> dont quasi-signal (< 10 pts)   : 0
+GH	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	      -> egalite Bull=Bear (cas limite)  : 0
+GR	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	
+RJ	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	--- Etage VALIDATOR (avant execution) ---
+GN	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   Trade autorise                       : 0
+MJ	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   Trade refuse                         : 0
+IH	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	
+HE	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	--- Etage TRADEMANAGER (ouverture) ---
+MG	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   Positions ouvertes avec succes        : 0
+DP	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   Echecs d'ouverture (retcode broker)    : 0
+CF	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	
+IN	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	--- Etage CLOTURE DES TRADES (WIN/LOSS) ---
+FI	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   Trades clotures (total)               : 0
+CD	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   WIN                                   : 0
+FL	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   LOSS                                  : 0
+MQ	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	
+JP	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	--- LABORATOIRE D'ANALYSE (argent reel, depuis CTradeLifecycleTracker) ---
+DP	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   (Aucune donnee - InpTrackTradeLifecycle desactive ou aucun trade cloture avec suivi)
+CL	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	
+EJ	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	--- REPARTITION WIN/LOSS PAR DIMENSION ---
+FN	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   (Aucune donnee - pas encore de trades clotures avec contexte associe)
+OR	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	
+GG	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	--- ANALYSE ET SUGGESTIONS (observations statistiques, aucune modification automatique) ---
+IK	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Etage le plus bloquant : Validator (0 occurrences, 0.0% des bougies analysees)
+RK	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Trades clotures (0) encore insuffisants pour une analyse statistique fiable du Win Rate.
+RH	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	=============================================
+QP	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:44:59] [INFO] ===== PROFIT PROTECTION ENGINE - Activations par mecanisme =====
+NP	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	BreakEven :
+KF	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+KH	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+OQ	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	TrailingClassique :
+GE	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+OF	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+PG	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	ProfitGuard_Structure :
+KR	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+KD	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+CG	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	ProfitGuard_PeakPercent :
+CP	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+CR	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+HK	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	ProfitGuard_Emergency :
+GN	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+OQ	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+FD	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	-------------------------------------------------------------------
+FH	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Definition de "Efficace" : le DERNIER mecanisme a avoir modifie le SL
+NH	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	avant que le trade ne se cloture sur ce SL touche, avec un profit final >= 0.
+CG	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	Un mecanisme peut etre applique souvent sans etre "efficace" (surclasse
+GH	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	ensuite par un autre), et inversement.
+JQ	0	17:44:59.117	NexusEdgeEA (XAUUSD,H1)	===================================================================
+DJ	0	17:44:59.382	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:45:00] [INFO] Logger initialisé (niveau=LOG_LEVEL_INFO, fichiers=NexusEdgeEA_Trades.csv/NexusEdgeEA_Log.txt/NexusEdgeEA_Decisions.json + TradeEvents/TradeFull/PostCloseReview/SystemEvents/DebugPipeline)
+RQ	0	17:44:59.409	NexusEdgeEA (XAUUSD,H1)	CPositionManager::LoadProcessedIds - 16 position(s) deja traitee(s) rechargee(s) depuis NexusEdgeEA_ProcessedPositions_XAUUSD_202601.dat
+RE	0	17:44:59.409	NexusEdgeEA (XAUUSD,H1)	CDashboard: Dashboard Init Start (x=10, y=20, visible=true, prefix=NEA_Dash)
+QN	0	17:44:59.409	NexusEdgeEA (XAUUSD,H1)	CDashboard: Dashboard Init termine avec succes
+EQ	0	17:44:59.410	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:45:00] [INFO] Nouveau jour de trading - réinitialisation des limites journalières
+QD	0	17:44:59.410	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:45:00] [INFO] NexusEdgeEA v1.0.0 initialisé sur XAUUSD (TF principal=PERIOD_H1)
+OF	0	17:45:35.046	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:45:35] [INFO] Arrêt de NexusEdgeEA (raison=1)
+ML	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:45:35] [INFO] === Rapport de Performance NexusEdgeEA ===
+HO	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	Trades totaux       : 0 (BUY=0, SELL=0)
+HE	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	Win Rate            : 0.00%
+RL	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	Profit Factor       : 0.00
+LF	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	Esperance/trade     : 0.00
+LM	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	RR moyen realise    : 0.00
+LI	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	Profit net          : 0.00
+LO	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	Drawdown maximal    : 0.00% (0.00 en montant)
+OS	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	Recovery Factor     : 0.00
+PJ	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	Sharpe (approx, secondaire) : 0.000
+PO	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	Profit du jour      : 0.00
+QJ	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	Profit de la semaine: 0.00
+RL	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	Profit du mois      : 0.00
+CF	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	
+KM	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:45:35] [INFO] ===== AUDIT DES CONTRIBUTIONS (preuve empirique) =====
+DQ	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	Nombre total de bougies analysees : 0
+KG	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	--------------------------------------------------------
+IK	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	EMA                    :     0 / 0 bougies (0.0%)
+FS	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	Tendance               :     0 / 0 bougies (0.0%)
+FR	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	RSI                    :     0 / 0 bougies (0.0%)
+HJ	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	Momentum               :     0 / 0 bougies (0.0%)
+GK	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	Support/Resistance     :     0 / 0 bougies (0.0%)
+DM	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	Pattern                :     0 / 0 bougies (0.0%)
+EM	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	Breakout               :     0 / 0 bougies (0.0%)
+JJ	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	ATR Bonus              :     0 / 0 bougies (0.0%)
+EJ	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	Volume Bonus           :     0 / 0 bougies (0.0%)
+FQ	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	=========================================================
+KQ	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:45:35] [INFO] ===== DIAGNOSTICS GLOBAUX DU PIPELINE =====
+OG	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	
+FQ	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	--- PIPELINE (entonnoir) ---
+HE	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	Bougies analysees                       : 0
+OJ	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	  v  Filters rejetees                   : 0 (0.0%)
+CS	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	  v  Signal NONE                        : 0 (0.0%)
+PH	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	  v  Validator refuses (sur signaux)    : 0 (0.0%)
+EG	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	  v  TradeManager echecs                : 0 (0.0%)
+FO	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	  v  Trades ouverts                     : 0
+CS	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	
+IL	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	--- Etage FILTERS (avant analyse du signal) ---
+ER	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	   Analyse autorisee                    : 0
+QD	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	   Analyse bloquee                      : 0
+QI	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	
+LD	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	--- Etage SIGNALMANAGER ---
+MQ	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	   Signal BUY                           : 0
+CS	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	   Signal SELL                          : 0
+DH	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	   Signal NONE (total)                  : 0
+GR	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	      -> score insuffisant (< seuil)     : 0
+DQ	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	      -> dont quasi-signal (< 10 pts)   : 0
+KE	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	      -> egalite Bull=Bear (cas limite)  : 0
+KI	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	
+FD	0	17:45:35.059	NexusEdgeEA (XAUUSD,H1)	--- Etage VALIDATOR (avant execution) ---
+ME	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	   Trade autorise                       : 0
+OO	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	   Trade refuse                         : 0
+CG	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	
+FO	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	--- Etage TRADEMANAGER (ouverture) ---
+GH	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	   Positions ouvertes avec succes        : 0
+RE	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	   Echecs d'ouverture (retcode broker)    : 0
+QM	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	
+KK	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	--- Etage CLOTURE DES TRADES (WIN/LOSS) ---
+PR	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	   Trades clotures (total)               : 0
+QI	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	   WIN                                   : 0
+PK	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	   LOSS                                  : 0
+GL	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	
+LE	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	--- LABORATOIRE D'ANALYSE (argent reel, depuis CTradeLifecycleTracker) ---
+JF	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	   (Aucune donnee - InpTrackTradeLifecycle desactive ou aucun trade cloture avec suivi)
+QK	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	
+OG	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	--- REPARTITION WIN/LOSS PAR DIMENSION ---
+HI	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	   (Aucune donnee - pas encore de trades clotures avec contexte associe)
+MH	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	
+EH	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	--- ANALYSE ET SUGGESTIONS (observations statistiques, aucune modification automatique) ---
+CF	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	Etage le plus bloquant : Validator (0 occurrences, 0.0% des bougies analysees)
+DD	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	Trades clotures (0) encore insuffisants pour une analyse statistique fiable du Win Rate.
+DE	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	=============================================
+NG	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:45:35] [INFO] ===== PROFIT PROTECTION ENGINE - Activations par mecanisme =====
+PE	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	BreakEven :
+IQ	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+QE	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+EJ	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	TrailingClassique :
+EO	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+ES	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+NI	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	ProfitGuard_Structure :
+IM	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+QQ	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+QL	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	ProfitGuard_PeakPercent :
+QK	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+IL	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+NL	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	ProfitGuard_Emergency :
+EH	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+EJ	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+HN	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	-------------------------------------------------------------------
+PO	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	Definition de "Efficace" : le DERNIER mecanisme a avoir modifie le SL
+PR	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	avant que le trade ne se cloture sur ce SL touche, avec un profit final >= 0.
+IM	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	Un mecanisme peut etre applique souvent sans etre "efficace" (surclasse
+EG	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	ensuite par un autre), et inversement.
+LJ	0	17:45:35.060	NexusEdgeEA (XAUUSD,H1)	===================================================================
+IE	0	17:45:46.806	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:45:47] [INFO] Logger initialisé (niveau=LOG_LEVEL_INFO, fichiers=NexusEdgeEA_Trades.csv/NexusEdgeEA_Log.txt/NexusEdgeEA_Decisions.json + TradeEvents/TradeFull/PostCloseReview/SystemEvents/DebugPipeline)
+IL	0	17:45:46.807	NexusEdgeEA (XAUUSD,H1)	CPositionManager::LoadProcessedIds - 16 position(s) deja traitee(s) rechargee(s) depuis NexusEdgeEA_ProcessedPositions_XAUUSD_202601.dat
+IH	0	17:45:46.807	NexusEdgeEA (XAUUSD,H1)	CDashboard: Dashboard Init Start (x=10, y=20, visible=true, prefix=NEA_Dash)
+JE	0	17:45:46.807	NexusEdgeEA (XAUUSD,H1)	CDashboard: Dashboard Init termine avec succes
+KK	0	17:45:46.807	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:45:47] [INFO] Nouveau jour de trading - réinitialisation des limites journalières
+GQ	0	17:45:46.807	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 19:45:47] [INFO] NexusEdgeEA v1.0.0 initialisé sur XAUUSD (TF principal=PERIOD_H1)
+IE	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 20:00:00] [INFO] TRADE CLOSED : positionId=9547845569 XAUUSD SELL | Resultat=LOSS | Raison=SL atteint (initial ou ajuste par BreakEven/Trailing) | Profit=0.00 | Duree=57s | MFE=0.00000 | MAE=0.00000
+CQ	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 20:00:00] [INFO] Analyse de signal autorisée :
+GR	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	✔ Spread : Spread actuel=27.0 pts (max=300.0 pts)
+KJ	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	✔ Volatilité : Regime=Normale | ATR brut=15.71214 | ATR en points=1571.2 | Seuils=[80.0 - 3000.0]
+CP	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	✔ Session : Session New York active (13:00-22:00)
+HP	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	✔ News : Aucune annonce bloquante à proximité
+JG	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	✔ Contexte de marché : Trend=Transition | Volatilité=Normale
+JE	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	✔ Drawdown : Drawdown actuel=0.52% (max=20.00%)
+PR	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	
+CE	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 20:00:00] [INFO] ===== SCORE DETAIL =====
+FS	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	EMA                          : +30.0 (Baissier)
+PO	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	Tendance                     : +0.0 (Aucun)
+RE	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	RSI                          : +20.0 (Baissier)
+GO	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	Momentum                     : +6.9 (Baissier)
+GR	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	Support/Resistance           : +0.0 (Aucun)
+CG	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	Pattern (hors zone, ignore)  : +0.0 (Aucun)
+EL	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	Breakout (aucune cassure)    : +0.0 (Aucun)
+JL	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	ATR Bonus                    : +10.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+LS	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	Volume Bonus (liquidite=48.1 < seuil 55.0, pas de bonus) : +0.0 (Aucun)
+PQ	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	--------------------------
+IF	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	Bullish   = 10.0
+HO	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	Bearish   = 66.9
+FG	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	Score     = 66.9
+CH	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	Threshold = 108.0 (60% de 180.0)
+NK	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	Manquant  = 41.1
+CS	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	Signal    = NONE
+ID	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	Raison exacte : Score insuffisant : 66.9 obtenu, 108.0 requis (manque 41.1 pts, soit 23% du score max)
+CH	0	17:59:59.592	NexusEdgeEA (XAUUSD,H1)	=========================
+OS	0	17:59:59.593	NexusEdgeEA (XAUUSD,H1)	CDashboard: Dashboard Created (prefix=NEA_Dash)
+FM	0	18:59:59.771	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 21:00:00] [INFO] Analyse de signal autorisée :
+LF	0	18:59:59.786	NexusEdgeEA (XAUUSD,H1)	✔ Spread : Spread actuel=20.0 pts (max=300.0 pts)
+OG	0	18:59:59.786	NexusEdgeEA (XAUUSD,H1)	✔ Volatilité : Regime=Normale | ATR brut=15.99143 | ATR en points=1599.1 | Seuils=[80.0 - 3000.0]
+MD	0	18:59:59.786	NexusEdgeEA (XAUUSD,H1)	✔ Session : Session New York active (13:00-22:00)
+NL	0	18:59:59.786	NexusEdgeEA (XAUUSD,H1)	✔ News : Aucune annonce bloquante à proximité
+PK	0	18:59:59.786	NexusEdgeEA (XAUUSD,H1)	✔ Contexte de marché : Trend=Transition | Volatilité=Normale
+PI	0	18:59:59.786	NexusEdgeEA (XAUUSD,H1)	✔ Drawdown : Drawdown actuel=0.52% (max=20.00%)
+FN	0	18:59:59.786	NexusEdgeEA (XAUUSD,H1)	
+RI	0	18:59:59.845	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 21:00:00] [INFO] ===== SCORE DETAIL =====
+LG	0	18:59:59.845	NexusEdgeEA (XAUUSD,H1)	EMA                          : +30.0 (Baissier)
+FS	0	18:59:59.845	NexusEdgeEA (XAUUSD,H1)	Tendance                     : +0.0 (Aucun)
+HI	0	18:59:59.845	NexusEdgeEA (XAUUSD,H1)	RSI                          : +20.0 (Baissier)
+EJ	0	18:59:59.845	NexusEdgeEA (XAUUSD,H1)	Momentum                     : +7.8 (Baissier)
+CR	0	18:59:59.845	NexusEdgeEA (XAUUSD,H1)	Support/Resistance           : +20.0 (Baissier)
+HQ	0	18:59:59.845	NexusEdgeEA (XAUUSD,H1)	Pattern(Engulfing baissier)  : +15.0 (Baissier)
+GF	0	18:59:59.845	NexusEdgeEA (XAUUSD,H1)	Breakout (aucune cassure)    : +0.0 (Aucun)
+PQ	0	18:59:59.845	NexusEdgeEA (XAUUSD,H1)	ATR Bonus                    : +10.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+RM	0	18:59:59.845	NexusEdgeEA (XAUUSD,H1)	Volume Bonus                 : +15.0 (Neutre (bonus qualite, ajoute aux 2 sens))
+DO	0	18:59:59.845	NexusEdgeEA (XAUUSD,H1)	--------------------------
+GH	0	18:59:59.845	NexusEdgeEA (XAUUSD,H1)	Bullish   = 25.0
+JS	0	18:59:59.845	NexusEdgeEA (XAUUSD,H1)	Bearish   = 117.8
+JJ	0	18:59:59.845	NexusEdgeEA (XAUUSD,H1)	Score     = 117.8
+CQ	0	18:59:59.845	NexusEdgeEA (XAUUSD,H1)	Threshold = 108.0 (60% de 180.0)
+RF	0	18:59:59.845	NexusEdgeEA (XAUUSD,H1)	Manquant  = 0.0
+QM	0	18:59:59.845	NexusEdgeEA (XAUUSD,H1)	Signal    = SELL
+NH	0	18:59:59.845	NexusEdgeEA (XAUUSD,H1)	Raison exacte : Signal genere normalement
+GK	0	18:59:59.845	NexusEdgeEA (XAUUSD,H1)	=========================
+QN	0	18:59:59.880	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 21:00:00] [INFO] RISK MANAGER : Entry=4041.72000 | SL=4065.71000 (dist=23.99000) | TP=3993.74000 (dist=47.98000) | RR=2.00 | Lot=4.07
+GM	0	19:00:00.071	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 21:00:00] [INFO] Trade autorisé :
+CE	0	19:00:00.071	NexusEdgeEA (XAUUSD,H1)	✔ Marché ouvert : Session de trading active
+PJ	0	19:00:00.071	NexusEdgeEA (XAUUSD,H1)	✔ Trading autorisé : Trading activé (terminal/compte/symbole)
+HM	0	19:00:00.071	NexusEdgeEA (XAUUSD,H1)	✔ Compte connecté : Connexion au serveur active
+PO	0	19:00:00.071	NexusEdgeEA (XAUUSD,H1)	✔ Spread : Spread actuel=20.0 pts (max autorisé=300.0 pts)
+OL	0	19:00:00.071	NexusEdgeEA (XAUUSD,H1)	✔ Session : Session autorisée (validée par CSessions)
+GQ	0	19:00:00.071	NexusEdgeEA (XAUUSD,H1)	✔ News : Aucune annonce bloquante
+CD	0	19:00:00.071	NexusEdgeEA (XAUUSD,H1)	✔ Nombre de positions : Positions ouvertes=0 (max=1)
+MJ	0	19:00:00.071	NexusEdgeEA (XAUUSD,H1)	✔ Perte journalière : P/L jour=0.00% (limite perte=-5.00%)
+OR	0	19:00:00.071	NexusEdgeEA (XAUUSD,H1)	✔ Gain journalier : P/L jour=0.00% (limite gain=+10.00%)
+MF	0	19:00:00.071	NexusEdgeEA (XAUUSD,H1)	✔ Taille du lot : Lot 4.07 conforme (min=0.01, max=100.00, step=0.01)
+JJ	0	19:00:00.071	NexusEdgeEA (XAUUSD,H1)	✔ Distance SL : Distance SL OK : distance=23.99000 (minimum broker=0.00000)
+MH	0	19:00:00.071	NexusEdgeEA (XAUUSD,H1)	✔ Distance TP : Distance TP OK : distance=47.98000 (minimum broker=0.00000)
+KG	0	19:00:00.071	NexusEdgeEA (XAUUSD,H1)	✔ Marge disponible : Marge OK : requise=16449.80, disponible=97797.51
+RH	0	19:00:00.071	NexusEdgeEA (XAUUSD,H1)	
+PF	0	19:00:00.783	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 21:00:01] [INFO] TRADE MANAGER : Direction=SELL Volume=4.07 Entry=4041.72000 SL=4065.71000 TP=3993.74000 | Retcode=10009 (done at 4041.74)
+IQ	0	19:00:00.784	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 21:00:01] [INFO] Position ouverte : ticket=9699910514 SELL lot=4.07 entry=4041.72000 sl=4065.71000 tp=3993.74000
+RO	0	19:59:59.591	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 22:00:00] [INFO] Analyse de signal filtrée :
+NG	0	19:59:59.656	NexusEdgeEA (XAUUSD,H1)	✔ Spread : Spread actuel=9.0 pts (max=300.0 pts)
+PD	0	19:59:59.657	NexusEdgeEA (XAUUSD,H1)	✔ Volatilité : Regime=Normale | ATR brut=15.79000 | ATR en points=1579.0 | Seuils=[80.0 - 3000.0]
+LK	0	19:59:59.657	NexusEdgeEA (XAUUSD,H1)	❌ Session : Heure serveur 22:00 hors de toute session activée
+HS	0	19:59:59.657	NexusEdgeEA (XAUUSD,H1)	✔ News : Aucune annonce bloquante à proximité
+RJ	0	19:59:59.657	NexusEdgeEA (XAUUSD,H1)	✔ Contexte de marché : Trend=Transition | Volatilité=Normale
+RF	0	19:59:59.657	NexusEdgeEA (XAUUSD,H1)	✔ Drawdown : Drawdown actuel=0.52% (max=20.00%)
+PO	0	19:59:59.657	NexusEdgeEA (XAUUSD,H1)	
+KD	0	19:59:59.838	NexusEdgeEA (XAUUSD,H1)	[2026.07.23 22:00:00] [INFO] [SessionFilter] Analyse bloquee : Session
+GE	0	22:59:59.734	NexusEdgeEA (XAUUSD,H1)	[2026.07.24 01:00:00] [INFO] ===== RAPPORT DU JOUR =====
+PN	0	22:59:59.770	NexusEdgeEA (XAUUSD,H1)	
+JD	0	22:59:59.770	NexusEdgeEA (XAUUSD,H1)	Bougies analysees : 3
+FM	0	22:59:59.770	NexusEdgeEA (XAUUSD,H1)	
+QE	0	22:59:59.770	NexusEdgeEA (XAUUSD,H1)	Signaux detectes : 1
+NS	0	22:59:59.770	NexusEdgeEA (XAUUSD,H1)	
+DP	0	22:59:59.770	NexusEdgeEA (XAUUSD,H1)	Trades ouverts : 1
+JF	0	22:59:59.770	NexusEdgeEA (XAUUSD,H1)	
+JM	0	22:59:59.770	NexusEdgeEA (XAUUSD,H1)	Trades gagnants : 0
+DE	0	22:59:59.770	NexusEdgeEA (XAUUSD,H1)	
+OR	0	22:59:59.770	NexusEdgeEA (XAUUSD,H1)	Trades perdants : 1
+NK	0	22:59:59.770	NexusEdgeEA (XAUUSD,H1)	
+QK	0	22:59:59.770	NexusEdgeEA (XAUUSD,H1)	Win Rate : 0 %
+RN	0	22:59:59.770	NexusEdgeEA (XAUUSD,H1)	
+GI	0	22:59:59.770	NexusEdgeEA (XAUUSD,H1)	Profit Net : +0.00 %
+JM	0	22:59:59.770	NexusEdgeEA (XAUUSD,H1)	
+NJ	0	22:59:59.795	NexusEdgeEA (XAUUSD,H1)	Profit Factor : 0.00
+GS	0	22:59:59.795	NexusEdgeEA (XAUUSD,H1)	
+MM	0	22:59:59.795	NexusEdgeEA (XAUUSD,H1)	Raisons de cloture :
+OD	0	22:59:59.795	NexusEdgeEA (XAUUSD,H1)	  -> SL atteint (initial ou ajuste par BreakEven/Trailing) : 1
+KE	0	22:59:59.795	NexusEdgeEA (XAUUSD,H1)	
+JR	0	22:59:59.795	NexusEdgeEA (XAUUSD,H1)	Filtre le plus bloquant :
+DG	0	22:59:59.795	NexusEdgeEA (XAUUSD,H1)	Session (100 %)
+CS	0	22:59:59.795	NexusEdgeEA (XAUUSD,H1)	
+HM	0	22:59:59.795	NexusEdgeEA (XAUUSD,H1)	=============================================
+JQ	0	22:59:59.869	NexusEdgeEA (XAUUSD,H1)	[2026.07.24 01:00:00] [INFO] Nouveau jour de trading - réinitialisation des limites journalières
+QG	0	23:00:00.583	NexusEdgeEA (XAUUSD,H1)	[2026.07.24 01:00:01] [INFO] Analyse de signal filtrée :
+GS	0	23:00:00.583	NexusEdgeEA (XAUUSD,H1)	❌ Spread : Spread actuel=819.0 pts (max=300.0 pts)
+QL	0	23:00:00.583	NexusEdgeEA (XAUUSD,H1)	✔ Volatilité : Regime=Normale | ATR brut=15.59500 | ATR en points=1559.5 | Seuils=[80.0 - 3000.0]
+EK	0	23:00:00.584	NexusEdgeEA (XAUUSD,H1)	✔ Session : Session Tokyo active (00:00-09:00)
+RI	0	23:00:00.584	NexusEdgeEA (XAUUSD,H1)	✔ News : Aucune annonce bloquante à proximité
+LP	0	23:00:00.584	NexusEdgeEA (XAUUSD,H1)	✔ Contexte de marché : Trend=Transition | Volatilité=Normale
+LL	0	23:00:00.584	NexusEdgeEA (XAUUSD,H1)	✔ Drawdown : Drawdown actuel=0.52% (max=20.00%)
+JD	0	23:00:00.584	NexusEdgeEA (XAUUSD,H1)	
+JL	0	23:00:00.650	NexusEdgeEA (XAUUSD,H1)	[2026.07.24 01:00:01] [INFO] [SessionFilter] Analyse bloquee : Spread
+CK	0	23:52:15.088	NexusEdgeEA (XAUUSD,H1)	[2026.07.24 01:52:15] [INFO] Arrêt de NexusEdgeEA (raison=4)
+KK	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	[2026.07.24 01:52:16] [INFO] === Rapport de Performance NexusEdgeEA ===
+EK	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	Trades totaux       : 1 (BUY=0, SELL=1)
+QP	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	Win Rate            : 0.00%
+CG	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	Profit Factor       : 0.00
+JH	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	Esperance/trade     : -511.89
+PQ	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	RR moyen realise    : 0.05
+DD	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	Profit net          : -511.89
+DS	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	Drawdown maximal    : 0.52% (511.89 en montant)
+NE	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	Recovery Factor     : -1.00
+CN	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	Sharpe (approx, secondaire) : 0.000
+KR	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	Profit du jour      : 0.00
+FF	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	Profit de la semaine: 0.00
+FR	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	Profit du mois      : -511.89
+JJ	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	
+IP	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	[2026.07.24 01:52:16] [INFO] ===== AUDIT DES CONTRIBUTIONS (preuve empirique) =====
+CL	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	Nombre total de bougies analysees : 2
+RJ	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	--------------------------------------------------------
+CO	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	EMA                    :     2 / 2 bougies (100.0%)
+QN	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	Tendance               :     0 / 2 bougies (0.0%)
+LG	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	RSI                    :     2 / 2 bougies (100.0%)
+RG	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	Momentum               :     2 / 2 bougies (100.0%)
+DN	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	Support/Resistance     :     1 / 2 bougies (50.0%)
+IQ	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	Pattern                :     1 / 2 bougies (50.0%)
+RK	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	Breakout               :     0 / 2 bougies (0.0%)
+HD	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	ATR Bonus              :     2 / 2 bougies (100.0%)
+RO	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	Volume Bonus           :     1 / 2 bougies (50.0%)
+MS	0	23:52:15.152	NexusEdgeEA (XAUUSD,H1)	=========================================================
+FG	0	23:52:15.278	NexusEdgeEA (XAUUSD,H1)	[2026.07.24 01:52:16] [INFO] ===== DIAGNOSTICS GLOBAUX DU PIPELINE =====
+QE	0	23:52:15.278	NexusEdgeEA (XAUUSD,H1)	
+DO	0	23:52:15.278	NexusEdgeEA (XAUUSD,H1)	--- PIPELINE (entonnoir) ---
+FK	0	23:52:15.278	NexusEdgeEA (XAUUSD,H1)	Bougies analysees                       : 4
+LO	0	23:52:15.278	NexusEdgeEA (XAUUSD,H1)	  v  Filters rejetees                   : 2 (50.0%)
+DN	0	23:52:15.278	NexusEdgeEA (XAUUSD,H1)	  v  Signal NONE                        : 3 (75.0%)
+FI	0	23:52:15.278	NexusEdgeEA (XAUUSD,H1)	  v  Validator refuses (sur signaux)    : 0 (0.0%)
+LE	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	  v  TradeManager echecs                : 0 (0.0%)
+DM	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	  v  Trades ouverts                     : 1
+NQ	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	
+PN	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	--- Etage FILTERS (avant analyse du signal) ---
+NP	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	   Analyse autorisee                    : 2
+RE	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	   Analyse bloquee                      : 2
+JR	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	      -> Session : 1 fois (50.0%)
+ES	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	      -> Spread : 1 fois (50.0%)
+RK	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	
+KE	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	--- Etage SIGNALMANAGER ---
+RF	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	   Signal BUY                           : 0
+KR	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	   Signal SELL                          : 1
+JJ	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	   Signal NONE (total)                  : 3
+GD	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	      -> score insuffisant (< seuil)     : 1
+CO	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	      -> dont quasi-signal (< 10 pts)   : 0
+PG	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	      -> egalite Bull=Bear (cas limite)  : 0
+PK	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	
+IE	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	--- Etage VALIDATOR (avant execution) ---
+CG	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	   Trade autorise                       : 1
+FQ	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	   Trade refuse                         : 0
+FF	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	
+CN	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	--- Etage TRADEMANAGER (ouverture) ---
+QI	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	   Positions ouvertes avec succes        : 1
+GF	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	   Echecs d'ouverture (retcode broker)    : 0
+DL	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	
+JI	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	--- Etage CLOTURE DES TRADES (WIN/LOSS) ---
+JP	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	   Trades clotures (total)               : 1
+HO	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	   WIN                                   : 0
+JE	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	   LOSS                                  : 1
+LO	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	   Raisons de cloture :
+PE	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	      -> SL atteint (initial ou ajuste par BreakEven/Trailing) : 1 fois (100.0%)
+FD	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	   MFE moyen prix (trades LOSS)          : 0.00000
+KI	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	   MAE moyen prix (trades LOSS)          : 0.00000
+JS	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	   Duree moyenne (trades LOSS)           : 57 sec
+RS	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	
+EQ	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	--- LABORATOIRE D'ANALYSE (argent reel, depuis CTradeLifecycleTracker) ---
+GR	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	   (Aucune donnee - InpTrackTradeLifecycle desactive ou aucun trade cloture avec suivi)
+DO	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	
+FD	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	--- REPARTITION WIN/LOSS PAR DIMENSION ---
+PR	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	   Par direction (BUY vs SELL) :
+LR	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	      -> SELL : 1 trades | WinRate=0.0% | Profit net=-511.89
+HD	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	
+PM	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	--- ANALYSE ET SUGGESTIONS (observations statistiques, aucune modification automatique) ---
+NL	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	Etage le plus bloquant : SignalManager (SIGNAL_NONE) (3 occurrences, 75.0% des bougies analysees)
+HL	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	   Cause : score inferieur au seuil sur 33.3% des SIGNAL_NONE, dont 0.0% manquent de moins de 10 points.
+NF	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	   Suggestion : ce seuil (InpScore_Threshold) merite une analyse - une part significative des rejets sont des quasi-signaux.
+LG	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	Trades clotures (1) encore insuffisants pour une analyse statistique fiable du Win Rate.
+KG	0	23:52:15.312	NexusEdgeEA (XAUUSD,H1)	=============================================
+RE	0	23:52:15.370	NexusEdgeEA (XAUUSD,H1)	[2026.07.24 01:52:16] [INFO] ===== PROFIT PROTECTION ENGINE - Activations par mecanisme =====
+KG	0	23:52:15.370	NexusEdgeEA (XAUUSD,H1)	BreakEven :
+NS	0	23:52:15.370	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+NG	0	23:52:15.370	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+RD	0	23:52:15.370	NexusEdgeEA (XAUUSD,H1)	TrailingClassique :
+JQ	0	23:52:15.370	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+RE	0	23:52:15.370	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+QK	0	23:52:15.370	NexusEdgeEA (XAUUSD,H1)	ProfitGuard_Structure :
+NO	0	23:52:15.370	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+NS	0	23:52:15.370	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+FJ	0	23:52:15.370	NexusEdgeEA (XAUUSD,H1)	ProfitGuard_PeakPercent :
+FL	0	23:52:15.370	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+FN	0	23:52:15.370	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+IO	0	23:52:15.370	NexusEdgeEA (XAUUSD,H1)	ProfitGuard_Emergency :
+JJ	0	23:52:15.370	NexusEdgeEA (XAUUSD,H1)	   Propose=0    | Retenu=0    | Applique=0    | Efficace=0   
+RL	0	23:52:15.370	NexusEdgeEA (XAUUSD,H1)	   Temps moyen avant 1ere activation : N/A (jamais active)
+CP	0	23:52:15.370	NexusEdgeEA (XAUUSD,H1)	-------------------------------------------------------------------
+CL	0	23:52:15.370	NexusEdgeEA (XAUUSD,H1)	Definition de "Efficace" : le DERNIER mecanisme a avoir modifie le SL
+KD	0	23:52:15.370	NexusEdgeEA (XAUUSD,H1)	avant que le trade ne se cloture sur ce SL touche, avec un profit final >= 0.
+FK	0	23:52:15.370	NexusEdgeEA (XAUUSD,H1)	Un mecanisme peut etre applique souvent sans etre "efficace" (surclasse
+JE	0	23:52:15.370	NexusEdgeEA (XAUUSD,H1)	ensuite par un autre), et inversement.
+GM	0	23:52:15.370	NexusEdgeEA (XAUUSD,H1)	===================================================================
+IG	0	23:53:39.112	NexusEdgeEA (XAUUSD,H1)	[2026.07.24 01:53:39] [INFO] Logger initialisé (niveau=LOG_LEVEL_INFO, fichiers=NexusEdgeEA_Trades.csv/NexusEdgeEA_Log.txt/NexusEdgeEA_Decisions.json + TradeEvents/TradeFull/PostCloseReview/SystemEvents/DebugPipeline)
+KN	0	23:53:39.657	NexusEdgeEA (XAUUSD,H1)	CPositionManager::LoadProcessedIds - 17 position(s) deja traitee(s) rechargee(s) depuis NexusEdgeEA_ProcessedPositions_XAUUSD_202601.dat
+LI	0	23:53:39.657	NexusEdgeEA (XAUUSD,H1)	CDashboard: Dashboard Init Start (x=10, y=20, visible=true, prefix=NEA_Dash)
+KJ	0	23:53:39.657	NexusEdgeEA (XAUUSD,H1)	CDashboard: Dashboard Init termine avec succes
+GM	0	23:53:39.742	NexusEdgeEA (XAUUSD,H1)	[2026.07.24 01:53:40] [INFO] Nouveau jour de trading - réinitialisation des limites journalières
+KG	0	23:53:39.742	NexusEdgeEA (XAUUSD,H1)	[2026.07.24 01:53:40] [INFO] NexusEdgeEA v1.0.0 initialisé sur XAUUSD (TF principal=PERIOD_H1)
