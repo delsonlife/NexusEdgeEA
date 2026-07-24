@@ -65,7 +65,7 @@ Cinq familles de modules, cinq niveaux d'autorité différents. C'est la hiérar
 
 ### 3.3 Trade Scenario Engine (TSE) — l'autorité unique
 
-**Rôle** : la seule instance du système qui a le droit de répondre à la question centrale. Il consomme la Structure Engine + la Confirmation Layer + l'état courant de la position (si un trade est déjà ouvert), et produit **deux choses distinctes** :
+**Rôle** : la seule instance du système qui a le droit de répondre à la question centrale. Il consomme un `SScenarioContext` déjà préparé — jamais la Structure Engine, la Confirmation Layer ou l'état de position directement (voir §3.3bis) — et produit **deux choses distinctes** :
 
 1. **Un verdict** — l'état du scénario : `SCENARIO_VALID`, `SCENARIO_STRENGTHENED`, `SCENARIO_WEAKENED`, `SCENARIO_INVALIDATED`, accompagné d'un niveau de confiance (anticipation déjà actée précédemment) et d'une raison exacte.
 2. **Une décision** — l'action à entreprendre en conséquence : ne rien faire, resserrer jusqu'à un niveau donné, prendre partiellement les profits, sortir, autoriser une entrée, etc.
@@ -73,6 +73,20 @@ Cinq familles de modules, cinq niveaux d'autorité différents. C'est la hiérar
 Le TSE fonctionne aussi bien pour la décision d'entrée que pour la gestion d'une position déjà ouverte — **c'est le même moteur, pas deux moteurs séparés**, seule la nature de la décision produite change (entrer/ne pas entrer d'un côté, ajuster/sortir de l'autre). C'est cette unification qui répond directement à la demande de traiter entrée et gestion comme un seul scénario continu.
 
 **Ce que le TSE ne fait jamais** : il ne place jamais lui-même un ordre, ne modifie jamais lui-même un SL. Il décide, il ne touche pas au broker.
+
+### 3.3bis Principe d'isolation du TSE — règle permanente, pas une préférence de sprint
+
+**Le Trade Scenario Engine ne collecte jamais lui-même les données de marché.** Ce principe, validé après revue du Sprint V3.0, devient une règle d'architecture au même titre que la règle d'or (§4ter) — pas une simple préférence d'implémentation qu'un sprint futur pourrait discrètement contourner par commodité.
+
+Concrètement :
+
+- **Les couches d'observation** (Structure Engine, Confirmation Layer, et plus tard Order Block/FVG/HTF Bias) **remplissent progressivement `SScenarioContext`** — chacune y dépose les champs qui relèvent de sa responsabilité, sans jamais avoir besoin de connaître le TSE.
+- **Le TSE reçoit ce contexte déjà construit**, l'interprète, et produit verdict + décision — il ne détient et ne détiendra jamais de référence directe (pointeur, instance) vers `CMarketStructure`, `CMarketContext`, `CSignalManager` ou tout futur module de marché.
+- **`SScenarioContext` est l'unique frontière** entre « ce qui observe le marché » et « ce qui décide ». Un sprint qui aurait besoin d'une nouvelle information dans le TSE doit l'ajouter comme champ de ce contexte, jamais comme nouveau paramètre d'`Init()` ni comme nouveau pointeur stocké.
+
+**Pourquoi cette règle est permanente et non négociable au fil des sprints** : c'est la seule façon de garantir que le TSE reste testable indépendamment (un contexte peut être construit à la main pour un test, un module de marché ne se simule pas aussi facilement), qu'il ne devienne pas un point de couplage entre toutes les couches du système (le risque de « God Object » déjà identifié), et que remplacer une des couches d'observation plus tard (par exemple un futur détecteur d'Order Block plus sophistiqué) ne nécessite jamais de toucher au TSE lui-même — seulement à ce qui remplit le contexte qu'il consomme.
+
+**Conséquence pour toute revue de code future** : si un sprint introduit un pointeur vers un module métier dans `CTradeScenarioEngine` (membre de classe ou paramètre d'`Init()`), c'est un signal de régression architecturale à corriger avant fusion — pas une optimisation à débattre au cas par cas.
 
 ### 3.4 Action Engines — les calculateurs actuels, rétrogradés
 
@@ -94,15 +108,16 @@ Le TSE fonctionne aussi bien pour la décision d'entrée que pour la gestion d'u
 
 | De | Vers | Ce qui transite |
 |---|---|---|
-| Structure Engine | Trade Scenario Engine | État structurel qualifié (biais, dernier événement BOS/CHOCH/Sweep, zones OB/FVG actives, biais HTF) |
-| Confirmation Layer | Trade Scenario Engine | Score de confirmation (ce qui existe déjà), jamais un verdict propre |
+| Structure Engine | `SScenarioContext` | État structurel qualifié (biais, dernier événement BOS/CHOCH/Sweep, zones OB/FVG actives, biais HTF) |
+| Confirmation Layer | `SScenarioContext` | Score de confirmation (ce qui existe déjà), jamais un verdict propre |
+| `SScenarioContext` | Trade Scenario Engine | Le contexte déjà assemblé, seule porte d'entrée du TSE vers toute donnée de marché (voir §3.3bis) |
 | Trade Scenario Engine | Action Engines | Une décision explicite typée (pas un simple prix) — l'outil à utiliser et le résultat attendu, jamais le calcul lui-même |
 | Action Engines | TradeManager | Un ordre d'exécution concret (inchangé par rapport à aujourd'hui) |
 | Hard Risk Guard | TradeManager | Un ordre de clôture, directement, sans passer par le TSE |
 | Position / historique | Learning Engine | Lecture seule de la source de vérité persistée |
 | Learning Engine | Trade Scenario Engine | Connaissance agrégée, livrée en différé, jamais en flux temps réel |
 
-Le principe commun à toutes ces flèches : **plus l'information remonte vers l'autorité de décision, plus elle est qualifiée ; plus elle redescend vers l'exécution, plus elle est concrète.** Aucune flèche ne remonte d'un Action Engine vers le TSE — un outil ne renseigne jamais la décision, il ne fait que l'exécuter.
+Le principe commun à toutes ces flèches : **plus l'information remonte vers l'autorité de décision, plus elle est qualifiée ; plus elle redescend vers l'exécution, plus elle est concrète.** Aucune flèche ne remonte d'un Action Engine vers le TSE — un outil ne renseigne jamais la décision, il ne fait que l'exécuter. **Aucune flèche ne contourne non plus `SScenarioContext` pour atteindre directement le TSE** — c'est le seul point de passage autorisé entre les couches d'observation et l'autorité de décision (voir §3.3bis).
 
 ---
 
@@ -133,7 +148,7 @@ Une entrée intra-bougie n'a lieu que si les deux vitesses s'accordent : le cont
 
 **Bloquant, à réactiver avant que le Learning Engine ait un sens** : le chantier de persistance de `CTradeLifecycleTracker` / `TradeEvents.csv` comme source de vérité définitive, mis en pause plus tôt. Le Learning Engine ne peut observer que ce qui est fidèlement enregistré — sans cette fondation, il apprendrait sur des données potentiellement incomplètes, exactement le problème déjà diagnostiqué sur le trade du 23-24 juillet.
 
-**Entièrement nouveau** : Order Block Detector, Fair Value Gap Detector, Trade Scenario Engine, Hard Risk Guard (en tant que couche consolidée), Partial Exit (Action Engine), Learning Engine.
+**Entièrement nouveau** : Order Block Detector, Fair Value Gap Detector, Trade Scenario Engine, Hard Risk Guard (en tant que couche consolidée), Partial Exit (Action Engine), Learning Engine, `SScenarioContext` (structure de contexte posée au Sprint V3.0 avec un seul champ réel, remplie progressivement par les couches d'observation au fil des sprints suivants — voir §3.3bis).
 
 ---
 
@@ -148,7 +163,7 @@ La séquence ci-dessous applique cette règle à chaque étape.
 | Sprint | Contenu | Pourquoi à cette place |
 |---|---|---|
 | **V3.0** | Mise en place du squelette architectural — création des contrats/interfaces entre les futures couches (verdict de scénario, structure de décision, structure d'ordre d'exécution), et des coquilles vides ou en mode passif pour le Trade Scenario Engine, les Action Engines (enveloppe autour des calculateurs actuels, sans changer leur comportement), le Hard Risk Guard et le Learning Engine. **Aucun changement de logique métier** : le système continue de se comporter exactement comme aujourd'hui, les nouvelles structures existent mais ne pilotent rien. Objectif unique : que tout compile, que rien ne casse, et que les sprints suivants n'aient plus qu'à remplir des coquilles déjà en place plutôt qu'à improviser leur intégration au fil de l'eau | Sépare explicitement « poser l'architecture » de « changer le comportement » — le risque de régression de ce sprint est nul par construction, puisque rien de décisionnel n'y change |
-| **V3.1** | Exposer l'état de `CMarketStructure` côté entrée (lecture seule) + câbler le biais HTF déjà prévu en configuration mais jamais utilisé — alimente les coquilles posées en V3.0, en mode journalisation uniquement, sans encore influencer aucune décision | Premier remplissage réel, mais toujours sans effet sur le comportement — seulement de la donnée qui commence à circuler dans le nouveau squelette |
+| **V3.1** | Exposer l'état de `CMarketStructure` côté entrée (lecture seule) + câbler le biais HTF déjà prévu en configuration mais jamais utilisé — **premiers champs réels ajoutés à `SScenarioContext`** (jamais un pointeur direct transmis au TSE, voir §3.3bis), en mode journalisation uniquement, sans encore influencer aucune décision | Premier remplissage réel, mais toujours sans effet sur le comportement — seulement de la donnée qui commence à circuler via le contexte, jamais par couplage direct |
 | **V3.2** | Order Block Detector + Fair Value Gap Detector, construits sur le même patron « observateur pur » que MarketStructure | Nouveaux détecteurs, mais isolés — validables seuls avant toute connexion |
 | **V3.3** | Trade Scenario Engine, côté ENTRÉE uniquement (décision binaire : entrer ou pas) + mécanisme événementiel intra-bougie — déployé d'abord **en parallèle** du pipeline d'entrée actuel : le TSE calcule et journalise sa décision sans encore autoriser ou bloquer une ouverture réelle | La première fois que le TSE existe, volontairement limité à la décision la plus simple, et non encore autorisé à agir — comparaison directe avec les entrées réellement prises par le système actuel avant tout transfert d'autorité |
 | **V3.4** | Hard Risk Guard, consolidation de ce qui existe déjà en une couche explicite et indépendante | Ne dépend d'aucun nouveau concept — peut être livré en parallèle des autres sprints, sans remplacer les garde-fous actuels tant qu'il n'a pas démontré une couverture au moins équivalente |
