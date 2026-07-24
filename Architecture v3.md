@@ -106,6 +106,18 @@ Le principe commun à toutes ces flèches : **plus l'information remonte vers l'
 
 ---
 
+## 4bis. Feature Flags — condition obligatoire de toute évolution décisionnelle
+
+**Toute nouvelle intelligence qui modifie une décision doit être protégée par un mécanisme d'activation/désactivation indépendant**, permettant de basculer instantanément entre l'ancien et le nouveau comportement, sans retour en arrière par modification de code. Concrètement : Trade Scenario Engine (entrée), Higher Timeframe Bias, BOS/CHOCH décisionnels, gestion structurelle des positions, Learning Engine — chacun de ces éléments possède son propre drapeau, indépendant des autres. Un drapeau désactivé doit garantir un comportement **rigoureusement identique** à celui d'aujourd'hui, pas une approximation.
+
+## 4ter. La règle d'or de la V3
+
+> **Aucune nouvelle intelligence ne remplace une intelligence existante tant qu'elle n'a pas démontré, objectivement, qu'elle est au moins aussi performante — en backtest et en observation réelle.**
+
+Observer. Comparer. Mesurer. Valider. Puis seulement remplacer. Cette règle est le prolongement direct du principe de parallélisme déjà posé en section 7 — les Feature Flags en sont l'instrument technique, cette règle en est le critère de décision.
+
+---
+
 ## 5. Entrées — l'architecture à deux vitesses
 
 - **Vitesse lente (contexte)** : recalculée à chaque nouvelle bougie H1, comme aujourd'hui — biais HTF, tendance H1, régime de volatilité, session, cartographie des zones de liquidité. Rien ici ne doit devenir event-driven ; le recalculer plus souvent n'ajouterait aucune information.
@@ -157,3 +169,85 @@ Chaque sprint produit un système **immédiatement compilable et testable**, coh
 - Le principe de traçabilité complète de chaque décision, déjà exigé pour le sprint 1.
 
 La V3 n'est donc pas une rupture totale avec ce qui a été construit jusqu'ici — c'est la généralisation, à l'ensemble du cycle de vie d'un trade, d'un principe que le projet avait déjà commencé à appliquer partiellement.
+
+---
+
+## 9. Diagramme d'architecture de référence (Sprint V3.0)
+
+Ce diagramme représente l'état du système à l'issue du Sprint V3.0 : le squelette complet est en place, les Feature Flags existent, mais **aucune flèche pointillée n'est encore active** — le pilotage réel reste intégralement assuré par le chemin plein (le système actuel). C'est ce diagramme qui sert de référence à toutes les revues d'architecture des sprints suivants ; chaque sprint ultérieur active progressivement une flèche pointillée après validation, sans jamais supprimer le chemin plein tant que la règle d'or n'est pas satisfaite.
+
+```mermaid
+flowchart TB
+    subgraph LENT["Cadence lente — nouvelle bougie H1"]
+        MC[CMarketContext]
+        MS[CMarketStructure<br/>BOS / CHOCH / Sweep]
+        SM[CSignalManager<br/>score EMA/RSI/Momentum/Pattern]
+    end
+
+    subgraph RAPIDE["Cadence événementielle — pendant la bougie (V3.1+)"]
+        EVT[Détecteur de transition<br/>sweep / CHOCH / BOS / zone]
+    end
+
+    subgraph DECISION["Trade Scenario Engine (V3.0 = coquille)"]
+        TSE[CTradeScenarioEngine<br/>EvaluateEntry / EvaluateManagement]
+        FLAG1{{FeatureFlag<br/>EnableTradeScenarioEngine}}
+        FLAG2{{FeatureFlag<br/>EnableHTFBias}}
+        FLAG3{{FeatureFlag<br/>EnableStructuralManagement}}
+    end
+
+    subgraph ACTION["Action Engines (aujourd'hui: calculateurs concurrents)"]
+        BE[BreakEven]
+        TR[Trailing]
+        ST[Structure Protection]
+        PP[Peak Protection]
+        EM[Emergency]
+    end
+
+    subgraph EXEC["Exécution (inchangé)"]
+        TM[CTradeManager<br/>+ CBrokerConstraintProfile]
+    end
+
+    subgraph GUARD["Hard Risk Guard (V3.0 = coquille)"]
+        HRG[CHardRiskGuard<br/>Evaluate]
+        FLAG4{{FeatureFlag<br/>N/A - toujours actif}}
+    end
+
+    subgraph LEARN["Learning Engine (V3.0 = coquille)"]
+        LE[CLearningEngine<br/>OnTradeClosed]
+        FLAG5{{FeatureFlag<br/>EnableLearningEngine}}
+    end
+
+    subgraph TRUTH["Source de verite (chantier a reactiver)"]
+        CSV[(TradeEvents.csv<br/>TradeFull.csv)]
+    end
+
+    MC --> SM
+    MS -.observation seule, V3.0.-> TSE
+    EVT -.pas encore actif, V3.1.-> TSE
+    SM ==pilote reellement en V3.0==> PPE_EXISTANT[ProfitProtectionEngine actuel<br/>IsMoreProtective]
+    PPE_EXISTANT ==> BE & TR & ST & PP & EM
+    BE & TR & ST & PP & EM ==> TM
+
+    TSE -.verdict journalise, aucune influence en V3.0.-> FLAG1
+    FLAG1 -.desactive par defaut.-> ACTION
+    FLAG2 -.desactive par defaut.-> TSE
+    FLAG3 -.desactive par defaut.-> ACTION
+
+    HRG -.observation seule, V3.0.-> TM
+    FLAG5 -.desactive par defaut.-> LE
+    LE -.aucune ecriture reelle en V3.0.-> CSV
+    CSV -.connaissance differee, V3.8.-> TSE
+
+    style PPE_EXISTANT fill:#2d5,color:#000
+    style BE fill:#2d5,color:#000
+    style TR fill:#2d5,color:#000
+    style ST fill:#2d5,color:#000
+    style PP fill:#2d5,color:#000
+    style EM fill:#2d5,color:#000
+    style TM fill:#2d5,color:#000
+    style TSE fill:#eee,color:#000
+    style HRG fill:#eee,color:#000
+    style LE fill:#eee,color:#000
+```
+
+**Légende** : cases vertes = chemin qui pilote réellement le robot aujourd'hui (inchangé par V3.0). Cases grises = squelette V3 posé par ce sprint, présent, compilable, mais sans autorité. Flèches pleines = flux de décision actif. Flèches pointillées = flux existant mais encore sans effet (observation, journalisation, ou attente d'un Feature Flag).
