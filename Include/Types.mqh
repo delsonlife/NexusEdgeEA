@@ -247,6 +247,26 @@ enum ENUM_PROTECTION_SOURCE
    PROTECTION_SOURCE_EMERGENCY     = 5  // CHOCH contraire + effondrement du profit / retournement momentum
   };
 
+//+------------------------------------------------------------------+
+//| NOUVEAU (Sprint 1 - Gestion intelligente des refus broker,         |
+//| architecture validee suite a l'analyse des milliers d'echecs       |
+//| "Invalid Stops" observes en backtest ET en live).                  |
+//|                                                                     |
+//| Classification GENERIQUE d'un refus de modification par le broker -|
+//| ne se limite pas au cas "Invalid Stops" : conçue pour accueillir   |
+//| toute contrainte broker detectable a l'avenir.                     |
+//+------------------------------------------------------------------+
+enum ENUM_BROKER_REJECTION_REASON
+  {
+   REJECTION_NONE                                = 0, // Aucun refus - tentative non necessaire ou reussie
+   REJECTION_STOPS_LEVEL                         = 1, // Niveau demande trop proche du prix courant - un AUTRE niveau pourrait etre accepte
+   REJECTION_FREEZE_LEVEL                        = 2, // SL actuel deja trop proche du prix - AUCUNE modification possible tant que le prix n'a pas bouge
+   REJECTION_REQUOTE                             = 3,
+   REJECTION_TRADE_CONTEXT_BUSY_OR_NO_CONNECTION = 4,
+   REJECTION_MARKET_CLOSED_OR_DISABLED           = 5,
+   REJECTION_OTHER                               = 6
+  };
+
 // NOUVEAU (refonte "decision unique"). Contexte partagé transmis à
 // CHAQUE calculateur de niveau de protection (IProtectionLevelCalculator).
 // C'est ce contexte commun qui permet à ProfitProtectionEngine
@@ -272,6 +292,19 @@ struct SProtectionContext
    double            tickValue;
    double            tickSize;
    double            lot;
+
+   // --- NOUVEAU (Sprint 1 - Etape 1, correctif ISSUE 001/002) ---
+   // Excursion favorable exprimee DIRECTEMENT en distance de prix
+   // (jamais convertie depuis/vers une valeur monetaire), toujours
+   // positive ou nulle, deja orientee selon le sens du trade (BUY:
+   // prix - entryPrice ; SELL: entryPrice - prix). C'est la seule
+   // grandeur que CPeakPercentLevelCalculator et CEmergencyLevelCalculator
+   // doivent utiliser pour placer un niveau de SL - plus aucune
+   // dependance a tickValue/tickSize/lot pour ce calcul, conformement
+   // a la decision actee dans KNOWN_ISSUES.md (ISSUE 001) : "calculer
+   // la protection directement a partir du mouvement de prix".
+   double            peakFavorablePriceDistance;    // Plus grande excursion favorable jamais atteinte sur ce trade
+   double            currentFavorablePriceDistance; // Excursion favorable au tick courant (peut etre negative si le trade est actuellement sous son prix d'entree)
   };
 
 //+------------------------------------------------------------------+
