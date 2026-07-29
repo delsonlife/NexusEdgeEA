@@ -239,6 +239,64 @@ public:
          return(maxValue);
       return(value);
      }
+
+   //---------------------------------------------------------------
+   // ReconstructPeakEquity - SPRINT V3.6.5 - Fonction statique PURE :
+   // aucun état conservé entre les appels, aucune dépendance vers une
+   // classe métier du projet (pas CStatistics, pas CPositionManager,
+   // pas CTradeManager) - uniquement des primitives broker
+   // (HistorySelect/HistoryDealGetDouble/HistoryDealGetInteger).
+   // Totalement déterministe : mêmes paramètres => même résultat,
+   // toujours, quel que soit l'appelant.
+   //
+   // Rejoue l'historique des deals de clôture (DEAL_ENTRY_OUT), filtré
+   // par symbole et magic number, depuis initialBalance, et retourne
+   // uniquement le plus haut niveau d'équité atteint à un moment
+   // quelconque de ce rejeu - jamais un drawdown, jamais un maximum de
+   // perte. C'est une brique plus élémentaire que
+   // CStatistics::GetMaxDrawdownPercent() (qui reste l'unique
+   // référence historique pour les rapports, non modifiée, non
+   // dupliquée ici - cette fonction ne calcule pas la même chose,
+   // seulement un ingrédient que CStatistics aurait pu réutiliser en
+   // interne si on l'avait voulu, sans obligation, hors périmètre de
+   // ce sprint).
+   //
+   // Destinée à être appelée par tout composant ayant besoin d'amorcer
+   // un suivi d'équité en temps réel (CAccountMetrics, Sprint V3.6.5)
+   // - réutilisable par n'importe quel futur composant du projet sans
+   // créer la moindre nouvelle dépendance entre classes métier.
+   //---------------------------------------------------------------
+   static double     ReconstructPeakEquity(const double initialBalance, const string symbol, const long magicNumber)
+     {
+      double peak = initialBalance;
+      if(initialBalance <= 0.0)
+         return(peak);
+      if(!HistorySelect(0, TimeCurrent()))
+         return(peak);
+
+      double equity = initialBalance;
+      int    total  = HistoryDealsTotal();
+      for(int i = 0; i < total; i++) // Ordre chronologique (le plus ancien en premier) - necessaire pour un rejeu correct du pic
+        {
+         ulong ticket = HistoryDealGetTicket(i);
+         if(ticket == 0)
+            continue;
+         if(HistoryDealGetString(ticket, DEAL_SYMBOL) != symbol)
+            continue;
+         if((long)HistoryDealGetInteger(ticket, DEAL_MAGIC) != magicNumber)
+            continue;
+         if((ENUM_DEAL_ENTRY)HistoryDealGetInteger(ticket, DEAL_ENTRY) != DEAL_ENTRY_OUT)
+            continue; // Seules les clotures font evoluer l'equite realisee, pas les ouvertures
+
+         double profit = HistoryDealGetDouble(ticket, DEAL_PROFIT)
+                        + HistoryDealGetDouble(ticket, DEAL_SWAP)
+                        + HistoryDealGetDouble(ticket, DEAL_COMMISSION);
+         equity += profit;
+         if(equity > peak)
+            peak = equity;
+        }
+      return(peak);
+     }
   };
 
 // Définition des membres statiques (obligatoire en MQL5/C++)

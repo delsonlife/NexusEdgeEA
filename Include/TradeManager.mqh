@@ -52,6 +52,7 @@
 #include <Trade/Trade.mqh>
 #include "Types.mqh"
 #include "Utilities.mqh"
+#include "BrokerConstraints.mqh"
 
 //+------------------------------------------------------------------+
 //| Classe CTradeManager                                                 |
@@ -73,6 +74,11 @@ private:
    // plusieurs fois sur le même tick").
    ulong             m_modifyTrackTicket[];
    datetime          m_modifyTrackTime[];
+
+   // NOUVEAU (Sprint 1 - Gestion intelligente des refus broker). Seul
+   // point de connaissance des contraintes broker dans tout le projet -
+   // voir doc complete dans BrokerConstraints.mqh.
+   CBrokerConstraintProfile m_brokerConstraints;
 
    //---------------------------------------------------------------
    // Trouve l'index d'un ticket dans le tableau de throttle interne.
@@ -150,6 +156,8 @@ public:
       m_trade.SetExpertMagicNumber(magicNumber);
       m_trade.SetDeviationInPoints(deviationPoints);
       m_trade.SetTypeFillingBySymbol(symbol);
+
+      m_brokerConstraints.Init(symbol); // NOUVEAU (Sprint 1 - refus broker)
 
       m_initialized = true;
       return(true);
@@ -258,12 +266,26 @@ public:
       if(!m_initialized)
          return(false);
 
+      // NOUVEAU (Sprint 1 - refus broker) - captures AVANT la tentative,
+      // pour que le profil apprenne sur la base de l'etat reel au moment
+      // de la demande (le SL/prix ont pu changer entre-temps sinon).
+      double priceForLearning = 0.0;
+      double currentSLForLearning = 0.0;
+      if(PositionSelectByTicket(ticket))
+        {
+         ENUM_POSITION_TYPE posType = (ENUM_POSITION_TYPE)PositionGetInteger(POSITION_TYPE);
+         priceForLearning     = (posType == POSITION_TYPE_BUY) ? SymbolInfoDouble(m_symbol, SYMBOL_BID) : SymbolInfoDouble(m_symbol, SYMBOL_ASK);
+         currentSLForLearning = PositionGetDouble(POSITION_SL);
+        }
+
       if(!m_trade.PositionModify(ticket, newSL, newTP))
         {
          PrintFormat("CTradeManager::ModifyPosition - échec ticket=%I64u (retcode=%d, %s)",
                      ticket, m_trade.ResultRetcode(), m_trade.ResultRetcodeDescription());
+         m_brokerConstraints.RecordRejection(ticket, m_trade.ResultRetcode(), newSL, priceForLearning, currentSLForLearning);
          return(false);
         }
+      m_brokerConstraints.RecordSuccess(ticket); // NOUVEAU (Sprint 1 - refus broker)
       return(true);
      }
 
@@ -298,6 +320,107 @@ public:
         }
       return(true);
      }
+
+   //---------------------------------------------------------------
+   // NOUVEAU (Sprint 1 - Gestion intelligente des refus broker).
+   //
+   // A appeler par ProfitProtectionEngine UNE SEULE FOIS, apres avoir
+   // deja choisi son meilleur candidat parmi tous les calculateurs -
+   // jamais avant, jamais par calculateur individuel. Repond a trois
+   // questions en un seul appel, sans jamais toucher CTrade :
+   //   1. Le niveau souhaite respecte-t-il les contraintes connues
+   //      (nominales + apprises) ?
+   //   2. Sinon, existe-t-il un niveau valide le plus proche qui
+   //      protegerait quand meme la position (cas StopsLevel) ?
+   //   3. Vaut-il meme la peine de tenter (cas FreezeLevel, ou refus
+   //      identique tres recent sans changement suffisant du marche) ?
+   //
+   // Si shouldAttemptOut=false, l'appelant doit se comporter EXACTEMENT
+   // comme s'il n'avait trouve aucun candidat ce tick - pas de nouveau
+   // chemin de code special a gerer cote ProfitProtectionEngine.
+   //---------------------------------------------------------------
+   bool              GetBrokerAwareLevel(const ulong ticket, const double desiredSL, const ENUM_SIGNAL_TYPE type,
+                                         double &clampedLevelOut, ENUM_BROKER_REJECTION_REASON &reasonOut,
+                                         bool &shouldAttemptOut)
+     {
+      clampedLevelOut = desiredSL;
+      reasonOut       = REJECTION_NONE;
+      shouldAttemptOut = true;
+
+      if(!PositionSelectByTicket(ticket))
+        {
+         shouldAttemptOut = false;
+         return(false);
+        }
+
+      double currentSL    = PositionGetDouble(POSITION_SL);
+      double currentPrice = (type == SIGNAL_BUY) ? SymbolInfoDouble(m_symbol, SYMBOL_BID) : SymbolInfoDouble(m_symbol, SYMBOL_ASK);
+
+      // 1. Memoire de refus recent pour CE ticket, niveau quasi identique
+      //    -> ne pas retenter inutilement (demande explicite).
+      if(m_brokerConstraints.HasRecentIdenticalRejection(ticket, desiredSL))
+        {
+         shouldAttemptOut = false;
+         reasonOut        = m_brokerConstraints.GetLastReason(ticket);
+         return(false);
+        }
+
+      // 2. FreezeLevel : le SL ACTUEL est deja trop proche du prix -
+      //    aucune modification n'est possible pour l'instant, quel que
+      //    soit le niveau demande. Retenter serait structurellement
+      //    inutile tant que le prix n'a pas bouge.
+      if(m_brokerConstraints.IsFrozen(currentPrice, currentSL))
+        {
+         shouldAttemptOut = false;
+         reasonOut        = REJECTION_FREEZE_LEVEL;
+         return(false);
+        }
+
+      // 3. StopsLevel : clamp le niveau demande au niveau valide le plus
+      //    proche qui protege quand meme la position - jamais un niveau
+      //    MOINS protecteur que ce qui etait demande, seulement "aussi
+      //    proche du prix que le broker le permet".
+      double minDistance = CUtilities::PointsToPrice(m_symbol, m_brokerConstraints.GetEffectiveMinDistancePoints());
+      double clamped = desiredSL;
+      if(type == SIGNAL_BUY)
+        {
+         double maxAllowed = currentPrice - minDistance;
+         if(clamped > maxAllowed)
+            clamped = maxAllowed;
+        }
+      else
+        {
+         double minAllowed = currentPrice + minDistance;
+         if(clamped < minAllowed)
+            clamped = minAllowed;
+        }
+      clamped = CUtilities::NormalizePriceToTick(m_symbol, clamped);
+
+      // Le clamp ne doit jamais produire un niveau MOINS protecteur que
+      // le SL actuel - dans ce cas, il n'y a rien de valide a tenter ce
+      // tick (le contrat de ComputeFinalStopLevel exige une amelioration
+      // reelle, jamais une regression).
+      bool clampedIsImprovement = (type == SIGNAL_BUY) ? (currentSL == 0.0 || clamped > currentSL)
+                                                        : (currentSL == 0.0 || clamped < currentSL);
+      if(!clampedIsImprovement)
+        {
+         shouldAttemptOut = false;
+         reasonOut        = REJECTION_STOPS_LEVEL;
+         return(false);
+        }
+
+      if(clamped != desiredSL)
+        m_brokerConstraints.RecordClampedAndAccepted();
+
+      clampedLevelOut = clamped;
+      return(true);
+     }
+
+   //---------------------------------------------------------------
+   // Rapport de diagnostic du profil de contraintes broker - meme
+   // esprit que GetActivationReport() du Profit Protection Engine.
+   //---------------------------------------------------------------
+   string            GetBrokerConstraintReport() const { return(m_brokerConstraints.GetReport()); }
 
    //---------------------------------------------------------------
    // NOUVEAU (Profit Guard). Point d'entrée public dédié aux modules

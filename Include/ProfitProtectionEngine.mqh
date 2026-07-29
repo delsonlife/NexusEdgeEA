@@ -55,6 +55,24 @@
 //|   la protection d'urgence n'est pas mesurable aujourd'hui (aucun   |
 //|   module de volume réel dans le projet). Le momentum de            |
 //|   CMarketContext sert de proxy honnête pour l'accélération du prix.|
+//|                                                                    |
+//| CORRECTIF SPRINT 1 - ÉTAPE 1 (ISSUE 001/002 de KNOWN_ISSUES.md) :  |
+//|   CPeakPercentLevelCalculator et CEmergencyLevelCalculator          |
+//|   convertissaient un montant en devise (peakProfitMoney /          |
+//|   currentProfitMoney) en niveau de prix via tickValue/tickSize/lot |
+//|   (MoneyToPriceLevel) - conversion broker-dépendante à l'origine   |
+//|   de Stop Loss "impossibles" en live (ex: SL proposé à 4093 alors  |
+//|   que le marché était à 4078). Cette conversion est supprimée :    |
+//|   les deux calculateurs utilisent désormais EXCLUSIVEMENT          |
+//|   ctx.peakFavorablePriceDistance / ctx.currentFavorablePriceDistance,|
+//|   des distances de prix mesurées DIRECTEMENT sur le marché         |
+//|   (jamais reconstruites depuis une valeur monétaire), alimentées   |
+//|   par l'orchestrateur (NexusEdgeEA.mq5) et tracées dans            |
+//|   SGuardState au même titre que peakProfitMoney. tickValue/        |
+//|   tickSize/lot restent utilisés ailleurs dans ce fichier UNIQUEMENT|
+//|   pour convertir un prix déjà valide vers une valeur monétaire     |
+//|   d'affichage (BuildDetailNote) - ce sens de conversion n'a jamais |
+//|   été la source du problème, seul le sens inverse l'était.         |
 //+------------------------------------------------------------------+
 #property copyright "NexusEdgeEA"
 #property strict
@@ -323,18 +341,6 @@ private:
    double            m_minRetainPercent;
    string            m_lastReason; // NOUVEAU
 
-   double            MoneyToPriceLevel(const ENUM_SIGNAL_TYPE type, const double entryPrice, const double moneyToRetain,
-                                       const double tickValue, const double tickSize, const double lot) const
-     {
-      if(tickValue <= 0.0 || tickSize <= 0.0 || lot <= 0.0)
-         return(0.0);
-      double moneyPerPricePoint = (tickValue / tickSize) * lot;
-      if(moneyPerPricePoint <= 0.0)
-         return(0.0);
-      double priceDistance = moneyToRetain / moneyPerPricePoint;
-      return((type == SIGNAL_BUY) ? (entryPrice + priceDistance) : (entryPrice - priceDistance));
-     }
-
 public:
                      CPeakPercentLevelCalculator(const double minRetainPercent)
      {
@@ -342,24 +348,29 @@ public:
       m_lastReason        = "";
      }
 
+   //---------------------------------------------------------------
+   // CORRECTIF (Sprint 1 - Etape 1, ISSUE 001/002 de KNOWN_ISSUES.md) :
+   // ce calculateur ne convertit plus JAMAIS une valeur monetaire en
+   // prix via tickValue/tickSize/lot - cette conversion etait la cause
+   // racine des SL "impossibles" observes en live (ex: SL propose a
+   // 4093 alors que le marche etait a 4078). Le niveau est desormais
+   // calcule EXCLUSIVEMENT a partir de ctx.peakFavorablePriceDistance,
+   // une distance de prix deja mesuree directement sur le marche
+   // (jamais reconstruite depuis un montant en devise) - conformement
+   // a la decision actee : "calculer la protection directement a
+   // partir du mouvement de prix".
+   //---------------------------------------------------------------
    bool              ComputeLevel(const SProtectionContext &ctx, double &levelOut)
      {
       levelOut = 0.0;
-      if(ctx.peakProfitMoney <= 0.0)
+      if(ctx.peakFavorablePriceDistance <= 0.0)
         {
-         m_lastReason = "PeakProfit nul (le trade n'a jamais ete en profit flottant)";
+         m_lastReason = "PeakProfit nul (le trade n'a jamais ete en excursion favorable)";
          return(false);
         }
 
-      double retainMoney = ctx.peakProfitMoney * (m_minRetainPercent / 100.0);
-      double level = MoneyToPriceLevel(ctx.type, ctx.entryPrice, retainMoney, ctx.tickValue, ctx.tickSize, ctx.lot);
-      if(level <= 0.0)
-        {
-         m_lastReason = "conversion argent->prix impossible (tickValue/tickSize/lot invalides)";
-         return(false);
-        }
-
-      levelOut = level;
+      double retainDistance = ctx.peakFavorablePriceDistance * (m_minRetainPercent / 100.0);
+      levelOut = (ctx.type == SIGNAL_BUY) ? (ctx.entryPrice + retainDistance) : (ctx.entryPrice - retainDistance);
       return(true);
      }
 
@@ -387,18 +398,6 @@ private:
    double            m_retainPercent;
    bool              m_lastCloseNow;
    string            m_lastReason; // NOUVEAU
-
-   double            MoneyToPriceLevel(const ENUM_SIGNAL_TYPE type, const double entryPrice, const double moneyToRetain,
-                                       const double tickValue, const double tickSize, const double lot) const
-     {
-      if(tickValue <= 0.0 || tickSize <= 0.0 || lot <= 0.0)
-         return(0.0);
-      double moneyPerPricePoint = (tickValue / tickSize) * lot;
-      if(moneyPerPricePoint <= 0.0)
-         return(0.0);
-      double priceDistance = moneyToRetain / moneyPerPricePoint;
-      return((type == SIGNAL_BUY) ? (entryPrice + priceDistance) : (entryPrice - priceDistance));
-     }
 
 public:
                      CEmergencyLevelCalculator(CMarketStructure *structure, const bool enabled,
@@ -464,15 +463,15 @@ public:
          return(true);
         }
 
-      double emergencyRetain = ctx.currentProfitMoney * (m_retainPercent / 100.0);
-      double level = MoneyToPriceLevel(ctx.type, ctx.entryPrice, emergencyRetain, ctx.tickValue, ctx.tickSize, ctx.lot);
-      if(level <= 0.0)
-        {
-         m_lastReason = "conversion argent->prix impossible (tickValue/tickSize/lot invalides)";
-         return(false);
-        }
-
-      levelOut = level;
+      // CORRECTIF (Sprint 1 - Etape 1, ISSUE 001/002) : le niveau de
+      // repli n'est plus reconstruit depuis un montant en devise - il
+      // est calcule directement sur ctx.currentFavorablePriceDistance
+      // (distance de prix mesuree, jamais convertie depuis tickValue/
+      // tickSize/lot). Le drawdown/momentum ci-dessus restent bases sur
+      // le profit en devise : ce sont de simples RATIOS de comparaison
+      // (donc sans risque de prix impossible), pas un calcul de niveau.
+      double emergencyRetainDistance = ctx.currentFavorablePriceDistance * (m_retainPercent / 100.0);
+      levelOut = (ctx.type == SIGNAL_BUY) ? (ctx.entryPrice + emergencyRetainDistance) : (ctx.entryPrice - emergencyRetainDistance);
       return(true);
      }
 
@@ -501,6 +500,7 @@ private:
       double   lot;
       double   riskMoneyPerR;
       double   peakProfitMoney;
+      double   peakFavorablePriceDistance; // NOUVEAU (Sprint 1 - Etape 1) - equivalent de peakProfitMoney, mais en distance de prix directe (voir ISSUE 001/002)
       bool     armed;
       datetime openTime;             // NOUVEAU (point 2) - pour calculer le temps avant activation
       bool     firstActivationDone[]; // NOUVEAU (point 2) - un booleen par calculateur (index = position dans m_calculators)
@@ -520,6 +520,13 @@ private:
    // soit l'ordre dans ce tableau) ---
    IProtectionLevelCalculator *m_calculators[];
    CEmergencyLevelCalculator  *m_emergencyCalculator; // Référence typée séparée, pour consulter IsLastCloseNow()
+
+   // NOUVEAU (Sprint 1 - Gestion intelligente des refus broker) :
+   // référence non propriétaire, utilisée UNIQUEMENT dans
+   // ComputeFinalStopLevel() pour interroger GetBrokerAwareLevel() une
+   // seule fois, après avoir déjà choisi le meilleur candidat parmi tous
+   // les calculateurs - jamais transmise à un calculateur individuel.
+   CTradeManager              *m_tradeManager;
 
    // --- NOUVEAU (demande explicite) : statistiques par calculateur,
    // parallèles à m_calculators (même index). Trois compteurs distincts
@@ -627,6 +634,7 @@ public:
       m_enabled              = true;
       m_initialized          = false;
       m_emergencyCalculator  = NULL;
+      m_tradeManager         = NULL; // NOUVEAU (Sprint 1 - refus broker)
       m_diagnosticMode       = false;
      }
 
@@ -673,9 +681,24 @@ public:
       m_activationMoney = activationMoney;
       m_diagnosticMode  = diagnosticMode; // NOUVEAU
       m_initialized     = true;
+      m_tradeManager    = tradeManager; // NOUVEAU (Sprint 1 - refus broker)
       ArrayResize(m_states, 0);
 
       // --- Construction des calculateurs (ordre indifférent, voir IsMoreProtective) ---
+      // CORRECTIF (revue d'architecture du 2026-07-23) : si Init() est
+      // rappelé (MT5 peut réappeler OnInit() sans détruire les objets
+      // globaux - changement d'input, de timeframe...), les calculateurs
+      // précédemment alloués avec "new" n'étaient jamais libérés avant
+      // ce ArrayResize(..., 0) - fuite mémoire silencieuse à chaque
+      // ré-init. Le destructeur nettoie bien en fin de vie de l'EA, mais
+      // pas entre deux Init(). On libère donc explicitement AVANT de
+      // reconstruire.
+      int previousCount = ArraySize(m_calculators);
+      for(int p = 0; p < previousCount; p++)
+        {
+         if(CheckPointer(m_calculators[p]) == POINTER_DYNAMIC)
+            delete m_calculators[p];
+        }
       ArrayResize(m_calculators, 0);
       int n = 0;
 
@@ -762,6 +785,7 @@ public:
       s.lot             = lot;
       s.riskMoneyPerR   = riskMoney;
       s.peakProfitMoney = 0.0;
+      s.peakFavorablePriceDistance = 0.0; // NOUVEAU (Sprint 1 - Etape 1)
       s.armed           = false;
       s.openTime        = TimeCurrent(); // NOUVEAU (point 2)
       s.lastWinningIndex = -1;            // NOUVEAU (point 3)
@@ -779,7 +803,7 @@ public:
    // même principe que CTradeLifecycleTracker::Update() (observation
    // pure, aucun calcul de protection ici).
    //---------------------------------------------------------------
-   void              Update(const ulong positionId, const double currentProfitMoney)
+   void              Update(const ulong positionId, const double currentProfitMoney, const double currentFavorablePriceDistance = 0.0)
      {
       if(!IsEnabled())
          return;
@@ -789,6 +813,13 @@ public:
 
       if(currentProfitMoney > m_states[idx].peakProfitMoney)
          m_states[idx].peakProfitMoney = currentProfitMoney;
+
+      // NOUVEAU (Sprint 1 - Etape 1) : meme logique de "plus haut jamais
+      // atteint", mais en distance de prix directe - utilisee par
+      // CPeakPercentLevelCalculator/CEmergencyLevelCalculator a la place
+      // de la conversion argent->prix (voir ISSUE 001/002).
+      if(currentFavorablePriceDistance > m_states[idx].peakFavorablePriceDistance)
+         m_states[idx].peakFavorablePriceDistance = currentFavorablePriceDistance;
 
       if(!m_states[idx].armed)
         {
@@ -820,7 +851,8 @@ public:
                                            CMarketStructure &structure, const double atrValue, const double currentMomentum,
                                            const double tickValue, const double tickSize,
                                            double &finalSLOut, ENUM_PROTECTION_SOURCE &sourceOut,
-                                           string &noteOut, bool &closeNowOut, string &diagnosticTraceOut)
+                                           string &noteOut, bool &closeNowOut, string &diagnosticTraceOut,
+                                           const double currentFavorablePriceDistance = 0.0) // NOUVEAU (Sprint 1 - Etape 1, ISSUE 001/002)
      {
       finalSLOut  = currentSL;
       sourceOut   = PROTECTION_SOURCE_NONE;
@@ -848,6 +880,8 @@ public:
       ctx.tickValue           = tickValue;
       ctx.tickSize            = tickSize;
       ctx.lot                 = m_states[idx].lot;
+      ctx.peakFavorablePriceDistance    = m_states[idx].peakFavorablePriceDistance;    // NOUVEAU (Sprint 1 - Etape 1)
+      ctx.currentFavorablePriceDistance = currentFavorablePriceDistance;               // NOUVEAU (Sprint 1 - Etape 1)
 
       double bestCandidate = currentSL;
       int    bestIdx       = -1; // Index du calculateur gagnant dans m_calculators
@@ -937,6 +971,35 @@ public:
 
       finalSLOut = bestCandidate;
       sourceOut  = m_calculators[bestIdx].GetSource();
+
+      // NOUVEAU (Sprint 1 - Gestion intelligente des refus broker) :
+      // le meilleur candidat STRATEGIQUE est choisi - on vérifie
+      // maintenant, UNE SEULE FOIS, s'il est réalisable du point de vue
+      // du broker (StopsLevel/FreezeLevel + mémoire de refus récents),
+      // et on l'ajuste au niveau valide le plus proche si besoin. Ce
+      // module ne connaît jamais CTrade - toute la connaissance broker
+      // reste dans CTradeManager (voir BrokerConstraints.mqh).
+      if(m_tradeManager != NULL)
+        {
+         double originalCandidate = finalSLOut;
+         double clampedSL; ENUM_BROKER_REJECTION_REASON rejReason; bool shouldAttempt;
+         m_tradeManager.GetBrokerAwareLevel(positionId, finalSLOut, ctx.type, clampedSL, rejReason, shouldAttempt);
+
+         if(!shouldAttempt)
+           {
+            if(m_diagnosticMode)
+               diagnosticTraceOut += StringFormat(
+                  "\r\nDecision finale : %s retenu mais NON tente (contrainte broker : %s)\r\n",
+                  m_calculators[bestIdx].GetName(), EnumToString(rejReason));
+            return(false); // Rien de réalisable ce tick - même traitement que "aucun candidat"
+           }
+
+         finalSLOut = clampedSL;
+         if(m_diagnosticMode && clampedSL != originalCandidate)
+            diagnosticTraceOut += StringFormat(
+               "\r\n[BROKER] Niveau ajuste : %.5f -> %.5f (contrainte broker StopsLevel)\r\n",
+               originalCandidate, clampedSL);
+        }
 
       // --- Note de traçabilité (demande explicite point 2, existant) ---
       double securedProfitMoney = 0.0;
