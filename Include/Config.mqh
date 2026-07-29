@@ -238,6 +238,35 @@ input double  InpProfitGuardEmergencyRetainPercent = 80.0;   // % du profit COUR
 input bool    InpProfitGuardDiagnosticMode         = false;  // NOUVEAU - trace detaillee par tick (eligibilite + SL propose de chaque calculateur) dans DebugPipeline.txt - NE PAS laisser actif en continu (tres verbeux)
 
 //+------------------------------------------------------------------+
+//| V3 - FEATURE FLAGS (migration progressive, Sprint V3.0)            |
+//|                                                                    |
+//| Chacun de ces drapeaux gouverne une capacite de decision precise   |
+//| de l'architecture V3. Tous a "false" par defaut : le robot doit se |
+//| comporter de facon RIGOUREUSEMENT IDENTIQUE a la version actuelle  |
+//| tant qu'aucun n'est active - c'est la condition du Sprint V3.0     |
+//| (voir ARCHITECTURE_V3.md). Un flag ne doit jamais etre active tant |
+//| que la logique reelle qu'il gouverne n'a pas ete implementee ET    |
+//| validee (backtest + observation reelle) - regle d'or de la V3.     |
+//+------------------------------------------------------------------+
+input group "=== V3 - Feature Flags (migration progressive) ==="
+input bool    InpV3_EnableTradeScenarioEngine      = false;  // Autorite reelle du TSE sur les entrees (Sprint V3.5) - sans effet avant, moteur en observation seule
+input bool    InpV3_EnableHTFBias                  = false;  // Filtre de biais Higher Timeframe reel (Sprint V3.1+) - sans effet avant
+input bool    InpV3_EnableStructuralManagement     = false;  // Autorite reelle du TSE sur la gestion de position / Action Engines (Sprint V3.7) - sans effet avant
+input bool    InpV3_EnableLearningEngine           = false;  // Active la collecte du Learning Engine (Sprint V3.8) - sans effet avant, et depend de la reactivation de la persistance TradeLifecycleTracker
+
+//+------------------------------------------------------------------+
+//| RESEARCH PLATFORM (Sprint V3.9.2, Increment I2)                     |
+//|                                                                    |
+//| Simple interrupteur d'observation - PAS un Feature Flag gouvernant  |
+//| une decision (la regle "pas de nouveau flag" du Sprint V3.0 vise    |
+//| les capacites decisionnelles, pas les interrupteurs d'observation). |
+//| Quand desactive, aucun evenement n'est ecrit, mais le comportement  |
+//| de trading doit rester rigoureusement identique (Test 4, V3.9.2).   |
+//+------------------------------------------------------------------+
+input group "=== Research Platform (Observation Layer) ==="
+input bool    InpEnableResearchCapture            = true;   // Active la capture Decision/Execution vers la Research Data Layer - AUCUN effet sur les decisions de trading, uniquement sur la persistance des evenements de recherche
+
+//+------------------------------------------------------------------+
 //| Fonction utilitaire : construit la structure des poids de score  |
 //| à partir des inputs. Centralise l'accès pour éviter toute        |
 //| duplication dans les autres modules.                              |
