@@ -60,6 +60,27 @@
 #include <NexusEdgeEA/Dashboard.mqh>
 #include <NexusEdgeEA/SignalRecorder.mqh>
 #include <NexusEdgeEA/Diagnostics.mqh>
+// --- V3 - Squelette architectural (Sprint V3.0) - voir ARCHITECTURE_V3.md ---
+#include <NexusEdgeEA/V3Types.mqh>
+#include <NexusEdgeEA/TradeScenarioEngine.mqh>
+#include <NexusEdgeEA/StructureObserver.mqh>
+#include <NexusEdgeEA/OrderBlockDetector.mqh>
+#include <NexusEdgeEA/FVGDetector.mqh>
+#include <NexusEdgeEA/HTFBiasObserver.mqh>
+#include <NexusEdgeEA/ShadowAnalytics.mqh>
+#include <NexusEdgeEA/AccountMetrics.mqh>
+#include <NexusEdgeEA/ObservationLayer.mqh>
+#include <NexusEdgeEA/HardRiskGuard.mqh>
+#include <NexusEdgeEA/LearningEngine.mqh>
+// --- V4.1 - Module Opportunity (P1/P2A/P2B/P3) ---
+#include <NexusEdgeEA/Opportunity/OpportunityManager.mqh>
+#include <NexusEdgeEA/Opportunity/OpportunitySourceSMC.mqh>
+#include <NexusEdgeEA/Opportunity/OpportunityPipeline.mqh>
+#include <NexusEdgeEA/VirtualTrade/VirtualTradeTracker.mqh>
+#include <NexusEdgeEA/Opportunity/VirtualTradeFeed.mqh>
+#include <NexusEdgeEA/TradeHealth/TradeHealthGuardian.mqh>
+// --- Sprint PropFirm - Protection de portefeuille FTMO ---
+#include <NexusEdgeEA/PropFirm/PropFirmRiskGuard.mqh>
 
 //+------------------------------------------------------------------+
 //| Instances globales de tous les modules                            |
@@ -85,7 +106,31 @@ CDashboard           g_dashboard;
 CSignalRecorder      g_signalRecorder;
 CValidator           g_validator;
 CDiagnostics         g_diagnostics;
+// --- V3 - Squelette architectural (Sprint V3.0) ---
+CTradeScenarioEngine g_scenarioEngine;    // NOUVEAU (V3.0) - coquille, aucune autorite reelle avant V3.5/V3.7
+CStructureObserver   g_structureObserver; // NOUVEAU (V3.1) - couche d'observation, remplit g_scenarioContext
+COrderBlockDetector  g_orderBlockDetector; // NOUVEAU (V3.2A) - couche d'observation, remplit g_scenarioContext
+CFVGDetector         g_fvgDetector;        // NOUVEAU (V3.2B) - couche d'observation, remplit g_scenarioContext (independant de CMarketStructure)
+CMarketStructure     g_marketStructureHTF; // NOUVEAU (V3.3) - seconde instance INDEPENDANTE de CMarketStructure, configuree sur InpTF_High (Option A, voir HTFBiasObserver.mqh) - ne remplace ni ne modifie g_marketStructure (H1)
+CHTFBiasObserver     g_htfBiasObserver;    // NOUVEAU (V3.3) - couche d'observation, remplit g_scenarioContext
+CShadowAnalytics     g_shadowAnalytics;    // NOUVEAU (V3.6) - appariement verdict/trade reel, memoire uniquement, aucune influence
+CAccountMetrics      g_accountMetrics;     // NOUVEAU (V3.6.5) - etat courant du compte, corrige le verrouillage permanent du drawdown
+CResearchDataLayer   g_researchDataLayer;  // NOUVEAU (V3.9, Increment I1) - persistance, validee en isolation avec des evenements synthetiques
+CObservationLayer    g_observationLayer;   // NOUVEAU (V3.9.2, Increment I2) - traduction Decision/Execution -> evenements structures, aucune influence sur le trading
+SScenarioContext     g_scenarioContext;   // NOUVEAU (V3.1) - dernier contexte observe (cadence H1), lu en lecture seule par les appels shadow du TSE
+CHardRiskGuard       g_hardRiskGuard;     // NOUVEAU (V3.0) - coquille, logique reelle migree au V3.4
+CLearningEngine      g_learningEngine;    // NOUVEAU (V3.0) - coquille, logique reelle au V3.8
+// --- V4.1 - Module Opportunity (P1/P2A/P2B/P3) ---
+COpportunityManager     g_opportunityManager;    // NOUVEAU (V4.1-P3) - Shadow uniquement, aucune autorite reelle
+COpportunitySourceSMC   g_opportunitySourceSMC;  // NOUVEAU (V4.1-P3) - pont OrderBlockDetector/CFVGDetector -> Opportunity
+COpportunityPipeline    g_opportunityPipeline;   // NOUVEAU (V4.1-P3) - dispatch vers TSE (EvaluateOpportunity), Shadow
+CVirtualTradeTracker    g_virtualTradeTracker;   // NOUVEAU (V4.1-P3.1bis) - Niveau 1 (Groupe A), Shadow uniquement, aucun trade reel
+int                     g_lastBarIndex = 0;      // NOUVEAU (V4.1-P3) - currentBarIndex, calcule une fois par nouvelle bougie H1, injecte partout ou necessaire (invariant 4 : le module Opportunity ne lit jamais le marche lui-meme)
+CTradeHealthGuardian    g_tradeHealthGuardian;   // NOUVEAU (V4.1-P3.3) - modes reversibles, jamais de regression du SL (garanti par IsMoreProtective, inchange)
 
+// --- Sprint PropFirm - Protection de portefeuille FTMO ---
+CPropFirmRiskGuard      g_propFirmRiskGuard;        // NOUVEAU - protection compte entier, aucune autorite d'execution directe
+bool                    g_propFirmTradingBlocked = false; // NOUVEAU - flag DEDIE, separe du disjoncteur legacy existant (jamais fusionne avec lui)
 //+------------------------------------------------------------------+
 //| État global de sécurité (perte/gain journalier, jours, pertes    |
 //| consécutives)                                                     |
@@ -404,6 +449,74 @@ void LogNewlyClosedTrades()
          g_profitGuard.ReleaseTrade(rec.positionId);
         }
 
+      // --- V3 - Squelette architectural (Sprint V3.0) ---
+      // Point d'entree du Learning Engine, pose des maintenant pour que
+      // les sprints suivants n'aient pas a retoucher ce pipeline. Sans
+      // effet tant que InpV3_EnableLearningEngine=false (defaut) - voir
+      // LearningEngine.mqh pour la dependance bloquante (persistance
+      // TradeLifecycleTracker a reactiver avant le Sprint V3.8).
+      g_learningEngine.OnTradeClosed(rec.positionId, rec.profit > 0.0);
+
+      // --- V3 - Shadow Analytics (Sprint V3.6) ---
+      // Cloture reelle du trade : on relie le resultat deja calcule par
+      // le pipeline existant (rec.profit, hasSnapshot pour le RR) au
+      // verdict Shadow deja lie a l'ouverture (LinkVerdict). Aucune
+      // nouvelle lecture de marche, aucun recalcul - rrObtained reste a
+      // 0.0 si le contexte d'ouverture est indisponible (position
+      // survivante a un redemarrage), meme convention honnete que le
+      // reste du projet plutot que d'inventer une valeur.
+      double v3RrObtained = 0.0;
+      if(hasSnapshot)
+        {
+         double v3RiskDistance = MathAbs(openSnap.slPrice - openSnap.entryPrice);
+         if(v3RiskDistance > 0.0)
+            v3RrObtained = MathAbs(rec.exitPrice - openSnap.entryPrice) / v3RiskDistance;
+        }
+      bool v3WasAuthorized = false;
+      bool v3Linked = g_shadowAnalytics.LinkOutcome(rec.positionId, rec.profit > 0.0, rec.profit, v3RrObtained, v3WasAuthorized);
+      if(InpDebugPipeline && v3Linked)
+        {
+         g_logger.LogInfo(StringFormat("[SHADOW_OUTCOME]\nTicket : %I64u\nVerdict : %s\nResultat reel : %s\nProfit : %.2f",
+                          rec.positionId, v3WasAuthorized ? "AUTHORIZED" : "REFUSED",
+                          (rec.profit > 0.0) ? "WIN" : "LOSS", rec.profit));
+        }
+
+      // --- Research Platform (Sprint V3.9.2, Increment I2) - capture ExecutionClose ---
+      // Reprend, via le pont interne de CObservationLayer, le meme
+      // correlationId que celui capture a l'ouverture (voir
+      // ObservationLayer.mqh) - aucun recalcul, uniquement des valeurs
+      // deja produites par le pipeline de cloture existant.
+      g_observationLayer.CaptureExecutionClose(rec.positionId, rec.symbol, rec.exitPrice, rec.profit > 0.0, rec.profit, detailedReason);
+
+      // --- Research Platform (Sprint V3.9.4, Increment I5) - capture Outcome (dernier evenement du trade) ---
+      // "result" : convention explicite (voir ObservationLayer.mqh) -
+      // WIN si profit net > 0, LOSS si < 0, BE si strictement egal a 0.
+      // "swap"/"commission" lus directement depuis l'historique broker
+      // deja consolide (meme primitive HistorySelectByPosition +
+      // DEAL_SWAP/DEAL_COMMISSION deja utilisee par CPositionManager -
+      // lecture, pas un recalcul de logique de trading). grossProfit
+      // derive algebriquement de rec.profit (deja net = brut+swap+
+      // commission, voir Types.mqh) - aucune nouvelle source de verite.
+      double v3Swap = 0.0, v3Commission = 0.0;
+      if(HistorySelectByPosition((long)rec.positionId))
+        {
+         int v3DealsTotal = HistoryDealsTotal();
+         for(int v3d = 0; v3d < v3DealsTotal; v3d++)
+           {
+            ulong v3DealTicket = HistoryDealGetTicket(v3d);
+            if(v3DealTicket == 0)
+               continue;
+            v3Swap       += HistoryDealGetDouble(v3DealTicket, DEAL_SWAP);
+            v3Commission += HistoryDealGetDouble(v3DealTicket, DEAL_COMMISSION);
+           }
+        }
+      double v3GrossProfit = rec.profit - v3Swap - v3Commission;
+      string v3Result = (rec.profit > 0.0) ? "WIN" : ((rec.profit < 0.0) ? "LOSS" : "BE");
+
+      g_observationLayer.CaptureOutcome(rec.positionId, rec.symbol, v3Result, v3GrossProfit, rec.profit,
+                                        v3Swap, v3Commission, rec.durationSeconds, rec.mfe, rec.mae, rec.rr,
+                                        detailedReason, rec.openTime, rec.closeTime);
+
       full.exitPrice           = rec.exitPrice;
       full.profitFinal         = rec.profit;
       full.closeTime           = rec.closeTime;
@@ -520,7 +633,7 @@ void LogNewlyClosedTrades()
       // --- Libération du tracker pour ce trade (tout a déjà été lu) ---
       if(hasLifecycle)
          g_tradeTracker.ReleasePosition(rec.positionId, rec.profit);
-
+      g_tradeHealthGuardian.ReleasePosition(rec.positionId); // NOUVEAU (V4.1-P3.3)
       // NOUVEAU : purge le throttle de modification pour ce ticket clôturé
       // (voir CTradeManager::ClearModifyTracking - évite une croissance
       // illimitée des tableaux internes sur un compte utilisé en continu).
@@ -543,6 +656,45 @@ void LogNewlyClosedTrades()
 //+------------------------------------------------------------------+
 void ManageOpenPositions()
   {
+   // --- Sprint PropFirm - Protection de portefeuille (AVANT toute
+   // gestion par position - portefeuille entier, pas un trade individuel) ---
+   if(InpUsePropFirmRiskGuard && g_propFirmRiskGuard.IsInitialized())
+     {
+      double currentBalance = AccountInfoDouble(ACCOUNT_BALANCE);
+      double currentEquity  = AccountInfoDouble(ACCOUNT_EQUITY);
+      datetime serverTime   = TimeCurrent();
+      datetime gmtTime      = TimeGMT();
+
+      SPropFirmVerdict pfVerdict = g_propFirmRiskGuard.Evaluate(currentBalance, currentEquity, serverTime, gmtTime);
+
+      if(pfVerdict.timezoneMismatchDetected)
+         g_logger.LogError(pfVerdict.reason); // Avertissement seul - ne bloque rien
+
+      if(pfVerdict.dailyLossBreached || pfVerdict.maxLossBreached)
+        {
+         if(!g_propFirmTradingBlocked) // Log uniquement au moment de la transition, pas a chaque tick
+            g_logger.LogError(StringFormat(
+               "[PROPFIRM_BREACH] %s | Equity=%.2f DailyFloor=%.2f MaxFloor=%.2f - FERMETURE DE TOUTES LES POSITIONS",
+               pfVerdict.reason, pfVerdict.currentEquity, pfVerdict.dailyLossFloor, pfVerdict.maxLossFloor));
+
+         g_propFirmTradingBlocked = true; // Flag DEDIE, jamais fusionne avec le disjoncteur legacy
+
+         for(int p = PositionsTotal() - 1; p >= 0; p--)
+           {
+            ulong closeTicket = PositionGetTicket(p);
+            if(closeTicket == 0)
+               continue;
+            if(PositionGetString(POSITION_SYMBOL) != _Symbol)
+               continue;
+            if(PositionGetInteger(POSITION_MAGIC) != InpMagicNumber)
+               continue;
+            g_tradeManager.ApplyExternalClose(closeTicket);
+           }
+
+         return; // COURT-CIRCUIT total - aucune gestion ProfitProtectionEngine ce tick
+        }
+     }
+
    for(int i = PositionsTotal() - 1; i >= 0; i--)
      {
       ulong ticket = PositionGetTicket(i);
@@ -566,6 +718,36 @@ void ManageOpenPositions()
       if(newsActiveNow)
          g_tradeTracker.RecordNewsDuringTrade(ticket, newsDetailNow, currentProfitMoney);
 
+      // --- NOUVEAU (Sprint 1 - Etape 1, correctif ISSUE 001/002) ---
+      // Distance de prix favorable mesuree DIRECTEMENT sur le marche
+      // (jamais reconstruite depuis un montant en devise) : c'est cette
+      // grandeur, et uniquement elle, que CPeakPercentLevelCalculator et
+      // CEmergencyLevelCalculator utilisent desormais pour placer un
+      // niveau de SL - plus aucune dependance a tickValue/tickSize/lot
+      // pour ce calcul (voir en-tete de ProfitProtectionEngine.mqh).
+      ENUM_POSITION_TYPE posTypeGuard   = (ENUM_POSITION_TYPE)PositionGetInteger(POSITION_TYPE);
+      double             openPriceGuard = PositionGetDouble(POSITION_PRICE_OPEN);
+      double             currentPriceGuard = (posTypeGuard == POSITION_TYPE_BUY)
+                                             ? SymbolInfoDouble(_Symbol, SYMBOL_BID)
+                                             : SymbolInfoDouble(_Symbol, SYMBOL_ASK);
+      double             currentFavorablePriceDistance = (posTypeGuard == POSITION_TYPE_BUY)
+                                                         ? (currentPriceGuard - openPriceGuard)
+                                                         : (openPriceGuard - currentPriceGuard);
+
+      // --- V3 - Squelette architectural (Sprint V3.0/V3.1) ---
+      // Evaluation en mode OBSERVATION SEULE, par position ouverte, a
+      // chaque tick - meme cadence que ProfitProtectionEngine (pour
+      // permettre une future comparaison tick a tick), mais sans
+      // AUCUNE influence sur "posTypeGuard"/"currentFavorablePriceDistance"
+      // ni sur ce qui suit. g_scenarioContext (V3.1) est le dernier
+      // contexte observe a la cadence H1 (variable globale, mise a jour
+      // dans le bloc nouvelle bougie) - relu ici en lecture seule, aucun
+      // nouveau calcul. Aucun log par tick (verbeux) : seul le
+      // compteur agrege est expose via GetShadowReport() a OnDeinit().
+      SScenarioVerdict  v3MgmtVerdict;
+      SScenarioDecision v3MgmtDecision;
+      g_scenarioEngine.EvaluateManagement(ticket, g_scenarioContext, v3MgmtVerdict, v3MgmtDecision);
+
       // --- REFONTE "décision unique" (demande explicite, point 1) ---
       // BreakEven, Trailing et Profit Guard (Structure/PeakPercent/
       // Emergency) sont désormais des CALCULATEURS d'un seul et même
@@ -573,12 +755,19 @@ void ManageOpenPositions()
       // seul appel ApplyExternalProtection() par tick - plus de blocs
       // if() séparés qui pourraient chacun tenter leur propre
       // modification.
-      g_profitGuard.Update(ticket, currentProfitMoney);
+      g_profitGuard.Update(ticket, currentProfitMoney, currentFavorablePriceDistance);
 
       double tickValue = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_VALUE);
       double tickSize  = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);
       double atrNow     = g_indicators.GetATR(0);
       SMarketContext contextNow = g_marketContext.GetContext();
+
+      // --- NOUVEAU (V4.1-P3.3) : mise a jour du Guardian, CHAQUE TICK.
+      // currentFavorablePriceDistance deja calcule plus haut dans cette
+      // boucle. TimeCurrent() est appele ICI par l'orchestrateur, jamais
+      // a l'interieur de CTradeHealthGuardian (invariant 4).
+      if(g_tradeHealthGuardian.IsTracked(ticket))
+         g_tradeHealthGuardian.Update(ticket, currentFavorablePriceDistance, contextNow.momentum, TimeCurrent());
 
       double oldSLGuard    = PositionGetDouble(POSITION_SL);
       double currentTPGuard = PositionGetDouble(POSITION_TP);
@@ -587,7 +776,8 @@ void ManageOpenPositions()
       bool hasCandidate = g_profitGuard.ComputeFinalStopLevel(ticket, oldSLGuard, currentTPGuard, currentProfitMoney,
                                                               g_marketStructure, atrNow, contextNow.momentum,
                                                               tickValue, tickSize,
-                                                              finalSL, source, decisionNote, closeNow, diagnosticTrace);
+                                                              finalSL, source, decisionNote, closeNow, diagnosticTrace,
+                                                              currentFavorablePriceDistance);
 
       // NOUVEAU (mode diagnostic, demande explicite) : trace par tick,
       // écrite QUE si InpProfitGuardDiagnosticMode=true (sinon
@@ -608,6 +798,10 @@ void ManageOpenPositions()
               {
                DEBUG_TRADE(StringFormat("ProfitGuard URGENCE - fermeture immediate ticket=%I64u profit=%.2f", ticket, currentProfitMoney));
                g_logger.LogPipelineDebug(StringFormat("[TRADE EVENT]\r\nticket=%I64u\r\nevent_type=PROFIT_GUARD_EMERGENCY_CLOSE\r\nnote=%s\r\nevent_saved=true", ticket, decisionNote));
+
+               // --- Research Platform (Sprint V3.9.4, Increment I4) - capture Protection (fermeture forcee) ---
+               g_observationLayer.CaptureProtection(ticket, _Symbol, "FORCED_CLOSE", sourceLabel,
+                                                    oldSLGuard, oldSLGuard, currentProfitMoney, decisionNote);
               }
             else
               {
@@ -627,6 +821,10 @@ void ManageOpenPositions()
                g_logger.LogPipelineDebug(StringFormat(
                   "[TRADE EVENT]\r\nticket=%I64u\r\nevent_type=%s\r\nnote=%s\r\nevent_saved=%s",
                   ticket, sourceLabel, decisionNote, foundForCounts ? "true" : "false"));
+
+               // --- Research Platform (Sprint V3.9.4, Increment I4) - capture Protection (SL modifie) ---
+               g_observationLayer.CaptureProtection(ticket, _Symbol, "SL_MODIFIED", sourceLabel,
+                                                    oldSLGuard, newSLGuard, currentProfitMoney, decisionNote);
               }
            }
         }
@@ -653,10 +851,112 @@ void ManageOpenPositions()
                double profitNow = PositionGetDouble(POSITION_PROFIT);
                g_tradeTracker.RecordPartialClose(ticket, InpPartialClosePercent, profitNow);
                DEBUG_TRADE(StringFormat("Fermeture partielle ticket=%I64u pourcentage_demande=%.0f%%", ticket, InpPartialClosePercent));
+
+               // --- Research Platform (Sprint V3.9.4, Increment I4) - capture Protection (cloture partielle) ---
+               // Pas de changement de SL ici - oldSL/newSL identiques,
+               // le pourcentage demande est porte par "decisionNote"
+               // (le contrat CaptureProtection ne prevoit pas de champ
+               // dedie, conformement au principe "aucune donnee inutile"
+               // deja applique a chaque champ de ce projet).
+               double currentSLForPartial = PositionGetDouble(POSITION_SL);
+               g_observationLayer.CaptureProtection(ticket, _Symbol, "PARTIAL_CLOSE", "PartialClose",
+                                                    currentSLForPartial, currentSLForPartial, profitNow,
+                                                    StringFormat("pourcentage_demande=%.0f%%", InpPartialClosePercent));
               }
            }
         }
      }
+  }
+
+//+------------------------------------------------------------------+
+//| ResyncSurvivingPositions                                            |
+//|                                                                    |
+//| NOUVEAU (correctif prioritaire, angle mort identifie par revue     |
+//| d'architecture du 2026-07-23, avant la poursuite du Sprint 1).     |
+//|                                                                    |
+//| PROBLEME : g_profitGuard.RegisterTrade() n'etait appele qu'au      |
+//| moment de OpenPosition() (un seul site d'appel dans tout ce        |
+//| fichier). Si l'EA redemarre (VPS reboot, mise a jour Windows,      |
+//| recompilation, crash terminal) pendant qu'un trade est ouvert, ce  |
+//| trade devenait invisible pour CProfitProtectionEngine :            |
+//| ComputeFinalStopLevel() retourne false des sa toute premiere ligne |
+//| (FindIndex(positionId) < 0) - AVANT MEME d'evaluer BreakEven ou    |
+//| Trailing, qui pourtant n'ont besoin d'aucun etat stocke. Un trade  |
+//| survivant a un redemarrage perdait donc TOUTE protection active    |
+//| jusqu'a sa cloture manuelle.                                       |
+//|                                                                    |
+//| CORRECTIF : au demarrage, apres g_profitGuard.Init(), on scanne    |
+//| les positions deja ouvertes sous notre symbole/Magic Number et on  |
+//| les reenregistre - reutilisation PURE de RegisterTrade()/Update(), |
+//| deja publiques et deja appelees ailleurs avec la meme signature.   |
+//| Aucune nouvelle methode, aucune nouvelle interface, aucune         |
+//| modification de ProfitProtectionEngine.mqh.                        |
+//|                                                                    |
+//| LIMITE HONNETE DOCUMENTEE : le SL INITIAL (utilise pour calculer   |
+//| riskMoneyPerR, donc le mode d'armement ACTIVATION_BY_R) n'est      |
+//| persiste nulle part ailleurs dans le projet - seul le SL COURANT   |
+//| est visible sur la position au redemarrage (potentiellement deja   |
+//| deplace par BreakEven/Trailing avant l'arret). On utilise donc le  |
+//| SL courant comme approximation du SL initial : c'est la meilleure  |
+//| information disponible sans persistance dediee (voir echange sur   |
+//| la persistance de l'apprentissage broker - le meme mecanisme       |
+//| pourra un jour couvrir aussi l'etat des trades). De la meme facon, |
+//| le PeakProfit / la distance de prix favorable au plus haut ne      |
+//| peuvent pas etre reconstruits avec certitude (un retracement       |
+//| survenu avant le redemarrage est invisible) : on amorce donc le    |
+//| pic au NIVEAU COURANT (borne inferieure honnete), jamais a zero -   |
+//| strictement meilleur que l'absence totale de protection observee   |
+//| jusqu'ici.                                                          |
+//|                                                                    |
+//| PERIMETRE : ne couvre que CProfitProtectionEngine (le risque       |
+//| financier direct, prioritaire). CTradeLifecycleTracker::           |
+//| RegisterNewPosition() presente le meme angle mort (MFE/MAE         |
+//| reinitialises), mais necessite un STradeSnapshot complet (contexte |
+//| marche a l'entree, non reconstructible avec certitude) - laisse    |
+//| volontairement de cote pour une etape dediee ulterieure,           |
+//| conformement a la discipline "une etape a la fois".                 |
+//+------------------------------------------------------------------+
+void ResyncSurvivingPositions()
+  {
+   int resynced = 0;
+   for(int i = PositionsTotal() - 1; i >= 0; i--)
+     {
+      ulong ticket = PositionGetTicket(i);
+      if(ticket == 0)
+         continue;
+      if(PositionGetString(POSITION_SYMBOL) != _Symbol)
+         continue;
+      if(PositionGetInteger(POSITION_MAGIC) != InpMagicNumber)
+         continue;
+
+      if(g_profitGuard.IsTracked(ticket))
+         continue; // Deja suivi - ne devrait jamais se produire a ce stade de OnInit, garde-fou defensif
+
+      ENUM_POSITION_TYPE posType    = (ENUM_POSITION_TYPE)PositionGetInteger(POSITION_TYPE);
+      ENUM_SIGNAL_TYPE   signalType = (posType == POSITION_TYPE_BUY) ? SIGNAL_BUY : SIGNAL_SELL;
+      double entryPrice      = PositionGetDouble(POSITION_PRICE_OPEN);
+      double currentSLApprox = PositionGetDouble(POSITION_SL); // Approximation honnete - voir limite documentee ci-dessus
+      double lot             = PositionGetDouble(POSITION_VOLUME);
+      double tickValue       = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_VALUE);
+      double tickSize        = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);
+
+      g_profitGuard.RegisterTrade(ticket, signalType, entryPrice, currentSLApprox, lot, tickValue, tickSize);
+
+      // Amorce immediate du pic avec l'etat COURANT (borne inferieure honnete,
+      // jamais zero) - meme formule que ManageOpenPositions() pour la distance
+      // de prix favorable (voir Sprint 1 - Etape 1, ISSUE 001/002).
+      double currentProfitMoney = PositionGetDouble(POSITION_PROFIT);
+      double currentPriceNow    = (posType == POSITION_TYPE_BUY) ? SymbolInfoDouble(_Symbol, SYMBOL_BID) : SymbolInfoDouble(_Symbol, SYMBOL_ASK);
+      double currentFavorablePriceDistance = (posType == POSITION_TYPE_BUY) ? (currentPriceNow - entryPrice) : (entryPrice - currentPriceNow);
+      g_profitGuard.Update(ticket, currentProfitMoney, currentFavorablePriceDistance);
+
+      resynced++;
+     }
+
+   if(resynced > 0)
+      g_logger.LogSystemEvent("Resync", StringFormat(
+         "%d position(s) deja ouverte(s) reenregistree(s) aupres du Profit Protection Engine apres (re)demarrage de l'EA "
+         "(SL initial et PeakProfit approximes a partir de l'etat courant - voir limite documentee dans le code)", resynced));
   }
 
 //+------------------------------------------------------------------+
@@ -691,6 +991,46 @@ int OnInit()
    g_patterns.Init(_Symbol, InpTF_Main);
    g_supportResistance.Init(_Symbol, InpTF_Main, InpSR_LookbackBars, InpSR_SwingStrength, InpSR_ZoneMergeDistancePoints);
    g_marketStructure.Init(_Symbol, InpTF_Main, InpStructure_SwingStrength, InpStructure_LookbackBars);
+   g_structureObserver.Init(GetPointer(g_marketStructure)); // NOUVEAU (V3.1) - couche d'observation, pas le TSE (voir §3.3bis)
+   g_orderBlockDetector.Init(GetPointer(g_marketStructure), _Symbol, InpTF_Main); // NOUVEAU (V3.2A) - idem
+   g_fvgDetector.Init(_Symbol, InpTF_Main); // NOUVEAU (V3.2B) - pas de pointeur CMarketStructure, volontairement (voir FVGDetector.mqh)
+
+   // --- V3 - HTF Bias Observer (Sprint V3.3) ---
+   // g_marketStructureHTF est une instance INDEPENDANTE (Option A) -
+   // memes parametres de swing que l'instance H1, uniquement le
+   // timeframe change. Aucun conflit d'etat possible (verifie :
+   // CMarketStructure ne contient aucun membre statique).
+   g_marketStructureHTF.Init(_Symbol, InpTF_High, InpStructure_SwingStrength, InpStructure_LookbackBars);
+   g_htfBiasObserver.Init(GetPointer(g_marketStructureHTF), InpTF_High);
+   
+   // --- V4.1-P3 - Opportunity Pipeline (Shadow) ---
+   // Meme discipline que le reste du squelette V3 : initialisation
+   // inconditionnelle, aucune autorite reelle (aucun appel a
+   // g_opportunityManager/g_opportunityPipeline ne modifie jamais une
+   // position - voir OpportunityPipeline.mqh, "AUCUNE DECISION DE TRADING").
+   g_opportunityManager.Init(InpOpportunityMaxAgeBars);
+   g_opportunitySourceSMC.Init();
+   g_opportunityPipeline.Init();
+   g_virtualTradeTracker.Init(InpVirtualTradeMaxAgeBars);
+   g_tradeHealthGuardian.Init(InpTradeHealthProtectionGivebackRatio, InpTradeHealthDefenseActiveGivebackRatio);
+
+   // --- Sprint PropFirm - Protection de portefeuille FTMO ---
+   // Garde-fou : si le capital initial n'est pas configure (0.0 par
+   // defaut), le guard reste inactif plutot que de calculer des
+   // planchers a partir d'une valeur non renseignee (invariant 8 :
+   // aucune donnee fabriquee).
+   if(InpUsePropFirmRiskGuard && InpFTMOInitialCapital > 0.0)
+     {
+      g_propFirmRiskGuard.Init(InpFTMOInitialCapital, InpFTMODailyLossPercent, InpFTMOMaxLossPercent,
+                               InpFTMOBrokerGMTOffsetHours, (InpFTMOBrokerGMTOffsetHours != 0.0 || InpFTMOUseManualGMTOffset),
+                               InpFTMOUseManualGMTOffset);
+      g_logger.LogInfo(StringFormat("[PROPFIRM] Guard active - Capital=%.2f DailyLoss=%.1f%% MaxLoss=%.1f%%",
+                       InpFTMOInitialCapital, InpFTMODailyLossPercent, InpFTMOMaxLossPercent));
+     }
+   else if(InpUsePropFirmRiskGuard && InpFTMOInitialCapital <= 0.0)
+     {
+      g_logger.LogError("[PROPFIRM] InpUsePropFirmRiskGuard=true mais InpFTMOInitialCapital non configure (0.0) - Guard INACTIF par securite");
+     }
 
    ENUM_NEWS_SOURCE newsSource = InpNewsFilterEnabled ? NEWS_SOURCE_NATIVE_CALENDAR : NEWS_SOURCE_NONE;
    if(!g_newsFilter.Init(newsSource, InpNewsMinutesBefore, InpNewsMinutesAfter, NEWS_IMPORTANCE_HIGH))
@@ -737,10 +1077,51 @@ int OnInit()
                       InpProfitGuardStructureBufferATR, InpProfitGuardMinRetainPercent,
                       InpProfitGuardEmergencyEnabled, InpProfitGuardEmergencyDrawdownPercent,
                       InpProfitGuardEmergencyMomentumThreshold, InpProfitGuardEmergencyCloseImmediately,
-                      InpProfitGuardEmergencyRetainPercent, InpProfitGuardDiagnosticMode);
+                      InpProfitGuardEmergencyRetainPercent, InpProfitGuardDiagnosticMode,
+                      GetPointer(g_tradeHealthGuardian), InpUseDefenseActive,
+                      InpDefenseActiveProtectionRetainPercent, InpDefenseActiveDefenseActiveRetainPercent);
+
+   // NOUVEAU (correctif prioritaire - voir doc complete sur ResyncSurvivingPositions()
+   // ci-dessus) : reenregistre aupres du Profit Guard toute position deja ouverte
+   // au moment ou l'EA demarre/redemarre - sans quoi ces trades perdaient toute
+   // protection active (BreakEven/Trailing inclus) jusqu'a leur cloture manuelle.
+   ResyncSurvivingPositions();
+
+   // --- V3 - Squelette architectural (Sprint V3.0) ---
+   // Initialisation des coquilles - aucune n'a d'autorite reelle a ce
+   // stade (voir ARCHITECTURE_V3.md). Les Feature Flags sont transmis
+   // tels quels : par defaut tous a false, donc aucun changement de
+   // comportement par rapport a la version actuelle.
+   // AJUSTEMENT POST-REVUE V3.0 : le TSE ne recoit plus de pointeur
+   // vers un module de marche (voir TradeScenarioEngine.mqh, direction
+   // SScenarioContext) - uniquement les Feature Flags, qui sont de la
+   // configuration.
+   g_scenarioEngine.Init(InpV3_EnableTradeScenarioEngine, InpV3_EnableHTFBias,
+                         InpV3_EnableStructuralManagement);
+   g_hardRiskGuard.Init();
+   g_learningEngine.Init(InpV3_EnableLearningEngine);
 
    g_initialBalance = AccountInfoDouble(ACCOUNT_BALANCE);
    g_statistics.Init(&g_positionManager, g_initialBalance);
+
+   // --- V3.6.5 - Account Metrics Layer (correctif du verrouillage drawdown) ---
+   // Reconstruit le pic d'equite reel via CUtilities::ReconstructPeakEquity()
+   // (fonction statique pure, aucune dependance metier) - une seule fois,
+   // ici, puis le composant devient totalement autonome (voir AccountMetrics.mqh).
+   g_accountMetrics.Init(g_initialBalance, _Symbol, InpMagicNumber);
+
+   // --- Research Platform (Sprint V3.9.2, Increment I2) ---
+   // Fichier dedie, distinct de TradeFull.csv/TradeEvents.csv (voir
+   // blueprint V3.8.2). Nom fixe par magic number pour eviter toute
+   // collision entre executions (meme prudence que CPositionManager).
+   // Sprint V3.9.3.5 : extension .jsonl (JSON Lines), la Research Data
+   // Layer a migre son format de stockage - contrat SResearchEvent et
+   // contenu des evenements inchanges, seule la representation disque
+   // change (voir ResearchDataLayer.mqh).
+   string v3ResearchFileName = StringFormat("NexusEdgeEA_Research_%s_%d.jsonl", _Symbol, InpMagicNumber);
+   g_researchDataLayer.Init(v3ResearchFileName);
+   g_observationLayer.Init(GetPointer(g_researchDataLayer), InpEnableResearchCapture,
+                           "AUREX_TSE_V1", IntegerToString((long)InpMagicNumber));
 
    g_dashboard.Init(InpDashboardX, InpDashboardY, InpShowDashboard);
 
@@ -767,6 +1148,14 @@ void OnDeinit(const int reason)
    g_logger.LogInfo(g_signalManager.GetContributionReport());
    g_logger.LogInfo(g_diagnostics.GenerateReport());
    g_logger.LogInfo(g_profitGuard.GetActivationReport()); // NOUVEAU (demande explicite point 1)
+   g_logger.LogInfo(g_tradeManager.GetBrokerConstraintReport()); // NOUVEAU (Sprint 1 - refus broker)
+   // --- V3 - Squelette architectural (Sprint V3.0) ---
+   g_logger.LogInfo(g_scenarioEngine.GetShadowReport());
+   g_logger.LogInfo(g_scenarioEngine.GetOpportunityShadowReport()); // NOUVEAU (V4.1-P3) - Pipeline B, independant du Pipeline A ci-dessus
+   g_logger.LogInfo(g_virtualTradeTracker.GetSummaryReport()); // NOUVEAU (V4.1-P3.1bis) - resultats virtuels du Pipeline B
+   g_logger.LogInfo(g_shadowAnalytics.GetReport()); // NOUVEAU (V3.6)
+   g_logger.LogInfo(g_hardRiskGuard.GetShadowReport());
+   g_logger.LogInfo(g_learningEngine.GetShadowReport());
 
    g_dashboard.Deinit();
    g_signalRecorder.Deinit();
@@ -836,10 +1225,55 @@ void OnTradeTransaction(const MqlTradeTransaction &trans, const MqlTradeRequest 
 //+------------------------------------------------------------------+
 void OnTick()
   {
+   // --- V3.6.5 - Account Metrics Layer ---
+   // Une seule lecture d'equite, une seule comparaison - avant TOUTE
+   // autre logique du tick, y compris ManageOpenPositions(). Voir
+   // AccountMetrics.mqh pour la justification de cette cadence.
+   g_accountMetrics.Update();
+
    // Gestion des positions ouvertes (Break Even/Trailing/Partial) :
    // peut s'exécuter à chaque tick, contrairement à l'analyse de
    // signal, car réagir vite au prix est justement le but ici.
    ManageOpenPositions();
+   
+   // --- V4.1-P3 - Opportunity Pipeline (Shadow uniquement, AUCUN trade) ---
+   // Cadence : chaque tick (verrou P2B). bid/ask transmis en parametre -
+   // EvaluatePrice() choisit lui-meme Ask (BUY) ou Bid (SELL), voir P1
+   // Revision 2 dans OpportunityManager.mqh.
+   double v4OppBid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
+   double v4OppAsk = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
+   g_opportunityManager.EvaluatePrice(_Symbol, v4OppBid, v4OppAsk);
+
+   SOpportunityDispatchResult v4OppResults[];
+   int v4OppDispatchedCount = g_opportunityPipeline.ProcessTick(g_opportunityManager, g_scenarioEngine,
+                                                                 g_scenarioContext, v4OppResults);
+   if(v4OppDispatchedCount > 0)
+     {
+      for(int v4i = 0; v4i < ArraySize(v4OppResults); v4i++)
+        {
+         if(InpDebugPipeline)
+            g_logger.LogInfo(StringFormat(
+               "[OPPORTUNITY_SHADOW]\nOpportunity #%s (%s, motif=%s)\nZone : [%.5f - %.5f]\nVerdict : %s (confidence=%.2f)\nDetail : %s",
+               v4OppResults[v4i].candidate.id, v4OppResults[v4i].candidate.sourceType,
+               v4OppResults[v4i].candidate.creationReason,
+               v4OppResults[v4i].candidate.zoneLow, v4OppResults[v4i].candidate.zoneHigh,
+               v4OppResults[v4i].verdict.authorized ? "ACCEPTED" : "REJECTED",
+               v4OppResults[v4i].verdict.confidence, v4OppResults[v4i].verdict.reason));
+
+         // --- V4.1-P3.1bis - VirtualTradeFeed (Niveau 1 strict) ---
+         // Appele pour CHAQUE verdict (Authorized ET Refused) - c'est
+         // precisement ce qui permettra en P3.2 de savoir si les refus
+         // du TSE etaient justifies. entryScore recupere gratuitement
+         // (verdict.confidence deja calcule), currentScore non alimente
+         // dans cette premiere integration (voir section 6 ci-dessous).
+         string v4VtId = CVirtualTradeFeed::OnVerdict(v4OppResults[v4i].candidate, v4OppResults[v4i].verdict,
+                                                       g_lastBarIndex, g_riskManager, g_virtualTradeTracker);
+         if(InpDebugPipeline && v4VtId != "")
+            g_logger.LogInfo(StringFormat("[VIRTUAL_TRADE_REGISTERED] id=%s opportunity=%s verdict=%s",
+                             v4VtId, v4OppResults[v4i].candidate.id,
+                             v4OppResults[v4i].verdict.authorized ? "ACCEPTED" : "REJECTED"));
+        }
+     }
 
    // NOUVEAU (Phase 1) : CPostCloseWatcher également à chaque tick -
    // opération légère (comparaisons de datetime sur une petite liste),
@@ -856,6 +1290,7 @@ void OnTick()
       return;
 
    RefreshDailyStateIfNeeded();
+   g_lastBarIndex = Bars(_Symbol, InpTF_Main); // NOUVEAU (V4.1-P3) - calcule ICI, injecte partout ailleurs (invariant 4)
    g_diagnostics.RecordBarAnalyzed();
 
    g_positionManager.Update();
@@ -866,6 +1301,96 @@ void OnTick()
    g_marketContext.Update();
    g_supportResistance.Update();
    g_marketStructure.Update(1); // NOUVEAU - meme cadence que MarketContext/SupportResistance
+
+   // --- V3 - Couche d'observation structurelle (Sprint V3.1) ---
+   // Meme cadence que g_marketStructure.Update() ci-dessus (une fois par
+   // nouvelle bougie H1) - AUCUN nouveau calcul, uniquement la lecture
+   // de l'etat deja produit par CMarketStructure. Remplit g_scenarioContext
+   // (lu en lecture seule plus loin par les appels shadow du TSE) et
+   // journalise les transitions BOS/CHOCH/Sweep derriere InpDebugPipeline
+   // (pas de nouveau Feature Flag - ce sprint ne modifie aucune decision).
+   string v3StructureLogText; bool v3HasNewStructureEvent;
+   g_structureObserver.Observe(1, g_scenarioContext, v3StructureLogText, v3HasNewStructureEvent);
+   if(InpDebugPipeline && v3StructureLogText != "")
+      g_logger.LogInfo(v3StructureLogText);
+
+   // --- V3 - Détecteur d'Order Block (Sprint V3.2A) ---
+   // Même cadence, même discipline que ci-dessus. Ne recalcule jamais
+   // BOS/CHOCH - consomme exclusivement l'état déjà lu par
+   // g_marketStructure (voir ARCHITECTURE_V3.md, précision V3.2A).
+   // Appelé APRÈS g_structureObserver.Observe() : g_scenarioContext
+   // contient déjà les champs BOS/CHOCH/Sweep à jour de cette bougie
+   // avant que ce détecteur n'y ajoute les champs Order Block.
+   string v3OrderBlockLogText; bool v3HasNewOrderBlockEvent;
+   g_orderBlockDetector.Observe(1, g_scenarioContext, v3OrderBlockLogText, v3HasNewOrderBlockEvent);
+   if(InpDebugPipeline && v3OrderBlockLogText != "")
+      g_logger.LogInfo(v3OrderBlockLogText);
+      
+   // --- V4.1-P3 - Pont SMC -> Opportunity (Order Block) ---
+   // Lit exclusivement g_scenarioContext deja rempli ci-dessus - aucun
+   // recalcul. creationReason="BOS" strictement (voir OpportunitySourceSMC.mqh).
+   string v4OppIdFromOB = g_opportunitySourceSMC.IngestOrderBlock(g_scenarioContext, _Symbol, g_lastBarIndex, g_opportunityManager);
+   if(InpDebugPipeline && v4OppIdFromOB != "")
+      g_logger.LogInfo(StringFormat("[OPPORTUNITY_CREATED] id=%s source=OrderBlock reason=BOS", v4OppIdFromOB));
+
+   // --- V3 - Détecteur de Fair Value Gap (Sprint V3.2B) ---
+   // Même cadence que les détecteurs précédents. NE consulte PAS
+   // g_marketStructure (géométrie locale à 3 bougies, indépendante de
+   // toute structure - voir FVGDetector.mqh). Appelé APRÈS
+   // g_orderBlockDetector.Observe() : g_scenarioContext contient déjà
+   // les champs BOS/CHOCH/Sweep/Order Block à jour avant que ce
+   // détecteur n'y ajoute les champs FVG.
+   string v3FvgLogText; bool v3HasNewFvgEvent;
+   g_fvgDetector.Observe(1, g_scenarioContext, v3FvgLogText, v3HasNewFvgEvent);
+   if(InpDebugPipeline && v3FvgLogText != "")
+      g_logger.LogInfo(v3FvgLogText);
+      
+   // --- V4.1-P3 - Pont SMC -> Opportunity (FVG) ---
+   // creationReason="FVG" strictement, jamais correle a BOS/CHOCH/Sweep
+   // meme si ces champs sont renseignes dans g_scenarioContext au meme
+   // instant (voir OpportunitySourceSMC.mqh, decision de revue P2A).
+   string v4OppIdFromFVG = g_opportunitySourceSMC.IngestFVG(g_scenarioContext, _Symbol, g_lastBarIndex, g_opportunityManager);
+   if(InpDebugPipeline && v4OppIdFromFVG != "")
+      g_logger.LogInfo(StringFormat("[OPPORTUNITY_CREATED] id=%s source=FVG reason=FVG", v4OppIdFromFVG));
+
+   // --- V4.1-P3 - Politique d'expiration (bougies, voir P1 Revision 1) ---
+   int v4OppExpiredCount = g_opportunityManager.UpdateExpiration(g_lastBarIndex);
+   if(InpDebugPipeline && v4OppExpiredCount > 0)
+      g_logger.LogInfo(StringFormat("[OPPORTUNITY_EXPIRED] count=%d (politique=%d bougies)", v4OppExpiredCount, InpOpportunityMaxAgeBars));
+    
+   // --- V4.1-P3.1bis - Mise a jour des trades virtuels OPEN (Niveau 1) ---
+   // High/Low de la bougie qui vient de cloturer (shift=1, meme
+   // convention que le reste du bloc "nouvelle bougie"). Ne lit jamais
+   // le marche a l'interieur de VirtualTradeTracker lui-meme -
+   // High/Low/barIndex sont injectes ICI (invariant 4).
+   double v4VtBarHigh = iHigh(_Symbol, InpTF_Main, 1);
+   double v4VtBarLow  = iLow(_Symbol, InpTF_Main, 1);
+   int v4VtTotal = g_virtualTradeTracker.GetCount();
+   for(int v4vt = v4VtTotal - 1; v4vt >= 0; v4vt--)
+     {
+      SVirtualTrade v4VtRecord = g_virtualTradeTracker.GetRecord(v4vt);
+      if(v4VtRecord.state != VIRTUAL_TRADE_OPEN)
+         continue;
+      g_virtualTradeTracker.UpdateBar(v4VtRecord.id, v4VtBarHigh, v4VtBarLow, g_lastBarIndex);
+     }
+
+   int v4VtTimedOutCount = g_virtualTradeTracker.CheckTimeouts(g_lastBarIndex);
+   if(InpDebugPipeline && v4VtTimedOutCount > 0)
+      g_logger.LogInfo(StringFormat("[VIRTUAL_TRADE_TIMEOUT] count=%d (politique=%d bougies)", v4VtTimedOutCount, InpVirtualTradeMaxAgeBars));
+   // --- V3 - HTF Bias Observer (Sprint V3.3) ---
+   // CADENCE STRICTE : ce bloc ne s'exécute QUE si une nouvelle bougie
+   // InpTF_High vient de clôturer - jamais à chaque tick, jamais à
+   // chaque bougie H1 (contrairement aux observateurs précédents qui
+   // tournent à la cadence H1). g_marketStructureHTF n'est mise à jour
+   // que dans ce bloc, donc au rythme de InpTF_High uniquement.
+   if(CUtilities::IsNewBar(_Symbol, InpTF_High))
+     {
+      g_marketStructureHTF.Update(1);
+      string v3HtfLogText; bool v3HasNewHtfEvent;
+      g_htfBiasObserver.Observe(g_scenarioContext, v3HtfLogText, v3HasNewHtfEvent);
+      if(InpDebugPipeline && v3HtfLogText != "")
+         g_logger.LogInfo(v3HtfLogText);
+     }
 
    // --- Sécurité : perte/gain journalier, pertes consécutives ---
    double dailyProfit = g_statistics.GetDailyProfit();
@@ -882,7 +1407,14 @@ void OnTick()
 
    // --- Filtres de marché (gate l'analyse du signal) ---
    SMarketContext context = g_marketContext.GetContext();
-   double currentDrawdown = g_statistics.GetMaxDrawdownPercent();
+   // CORRECTIF V3.6.5 : "currentDrawdown" doit refleter le drawdown
+   // COURANT (recuperable), pas le maximum historique jamais atteint.
+   // g_statistics.GetMaxDrawdownPercent() reste la reference historique
+   // pour les rapports (non modifiee) - CFilters, lui, attend une valeur
+   // courante, ce que g_accountMetrics fournit desormais correctement.
+   // CFilters lui-meme n'est pas touche : signature et logique internes
+   // identiques, seule la source transmise ici change.
+   double currentDrawdown = g_accountMetrics.GetCurrentDrawdownPercent();
    SValidationReport filterReport = g_filters.Evaluate(_Symbol, context, currentDrawdown);
    if(InpDebugPipeline)
       g_logger.LogInfo(filterReport.summary);
@@ -929,6 +1461,58 @@ void OnTick()
      }
    g_diagnostics.RecordSignal(signal.type, signal.bullishScore, signal.bearishScore, signal.thresholdPoints);
 
+   // --- V3 - Shadow Decision Engine (Sprint V3.5) ---
+   // Evaluation en mode SHADOW STRICT : le TSE produit desormais un
+   // VRAI verdict deterministe (authorized/confidence/4 criteres), mais
+   // ce verdict n'influence JAMAIS "signal" ni "g_tradingStoppedToday"
+   // ci-dessous - la decision d'entree reelle reste exclusivement
+   // pilotee par CSignalManager. "signal.type" est transmis en VALEUR
+   // (pas un pointeur vers SignalManager) - le TSE ne lit aucun module,
+   // conformement au §3.3bis. Voir ARCHITECTURE_V3.md.
+   SScenarioVerdict  v3EntryVerdict;
+   SScenarioDecision v3EntryDecision;
+   string            v3EntryTrigger = CStructureObserver::BuildTriggerReason(g_scenarioContext, v3HasNewStructureEvent);
+   g_scenarioEngine.EvaluateEntry(g_scenarioContext, signal.type, v3EntryVerdict, v3EntryDecision, v3EntryTrigger);
+
+   // --- Research Platform (Sprint V3.9.2, Increment I2) - capture Decision ---
+   // Meme condition que le log [TSE] ci-dessous : un evenement reel
+   // n'est capture que lorsqu'un signal candidat existe - coherent avec
+   // la discipline "pas de spam" deja appliquee a chaque bougie sans
+   // signal depuis le Sprint V3.5. v3OpportunityId est reutilise plus
+   // bas, dans le meme tick, si un trade s'ouvre reellement.
+   string v3OpportunityId = "";
+   if(signal.type == SIGNAL_BUY || signal.type == SIGNAL_SELL)
+     {
+      v3OpportunityId = g_observationLayer.CaptureDecision(v3EntryVerdict, signal.type, _Symbol);
+
+      // --- Research Platform (Sprint V3.9.3.3, Increment I3) - capture Context ---
+      // Meme opportunityId que la Decision ci-dessus (meme tick, meme
+      // instant) - "context" (SMarketContext) est deja calcule plus haut
+      // dans cette fonction (g_marketContext.GetContext(), ligne ~1180),
+      // aucun recalcul. Spread et sessions relus via les memes
+      // utilitaires deja utilises par le filtre (CUtilities::
+      // GetSpreadPoints, CSessions::IsSessionActive) - lecture, pas
+      // duplication de logique.
+      g_observationLayer.CaptureContext(v3OpportunityId, context, CUtilities::GetSpreadPoints(_Symbol),
+                                        g_sessions.IsSessionActive(SESSION_TOKYO),
+                                        g_sessions.IsSessionActive(SESSION_LONDON),
+                                        g_sessions.IsSessionActive(SESSION_NEWYORK),
+                                        _Symbol);
+     }
+
+   // Journalisation [TSE] uniquement quand un verdict reel a ete produit
+   // (signal candidat present) - structuree par critere OK/KO (demande
+   // explicite), format stable pour exploitation statistique future.
+   if(InpDebugPipeline && (signal.type == SIGNAL_BUY || signal.type == SIGNAL_SELL))
+     {
+      g_logger.LogInfo(StringFormat(
+         "[TSE]\nDecision : %s\nHTF : %s\nStructure : %s\nOrderBlock : %s\nFVG : %s\nConfidence : %.2f\nScenario : %s",
+         v3EntryVerdict.authorized ? "AUTHORIZED" : "REFUSED",
+         v3EntryVerdict.htfOk ? "OK" : "KO", v3EntryVerdict.structureOk ? "OK" : "KO",
+         v3EntryVerdict.orderBlockOk ? "OK" : "KO", v3EntryVerdict.fvgOk ? "OK" : "KO",
+         v3EntryVerdict.confidence, v3EntryVerdict.scenarioStrength));
+     }
+
    // Mode analyse des performances : on enregistre TOUS les signaux,
    // exécutés ou non, y compris ceux filtrés en amont.
    if(InpLogAllSignals)
@@ -972,6 +1556,18 @@ void OnTick()
       vctx.useSessionOverride     = true;
       vctx.sessionAllowedOverride = sessionAllowed;
 
+      // --- Sprint PropFirm - Blocage manuel definitif apres un breach ---
+      // Court-circuite AVANT le calcul de validation - inutile de
+      // construire vctx/appeler Validate() si le trading est deja
+      // bloque. Flag DEDIE (g_propFirmTradingBlocked), jamais fusionne
+      // avec le disjoncteur legacy existant (invariant 9 inchange).
+      if(g_propFirmTradingBlocked)
+        {
+         if(InpDebugPipeline)
+            g_logger.LogInfo("[PROPFIRM] Trade bloque - deblocage manuel requis suite a un breach precedent");
+        }
+      else
+        {
       SValidationReport validation = g_validator.Validate(vctx);
       if(InpDebugPipeline)
          g_logger.LogInfo(validation.summary);
@@ -1011,6 +1607,27 @@ void OnTick()
             signal.executed = true;
             g_logger.LogInfo(StringFormat("Position ouverte : ticket=%I64u %s lot=%.2f entry=%.5f sl=%.5f tp=%.5f",
                                           ticket, CUtilities::SignalTypeToString(signal.type), lot, entryPrice, slPrice, tpPrice));
+
+            // --- V3 - Shadow Analytics (Sprint V3.6) ---
+            // Appariement immediat, dans le meme tick que le verdict
+            // Shadow deja produit par le TSE plus haut (v3EntryVerdict) -
+            // un fait etabli au moment ou il se produit, pas une
+            // reconstruction a posteriori. N'influence rien de ce qui
+            // precede ni de ce qui suit.
+            g_shadowAnalytics.LinkVerdict(ticket, v3EntryVerdict);
+            if(InpDebugPipeline)
+              {
+               g_logger.LogInfo(StringFormat("[SHADOW_LINK]\nTicket : %I64u\nVerdict : %s\nConfidence : %.2f",
+                                ticket, v3EntryVerdict.authorized ? "AUTHORIZED" : "REFUSED", v3EntryVerdict.confidence));
+              }
+
+            // --- Research Platform (Sprint V3.9.2, Increment I2) - capture ExecutionOpen ---
+            // Appelee UNIQUEMENT dans cette branche de succes reel (ticket
+            // deja obtenu du broker) - garantit structurellement que le Cas B
+            // (verdict autorise + ordre refuse) ne produit jamais cet
+            // evenement. v3OpportunityId identique a celui capture par
+            // CaptureDecision plus haut, meme tick.
+            g_observationLayer.CaptureExecutionOpen(v3OpportunityId, ticket, _Symbol, lot, entryPrice, slPrice, tpPrice, signal.type);
 
             // --- Snapshot complet du marché pour le laboratoire d'analyse ---
             double support    = g_supportResistance.GetNearestSupport(entryPrice);
@@ -1082,7 +1699,14 @@ void OnTick()
             // NOUVEAU (Phase 1) : enregistrement auprès du tracker vivant
             // et de la table de corrélation pour reconstruction à la
             // clôture (STradeFullRecord).
-            g_tradeTracker.RegisterNewPosition(openPositionId, snap);
+            g_tradeTracker.RegisterNewPosition(openPositionId, snap,
+                                               v3EntryVerdict.confidence, v3EntryVerdict.htfOk,
+                                               v3EntryVerdict.structureOk, v3EntryVerdict.orderBlockOk,
+                                               v3EntryVerdict.fvgOk, v3EntryVerdict.scenarioStrength,
+                                               v3EntryVerdict.authorized);
+            g_tradeHealthGuardian.RegisterPosition(openPositionId, (signal.type == SIGNAL_BUY),
+                                                   v3EntryVerdict.confidence, v3EntryVerdict.scenarioStrength,
+                                                   v3EntryVerdict.authorized);
             RecordOpenSnapshot(openPositionId, snap);
             DEBUG_TRADE(StringFormat("Ouverture %s lot=%.2f entry=%.5f positionId=%I64u",
                        CUtilities::SignalTypeToString(signal.type), lot, entryPrice, openPositionId));
@@ -1119,6 +1743,30 @@ void OnTick()
         }
       else
          g_logger.LogInfo("Trade refusé par CValidator (voir détail ci-dessus)");
+     } // Fin du else PropFirm (Sprint PropFirm) - ferme le bloc ouvert avant Validate()
+
+   // --- V3 - Hard Risk Guard (Sprint V3.4) ---
+   // Evaluation REELLE en mode OBSERVATION SEULE : les 5 risques sont
+   // desormais vraiment calcules (independamment de tout autre module,
+   // voir HardRiskGuard.mqh), mais ce module ne declenche TOUJOURS
+   // RIEN - aucun appel a CloseAllPositions() ici, aucune modification
+   // de g_tradingStoppedToday. Le disjoncteur reel ci-dessous reste
+   // 100% inchange et continue de piloter seul le comportement du
+   // robot. Seules les TRANSITIONS de statut sont retournees (voir
+   // modele evenementiel documente dans HardRiskGuard.mqh) - v3HardRiskEvents
+   // est vide dans l'immense majorite des appels.
+   SHardRiskEvent v3HardRiskEvents[];
+   g_hardRiskGuard.Evaluate(dailyProfitPercent, InpMaxDailyLossPercent, InpMaxDailyGainPercent,
+                            InpMaxDrawdownPercent, InpMaxConsecutiveLosses, InpMaxPositions,
+                            _Symbol, InpMagicNumber, v3HardRiskEvents);
+   if(InpDebugPipeline)
+     {
+      for(int v3i = 0; v3i < ArraySize(v3HardRiskEvents); v3i++)
+        {
+         g_logger.LogInfo(StringFormat("[HARD_RISK]\nType : %s\nStatus : %s\nValue : %.2f\nLimit : %.2f",
+                          HardRiskTypeToString(v3HardRiskEvents[v3i].type), HardRiskStatusToString(v3HardRiskEvents[v3i].status),
+                          v3HardRiskEvents[v3i].value, v3HardRiskEvents[v3i].limit));
+        }
      }
 
    // --- Gain journalier maximal atteint : on ferme et on stoppe ---
