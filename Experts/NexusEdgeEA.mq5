@@ -1392,6 +1392,42 @@ void OnTick()
          g_logger.LogInfo(v3HtfLogText);
      }
 
+   // --- NOUVEAU (V4.1-P3.4-A) - Recalcul Shadow du scenario COURANT,
+   // pour CHAQUE position deja ouverte AVANT cette bougie. g_scenarioContext
+   // est ICI completement a jour (HTF Bias inclus, dernier Observer
+   // execute juste au-dessus). Les positions ouvertes PENDANT cette
+   // meme bougie (plus bas, "Decision d'execution") ne sont pas encore
+   // dans PositionsTotal() a cet instant - garantit structurellement
+   // que la premiere reevaluation est celle suivant la bougie d'entree,
+   // jamais celle-ci. SHADOW STRICT : aucun SL, aucun DefenseActive,
+   // aucune entree, aucun lien avec CPropFirmRiskGuard.
+   for(int v4ti = PositionsTotal() - 1; v4ti >= 0; v4ti--)
+     {
+      ulong v4tTicket = PositionGetTicket(v4ti);
+      if(v4tTicket == 0) continue;
+      if(PositionGetString(POSITION_SYMBOL) != _Symbol) continue;
+      if(PositionGetInteger(POSITION_MAGIC) != InpMagicNumber) continue;
+      if(!g_tradeTracker.IsTracked(v4tTicket)) continue;
+
+      ENUM_SIGNAL_TYPE v4tDirection = (PositionGetInteger(POSITION_TYPE) == POSITION_TYPE_BUY) ? SIGNAL_BUY : SIGNAL_SELL;
+
+      SScenarioVerdict v4tVerdict; SScenarioDecision v4tDecision;
+      g_scenarioEngine.EvaluateOngoingTrade(g_scenarioContext, v4tDirection, IntegerToString(v4tTicket), v4tVerdict, v4tDecision);
+
+      g_tradeTracker.RecordScenarioVerdict(v4tTicket, g_lastBarIndex, TimeCurrent(),
+                                           v4tVerdict.confidence, v4tVerdict.htfOk, v4tVerdict.structureOk,
+                                           v4tVerdict.orderBlockOk, v4tVerdict.fvgOk, v4tVerdict.scenarioStrength,
+                                           v4tVerdict.authorized);
+
+      if(InpDebugPipeline)
+         g_logger.LogInfo(StringFormat(
+            "[TSE_RECALC]\nTicket : %I64u\nBarIndex : %d\nVerdict : %s (confidence=%.2f, %s)\nHTF=%s Structure=%s OrderBlock=%s FVG=%s",
+            v4tTicket, g_lastBarIndex, v4tVerdict.authorized ? "AUTHORIZED" : "REFUSED", v4tVerdict.confidence, v4tVerdict.scenarioStrength,
+            v4tVerdict.htfOk?"OK":"KO", v4tVerdict.structureOk?"OK":"KO", v4tVerdict.orderBlockOk?"OK":"KO", v4tVerdict.fvgOk?"OK":"KO"));
+     }
+
+   // --- Sécurité : perte/gain journalier, pertes consécutives ---
+
    // --- Sécurité : perte/gain journalier, pertes consécutives ---
    double dailyProfit = g_statistics.GetDailyProfit();
    double dailyProfitPercent = CUtilities::SafeDivide(dailyProfit, g_initialBalance, 0.0) * 100.0;
@@ -1743,7 +1779,8 @@ void OnTick()
         }
       else
          g_logger.LogInfo("Trade refusé par CValidator (voir détail ci-dessus)");
-     } // Fin du else PropFirm (Sprint PropFirm) - ferme le bloc ouvert avant Validate()
+     } // NOUVELLE accolade - ferme le "else" PropFirm (Sprint PropFirm)
+     }
 
    // --- V3 - Hard Risk Guard (Sprint V3.4) ---
    // Evaluation REELLE en mode OBSERVATION SEULE : les 5 risques sont
