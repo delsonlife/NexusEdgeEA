@@ -1,0 +1,960 @@
+
+ 
+Nous avons maintenant terminé **les 16 runs de l'année 2019** : 4 configurations × 4 trimestres.
+ 
+Je veux maintenant faire une **analyse approfondie de 2019 avant de lancer les quatre années restantes (2020–2023)**.
+ 
+⚠️ **IMPORTANT : aucune modification de code, aucun patch, aucun nouveau backtest et aucune modification de paramètres pour le moment.**
+ 
+L'objectif est uniquement de comprendre ce que 2019 nous apprend et de déterminer quelle configuration peut devenir notre **version candidate de référence** pour la suite.
+ 
+Je pense actuellement que **Config 3 (Baseline + SMC)** est intéressante, et que **Config 4 (DefenseActive + SMC)** est également intéressante, mais j'ai un doute sur le comportement de `DefenseActive`, notamment lorsqu'il intervient après que le SL a été déplacé.
+ 
+Je veux que tu vérifies cette hypothèse techniquement et statistiquement.
+  
+# 1. Les quatre configurations 2019
+ 
+  
+ 
+Config
+ 
+Configuration
+ 
+Trades
+ 
+   
+ 
+**1**
+ 
+Baseline pure
+ 
+58
+ 
+ 
+ 
+**2**
+ 
+Baseline + DefenseActive
+ 
+121
+ 
+ 
+ 
+**3**
+ 
+Baseline + SMC
+ 
+164
+ 
+ 
+ 
+**4**
+ 
+Baseline + DefenseActive + SMC
+ 
+480
+ 
+  
+ 
+Réglages communs de la campagne :
+ 
+ 
+- XAUUSD
+ 
+- H1
+ 
+- `InpMaxConsecutiveLosses = 999`
+ 
+- `InpTrackSLReversal = true`
+ 
+- mêmes périodes pour les quatre configurations
+ 
+- mêmes conditions générales de backtest
+ 
+
+  
+# 2. Résultats 2019 déjà obtenus
+ 
+## Config 1 — Baseline pure
+ 
+  
+ 
+Trimestre
+ 
+Trades
+ 
+Win Rate
+ 
+PF
+ 
+Expectancy/trade
+ 
+Profit net
+ 
+DD max
+ 
+REACHED
+ 
+TIMEOUT
+ 
+   
+ 
+T1
+ 
+22
+ 
+81.82%
+ 
+0.47
+ 
+-92.31
+ 
+-2030.79
+ 
+22.20%
+ 
+1
+ 
+20
+ 
+ 
+ 
+T2
+ 
+11
+ 
+81.82%
+ 
+0.35
+ 
+-121.82
+ 
+≈ -1340.02
+ 
+—
+ 
+1
+ 
+10
+ 
+ 
+ 
+T3
+ 
+9
+ 
+66.67%
+ 
+0.28
+ 
+-234.54
+ 
+-2110.86
+ 
+23.88%
+ 
+0
+ 
+8
+ 
+ 
+ 
+T4
+ 
+16
+ 
+75.00%
+ 
+0.35
+ 
+-121.69
+ 
+-1947.10
+ 
+23.61%
+ 
+3
+ 
+12
+ 
+ 
+ 
+**Total**
+ 
+**58**
+ 
+ 
+ 
+ 
+**≈ -7428.77**
+ 
+ 
+**5**
+ 
+**50**
+ 
+  
+  
+## Config 2 — Baseline + DefenseActive
+ 
+  
+ 
+Trimestre
+ 
+Trades
+ 
+Win Rate
+ 
+PF
+ 
+Expectancy/trade
+ 
+Profit net
+ 
+DD max
+ 
+REACHED
+ 
+TIMEOUT
+ 
+   
+ 
+T1
+ 
+27
+ 
+37.04%
+ 
+0.14
+ 
+-64.32
+ 
+-1736.55
+ 
+19.07%
+ 
+3
+ 
+24
+ 
+ 
+ 
+T2
+ 
+10
+ 
+40.00%
+ 
+0.03
+ 
+-197.03
+ 
+-1970.33
+ 
+20.00%
+ 
+1
+ 
+8
+ 
+ 
+ 
+T3
+ 
+61
+ 
+50.82%
+ 
+0.16
+ 
+-41.60
+ 
+-2537.77
+ 
+26.65%
+ 
+8
+ 
+53
+ 
+ 
+ 
+T4
+ 
+23
+ 
+47.83%
+ 
+0.09
+ 
+-120.61
+ 
+-2774.07
+ 
+28.16%
+ 
+3
+ 
+19
+ 
+ 
+ 
+**Total**
+ 
+**121**
+ 
+ 
+ 
+ 
+**-9018.72**
+ 
+ 
+**15**
+ 
+**104**
+ 
+  
+  
+## Config 3 — Baseline + SMC
+ 
+  
+ 
+Trimestre
+ 
+Trades
+ 
+Win Rate
+ 
+PF
+ 
+Expectancy/trade
+ 
+Profit net
+ 
+DD max
+ 
+REACHED
+ 
+TIMEOUT
+ 
+   
+ 
+T1
+ 
+17
+ 
+82.35%
+ 
+0.35
+ 
+-114.53
+ 
+-1947.09
+ 
+24.71%
+ 
+0
+ 
+15
+ 
+ 
+ 
+T2
+ 
+51
+ 
+90.20%
+ 
+0.76
+ 
+-24.62
+ 
+-1255.49
+ 
+21.28%
+ 
+2
+ 
+43
+ 
+ 
+ 
+T3
+ 
+50
+ 
+76.00%
+ 
+**0.93**
+ 
+**-6.58**
+ 
+-329.08
+ 
+—
+ 
+0
+ 
+9
+ 
+ 
+ 
+T4
+ 
+46
+ 
+73.91%
+ 
+0.52
+ 
+-51.54
+ 
+-2370.81
+ 
+25.87%
+ 
+2
+ 
+27
+ 
+ 
+ 
+**Total**
+ 
+**164**
+ 
+ 
+ 
+ 
+**-5902.47**
+ 
+ 
+**4**
+ 
+**94**
+ 
+  
+  
+## Config 4 — DefenseActive + SMC
+ 
+  
+ 
+Trimestre
+ 
+Trades
+ 
+Win Rate
+ 
+PF
+ 
+Expectancy/trade
+ 
+Profit net
+ 
+DD max
+ 
+REACHED
+ 
+TIMEOUT
+ 
+   
+ 
+T1
+ 
+43
+ 
+37.21%
+ 
+0.06
+ 
+-61.48
+ 
+-2643.76
+ 
+27.10%
+ 
+1
+ 
+42
+ 
+ 
+ 
+T2
+ 
+115
+ 
+51.30%
+ 
+0.13
+ 
+-22.53
+ 
+-2590.58
+ 
+26.16%
+ 
+1
+ 
+114
+ 
+ 
+ 
+T3
+ 
+167
+ 
+53.29%
+ 
+0.31
+ 
+-9.19
+ 
+-1534.86
+ 
+16.80%
+ 
+10
+ 
+151
+ 
+ 
+ 
+T4
+ 
+155
+ 
+55.48%
+ 
+0.44
+ 
+-7.56
+ 
+-1171.40
+ 
+17.11%
+ 
+13
+ 
+141
+ 
+ 
+ 
+**Total**
+ 
+**480**
+ 
+ 
+ 
+ 
+**-7940.60**
+ 
+ 
+**25**
+ 
+**448**
+ 
+  
+  
+# 3. Première question fondamentale
+ 
+Je veux que tu compares **Config 3 et Config 4 en priorité**.
+ 
+Config 3 :
+ 
+ 
+SMC seul
+ 
+ 
+Config 4 :
+ 
+ 
+SMC + DefenseActive
+ 
+ 
+Le passage de Config 3 à Config 4 fait passer le nombre de trades :
+ 
+**164 → 480**
+ 
+soit environ **+193 %**.
+ 
+Pourtant :
+ 
+**Profit net :**
+ 
+ 
+- Config 3 : −5902
+ 
+- Config 4 : −7941
+ 
+
+ 
+**PF :**
+ 
+ 
+- Config 3 : meilleur
+ 
+- Config 4 : inférieur
+ 
+
+ 
+**Expectancy :**
+ 
+ 
+- Config 3 : négative mais proche de zéro sur plusieurs périodes
+ 
+- Config 4 : également négative, mais beaucoup plus de trades
+ 
+
+ 
+Je veux comprendre **pourquoi**.
+  
+# 4. Vérification spécifique de mon hypothèse sur DefenseActive
+ 
+Je soupçonne que le problème pourrait venir de l'interaction entre :
+ 
+ 
+- `DefenseActive`
+ 
+- Break Even
+ 
+- Trailing
+ 
+- SL initial
+ 
+- SL structurel SMC
+ 
+- éventuellement TP / gestion de position
+ 
+- et les conditions de sortie.
+ 
+
+ 
+Je veux que tu inspectes réellement le code existant pour déterminer :
+ 
+### A. Que fait exactement DefenseActive ?
+ 
+Explique son fonctionnement précis dans le cycle d'un trade :
+ 
+**entrée → SL initial → évolution du prix → activation DefenseActive → éventuel Break Even → éventuel Trailing → sortie.**
+ 
+Ne donne pas une explication théorique : base-toi sur le code réel.
+ 
+### B. Quand DefenseActive déplace-t-il le SL ?
+ 
+Identifie précisément :
+ 
+ 
+- les conditions d'activation ;
+ 
+- le niveau auquel le SL est déplacé ;
+ 
+- si le déplacement est unique ou progressif ;
+ 
+- comment Break Even intervient ;
+ 
+- comment Trailing intervient ;
+ 
+- si plusieurs mécanismes peuvent se succéder ;
+ 
+- lequel a priorité en cas de conflit.
+ 
+
+ 
+### C. Que devient le SL structurel SMC ?
+ 
+C'est le point qui m'intéresse particulièrement.
+ 
+Dans Config 3, le SL est déterminé par :
+ 
+`SL_METHOD_STRUCTURE_SMC`
+ 
+Dans Config 4, nous avons le même SL structurel mais `DefenseActive=true`.
+ 
+Je veux savoir si DefenseActive :
+ 
+ 
+1. préserve réellement l'avantage du SL structurel ;
+ 
+2. remplace ou dégrade ce SL ;
+ 
+3. modifie fortement le profil risque/rendement ;
+ 
+4. provoque davantage de sorties prématurées ;
+ 
+5. ou au contraire protège efficacement mais génère davantage d'entrées/sorties.
+ 
+
+  
+# 5. Analyse des sorties
+ 
+Utilise toutes les informations disponibles dans les rapports et le code.
+ 
+Je veux notamment comparer :
+ 
+### Config 3 vs Config 4
+ 
+ 
+- Win Rate
+ 
+- Profit Factor
+ 
+- Expectancy/trade
+ 
+- Profit net
+ 
+- Drawdown
+ 
+- gain moyen
+ 
+- perte moyenne
+ 
+- meilleur trade
+ 
+- pire trade
+ 
+- RR moyen
+ 
+- distribution des gains/pertes si disponible
+ 
+- nombre de trades
+ 
+- fréquence des sorties SL
+ 
+- fréquence des sorties TP
+ 
+- sorties liées au Break Even
+ 
+- sorties liées au Trailing
+ 
+- SL initial jamais modifié
+ 
+- comportement des `REACHED`
+ 
+- comportement des `TIMEOUT`
+ 
+
+  
+# 6. Analyse particulière de `CSLReversalWatcher`
+ 
+Nous avons ajouté cette instrumentation précisément pour étudier le phénomène :
+ 
+ 
+**SL initial → trade clôturé par SL → ancien TP atteint ensuite**
+ 
+ 
+Elle est enregistrée uniquement lorsque :
+ `breakEvenActivatedTime == 0 ET trailingActivatedTime == 0 ET clôture par SL ` 
+Donc la population étudiée correspond aux trades sortis par leur **SL initial jamais modifié**.
+ 
+Je veux que tu analyses :
+ 
+### Config 3
+ 
+REACHED = 4 TIMEOUT = 94
+ 
+### Config 4
+ 
+REACHED = 25 TIMEOUT = 448
+ 
+Compare les proportions :
+ 
+`REACHED / (REACHED + TIMEOUT)`
+ 
+et explique ce que cette différence peut éventuellement indiquer.
+ 
+⚠️ Ne transforme surtout pas cela en preuve que SMC est meilleur. Nous n'avons qu'une année.
+ 
+Je veux uniquement des **hypothèses à vérifier sur 2020–2023**.
+  
+# 7. Attention au piège du nombre de trades
+ 
+Le fait que Config 4 ait 480 trades contre 164 ne doit pas être interprété automatiquement comme positif.
+ 
+Je veux que tu répondes clairement :
+ 
+ 
+Pourquoi DefenseActive + SMC génère-t-il presque trois fois plus de trades que SMC seul ?
+ 
+ 
+Détermine si cette différence vient principalement :
+ 
+ 
+- du filtre d'entrée ;
+ 
+- de la durée des trades ;
+ 
+- de la disponibilité du système après les sorties ;
+ 
+- du KillSwitch (qui est neutralisé avec `InpMaxConsecutiveLosses=999`) ;
+ 
+- du SL ;
+ 
+- du TP ;
+ 
+- de DefenseActive ;
+ 
+- ou d'une combinaison de plusieurs facteurs.
+ 
+
+ 
+**Il faut identifier la cause structurelle dans le code.**
+  
+# 8. Analyse comparative des 4 configurations
+ 
+Après Config 3/4, fais également :
+ 
+### Effet de DefenseActive
+ 
+Comparer :
+ 
+**Config 1 → Config 2**
+ 
+et
+ 
+**Config 3 → Config 4**
+ 
+Question :
+ 
+ 
+Que change réellement DefenseActive ?
+ 
+ 
+### Effet de SMC
+ 
+Comparer :
+ 
+**Config 1 → Config 3**
+ 
+et
+ 
+**Config 2 → Config 4**
+ 
+Question :
+ 
+ 
+Que change réellement le SL structurel SMC ?
+ 
+ 
+L'objectif est de séparer les deux effets.
+  
+# 9. Attention aux conclusions
+ 
+Je veux trois niveaux de résultat :
+ 
+### Niveau 1 — FAITS 2019
+ 
+Ce que les données démontrent réellement.
+ 
+### Niveau 2 — HYPOTHÈSES
+ 
+Ce que les données suggèrent mais ne prouvent pas.
+ 
+### Niveau 3 — CONCLUSIONS IMPOSSIBLES À CE STADE
+ 
+Ce que nous ne pouvons pas encore affirmer avant 2020–2023.
+ 
+Ne dis surtout pas :
+ 
+ 
+« Config 3 est la meilleure stratégie »
+ 
+ 
+simplement parce qu'elle a le meilleur PF en 2019.
+  
+# 10. Mais je veux quand même une recommandation pratique
+ 
+À la fin, donne-moi ton avis sur la **version candidate** que nous devrions utiliser pour la suite.
+ 
+Pas une version finale.
+ 
+Une :
+ 
+ 
+**Candidate V2019**
+ 
+ 
+Tu dois choisir entre :
+ 
+ 
+- Config 1
+ 
+- Config 2
+ 
+- Config 3
+ 
+- Config 4
+ 
+
+ 
+ou éventuellement :
+ 
+ 
+aucune configuration ne doit encore être privilégiée.
+ 
+ 
+Mais justifie ton choix avec les données.
+  
+# 11. Point très important : ne modifie rien
+ 
+À aucun moment :
+ 
+ 
+- ne modifie le code ;
+ 
+- ne propose pas encore de patch ;
+ 
+- ne change pas les paramètres ;
+ 
+- ne relance pas de backtest ;
+ 
+- ne modifie pas `P3.1_PROTOCOL.md`.
+ 
+
+ 
+Nous sommes dans une **phase d'audit uniquement**.
+  
+# 12. Format du rapport demandé
+ 
+Je veux un rapport structuré ainsi :
+ 
+## RAPPORT D'AUDIT P3.1 — 2019
+ 
+### 1. Résumé exécutif
+ 
+### 2. Résultats des 4 configurations
+ 
+### 3. Effet de DefenseActive
+ 
+### 4. Effet du SL structurel SMC
+ 
+### 5. Config 3 vs Config 4
+ 
+### 6. Analyse Break Even / Trailing / SL
+ 
+### 7. Analyse CSLReversalWatcher
+ 
+### 8. Cause du volume de trades 58 / 121 / 164 / 480
+ 
+### 9. Faits établis en 2019
+ 
+### 10. Hypothèses à vérifier en 2020–2023
+ 
+### 11. Ce qu'on ne peut pas conclure
+ 
+### 12. **Candidate V2019 recommandée**
+ 
+### 13. Conséquence pour les backtests 2020–2023
+  
+## Dernière consigne
+ 
+**Ne cherche pas à confirmer mon intuition.**
+ 
+Si mon hypothèse selon laquelle DefenseActive maîtrise mal les déplacements du SL est fausse, dis-le clairement.
+ 
+Si elle est partiellement vraie, explique précisément **où**.
+ 
+Si elle est vraie, identifie précisément **le mécanisme responsable**.
+ 
+Je préfère une conclusion qui contredit mon intuition mais qui est démontrée par le code et les données plutôt qu'une conclusion qui me donne raison sans preuve.
+ 
+**Aucun code. Aucun patch. Aucun nouveau backtest. Uniquement l'audit 2019 et la recommandation Candidate V2019.**
